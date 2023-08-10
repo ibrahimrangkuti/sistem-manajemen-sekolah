@@ -10,6 +10,10 @@ section {
     padding: 100px 0;
 }
 
+.category > a {
+    flex-shrink: 0;
+}
+
 .navbar {
     background-color: #eff6ff !important;
 }
