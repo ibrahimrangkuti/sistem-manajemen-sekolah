@@ -8,13 +8,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto gap-4">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Beranda</a>
+                    <a class="nav-link" href="/">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Forum</a>
+                    <a class="nav-link" href="/">Berita</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Lowongan</a>
+                    <a class="nav-link" href="/forum">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/lowongan">Lowongan</a>
                 </li>
                 </li>
                 <li class="nav-item">

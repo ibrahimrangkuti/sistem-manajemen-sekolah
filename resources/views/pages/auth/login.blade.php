@@ -19,9 +19,11 @@
     <div class="container">
         <div class="row justify-content-center align-items-center" style="min-height: 100vh">
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="mb-4 text-center">Masuk</h1>
+                <div class="card shadow">
+                    <div class="card-body px-4">
+                        <div class="d-flex justify-content-center mb-3">
+                            <img src="{{ asset('assets/img/logo-smk.png') }}" alt="" width="60">
+                        </div>
                         <form action="">
                             <div class="form-group mb-3">
                                 <label for="nis" class="form-label">NIS</label>

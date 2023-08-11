@@ -1,5 +1,31 @@
+:root {
+    --primary: #1e40af;
+}
+
 * {
     font-family: "Poppins", sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+    display: none;
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 a {
@@ -19,13 +45,13 @@ section {
 }
 
 .navbar .navbar-brand {
-    color: #1e40af;
+    color: var(--primary);
     font-size: 22px;
     font-weight: 600;
 }
 
 .navbar .navbar-nav .nav-item .nav-link:hover {
-    color: #1e40af;
+    color: var(--primary);
 }
 
 .btn {
@@ -34,12 +60,17 @@ section {
 }
 
 .btn-primary {
-    background-color: #1e40af;
+    background-color: var(--primary);
 }
 
 .btn-primary:hover,
 .btn-outline-primary:hover {
     background-color: #1e3a8a;
+}
+
+.btn-primary:active,
+.btn-outline-primary:active {
+    background-color: var(--primary);
 }
 
 .search-input {
@@ -74,7 +105,26 @@ section {
 }
 
 .counts .card:hover {
-    background-color: #1e40af;
+    background-color: var(--primary);
     color: #ffffff;
     transition: all 0.5s ease-in-out;
 }
+
+.departments .card .card-body {
+    padding: 40px 0;
+}
+
+.departments .card {
+    width: 200px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.box {
+    transition: box-shadow 0.2s ease; /* Efek transisi untuk bayangan */
+}
+
+.box:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); /* Mengubah bayangan saat dihover */
+}
+

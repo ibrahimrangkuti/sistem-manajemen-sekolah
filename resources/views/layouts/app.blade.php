@@ -23,17 +23,22 @@
         @yield('content')
     </main>
 
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
+
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script>
         var typed = new Typed('#hero-title', {
-            strings: ['Lorem ipsum dolor, sit amet consectetur adipisicing elit.s'],
+            strings: ['Mengasah Potensi, Meraih Prestasi: SMKN 5 Kab. Tangerang Membentuk Generasi Berkualitas'],
             typeSpeed: 30,
         });
     </script>
 
 </body>
+<!-- Footer -->
+@include('components.footer')
 
 </html>
