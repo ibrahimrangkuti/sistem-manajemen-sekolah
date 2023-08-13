@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+    // Berita
+    public function news()
+    {
+        return view('pages.news');
+    }
+
     // Forum
     public function forum()
     {

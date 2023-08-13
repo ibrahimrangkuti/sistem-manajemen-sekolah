@@ -12,7 +12,7 @@
                     <div class="card box">
                         <div class="card-body">
                             <img src="https://image-service-cdn.seek.com.au/74f8689b6f0c24639e2a835ab5558fbe2698206a/ee4dce1061f3f616224767ad58cb2fc751b8d2dc"
-                                alt="" class="shadow mb-3" width="70" height="70">
+                                alt="" class="shadow mb-3 rounded" width="70" height="70">
                             <h5 class="card-title text-truncate">Web Developer</h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">PT. Mencari Cinta Sejati</h6>
                             <p class="card-text text-secondary">Tangerang, Banten</p>

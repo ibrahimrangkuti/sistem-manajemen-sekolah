@@ -23,12 +23,12 @@
     <section id="welcome" class="welcome">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-3" data-aos="fade-right">
                     {{-- <img src="https://images.unsplash.com/flagged/photo-1571367034861-e6729ad9c2d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80"
                         alt="" class="img-fluid img-thumbnail"> --}}
                     <img src="{{ asset('assets/img/surta.png') }}" alt="" class="img-fluid w-100 rounded shadow-lg">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8" data-aos="fade-left">
                     <h1>Sambutan Kepala Sekolah</h1>
                     <p>Assalamu’alaikum Warohmatullohi Wabarokatuh
                         Puji syukur kita panjatkan kehadirat Allah SWT yang telah memberikan karunia hidayah dan taufik-Nya
@@ -48,7 +48,7 @@
                 <div class="col-6 col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h2>2000+</h2>
+                            <h2 class="value" count="2000">0</h2>
                             <span>Peserta Didik</span>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                 <div class="col-6 col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h2>99</h2>
+                            <h2 class="value" count="99">0</h2>
                             <span>Tenaga Pendidik</span>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                 <div class="col-6 col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h2>10</h2>
+                            <h2 class="value" count="10">0</h2>
                             <span>Konsentrasi Keahlian</span>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                 <div class="col-6 col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h2>15</h2>
+                            <h2 class="value" count="15">0</h2>
                             <span>Ekstrakurikuler</span>
                         </div>
                     </div>
@@ -220,11 +220,13 @@
                     <span class="fw-semibold fs-4">TKRO</span>
                 </div>
                 <div class="d-flex flex-column align-items-center gap-3">
-                    <img src="{{ asset('assets/img/logo-jurusan/tpm.png') }}" alt="" width="150" height="150">
+                    <img src="{{ asset('assets/img/logo-jurusan/tpm.png') }}" alt="" width="150"
+                        height="150">
                     <span class="fw-semibold fs-4">TPM</span>
                 </div>
                 <div class="d-flex flex-column align-items-center gap-3">
-                    <img src="{{ asset('assets/img/logo-jurusan/tbsm.png') }}" alt="" width="150" height="150">
+                    <img src="{{ asset('assets/img/logo-jurusan/tbsm.png') }}" alt="" width="150"
+                        height="150">
                     <span class="fw-semibold fs-4">TBSM</span>
                 </div>
                 <div class="d-flex flex-column align-items-center gap-3">
@@ -341,3 +343,28 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+        const counters = document.querySelectorAll('.value');
+        const speed = 300;
+
+        counters.forEach(counter => {
+            const animate = () => {
+                const value = +counter.getAttribute('count');
+                const data = +counter.innerText;
+
+                const time = value / speed;
+                if (data < value) {
+                    counter.innerText = Math.ceil(data + time);
+                    setTimeout(animate, 1);
+                } else {
+                    counter.innerText = value;
+                }
+
+            }
+
+            animate();
+        });
+    </script>
+@endpush

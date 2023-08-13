@@ -128,3 +128,6 @@ section {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); /* Mengubah bayangan saat dihover */
 }
 
+.comment-item p {
+    font-size: 14px;
+}

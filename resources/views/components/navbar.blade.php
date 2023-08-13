@@ -11,7 +11,7 @@
                     <a class="nav-link" href="/">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Berita</a>
+                    <a class="nav-link" href="/berita">Berita</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/forum">Forum</a>
@@ -21,7 +21,7 @@
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Portal Orangtua</a>
+                    <a class="nav-link" href="/portal-orangtua">Portal Orangtua</a>
                 </li>
                 <a href="{{ url('/login') }}" class="btn btn-primary">Masuk</a>
             </ul>

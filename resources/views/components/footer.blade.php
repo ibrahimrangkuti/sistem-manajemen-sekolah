@@ -1,9 +1,9 @@
 <!-- Footer Start -->
-<div class="bg-dark text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+<div class="footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s" style="background-color: #eff6ff; color: #1e3a8a;">
     <div class="container py-5 px-lg-5">
         <div class="row justify-content-between align-items-center g-5">
             <div class="col-12 col-md-6">
-                <h2 class="text-white mb-4">SMKN 5 Kab. Tangerang</h2>
+                <h2 class="mb-4">SMKN 5 Kab. Tangerang</h2>
                 <p>Jln. IR. Sutami KM.1,2 Desa. Mauk Barat, Kec. Mauk Tangerang Banten</p>
                 <p>+012 345 67890</p>
                 <p>smkn5kabtangerang@gmail.com</p>
