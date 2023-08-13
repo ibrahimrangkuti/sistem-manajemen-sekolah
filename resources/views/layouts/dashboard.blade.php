@@ -22,8 +22,17 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <style>
+        a {
+            color: black
+        }
+
+        /* icon */
         ion-icon {
             font-size: 20px
+        }
+
+        li.active ion-icon {
+            color: #fff;
         }
     </style>
 </head>
@@ -38,6 +47,22 @@
                 </a>
             </header>
 
+            <div class="page-heading d-flex justify-content-between align-items-center">
+                <h3>@yield('title')</h3>
+                <div class="dropdown d-none d-md-flex align-items-center">
+                    <div data-bs-toggle="dropdown" class="d-flex flex-column">
+                        <a class="dropdown-toggle font-semibold" href="" aria-expanded="false">
+                            Ibrahim Rangkuti
+                        </a>
+                        <span class="text-muted">Administrator</span>
+                    </div>
+                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="" class="rounded-circle w-25">
+                    <ul class="dropdown-menu shadow mt-4">
+                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><a class="dropdown-item" href="#">Keluar</a></li>
+                    </ul>
+                </div>
+            </div>
             @yield('content')
 
             {{-- <footer>
