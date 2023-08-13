@@ -68,6 +68,12 @@
                         <span>Postingan</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="index.html" class='sidebar-link'>
+                        <ion-icon name="mail"></ion-icon>
+                        <span>Kotak Pesan</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
