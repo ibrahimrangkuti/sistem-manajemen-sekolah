@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('mazer/assets/css/app.css') }}">
     <link rel="shortcut icon" href="{{ asset('mazer/assets/images/favicon.svg') }}" type="image/x-icon">
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
     {{-- Icon --}}
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -78,6 +80,10 @@
             </footer> --}}
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('mazer/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('mazer/assets/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -85,6 +91,7 @@
     <script src="{{ asset('mazer/assets/js/pages/dashboard.js') }}"></script>
 
     <script src="{{ asset('mazer/assets/js/main.js') }}"></script>
+    @stack('script')
 </body>
 
 </html>

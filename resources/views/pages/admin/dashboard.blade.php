@@ -14,13 +14,30 @@
                             <div class="card-body px-3 py-4-5">
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <div class="stats-icon text-white" style="background-color: salmon">
+                                            <ion-icon name="easel"></ion-icon>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h6 class="text-muted font-semibold">Kelas</h6>
+                                        <h6 class="font-extrabold mb-0">{{ \App\Models\Classes::count() }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-3 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4">
                                         <div class="stats-icon bg-warning text-white">
                                             <ion-icon name="people"></ion-icon>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Siswa</h6>
-                                        <h6 class="font-extrabold mb-0">2000</h6>
+                                        <h6 class="font-extrabold mb-0">{{ \App\Models\Student::count() }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +54,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Guru</h6>
-                                        <h6 class="font-extrabold mb-0">99</h6>
+                                        <h6 class="font-extrabold mb-0">{{ \App\Models\Teacher::count() }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +116,7 @@
                             <div class="card-body px-3 py-4-5">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="stats-icon bg-dark text-white">
+                                        <div class="stats-icon purple text-white">
                                             <ion-icon name="newspaper"></ion-icon>
                                         </div>
                                     </div>
@@ -122,6 +139,23 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Postingan</h6>
+                                        <h6 class="font-extrabold mb-0">2000</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-3 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="stats-icon bg-dark text-white">
+                                            <ion-icon name="mail"></ion-icon>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h6 class="text-muted font-semibold">Pesan</h6>
                                         <h6 class="font-extrabold mb-0">2000</h6>
                                     </div>
                                 </div>

@@ -21,19 +21,25 @@
                 <li class="sidebar-title">Master</li>
 
                 <li class="sidebar-item active">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
                         <ion-icon name="grid"></ion-icon>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('admin.class.index') }}" class='sidebar-link'>
+                        <ion-icon name="easel"></ion-icon>
+                        <span>Kelas</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.student.index') }}" class='sidebar-link'>
                         <ion-icon name="people"></ion-icon>
                         <span>Siswa</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('admin.teacher.index') }}" class='sidebar-link'>
                         <ion-icon name="people"></ion-icon>
                         <span>Guru</span>
                     </a>
@@ -71,7 +77,7 @@
                 <li class="sidebar-item">
                     <a href="index.html" class='sidebar-link'>
                         <ion-icon name="mail"></ion-icon>
-                        <span>Kotak Pesan</span>
+                        <span>Pesan</span>
                     </a>
                 </li>
 
