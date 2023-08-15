@@ -32,7 +32,7 @@
                             <tbody>
                                 @foreach ($students as $student)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $student->nis }}</td>
                                         <td>{{ $student->class->name }}</td>
                                         <td>{{ $student->photo }}</td>
@@ -44,7 +44,7 @@
                                         <td>{{ $student->place_of_birth }}</td>
                                         <td>{{ $student->date_of_birth }}</td>
                                         <td>{{ $student->status }}</td>
-                                        <td>
+                                        <td class="col-1">
                                             <a href="">Hapus</a>
                                         </td>
                                     </tr>

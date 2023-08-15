@@ -72,10 +72,10 @@
                             <tbody>
                                 @foreach ($departments as $department)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $department->name }}</td>
                                         <td>{{ $department->teacher->name }}</td>
-                                        <td>
+                                        <td class="col-1">
                                             <div class="d-flex gap-3">
                                                 <a href="?id={{ $department->id }}" class="btn btn-warning btn-sm">Edit</a>
                                                 <form action="{{ route('admin.department.delete', $department->id) }}"

@@ -71,5 +71,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Mata Pelajaran
     Route::prefix('lesson')->name('lesson.')->group(function () {
         Route::get('/', [AdminLessonController::class, 'index'])->name('index');
+        Route::post('/', [AdminLessonController::class, 'store'])->name('store');
+        Route::put('{id}', [AdminLessonController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [AdminLessonController::class, 'delete'])->name('delete');
     });
 });

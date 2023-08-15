@@ -25,11 +25,11 @@
                             <tbody>
                                 @foreach ($classes as $class)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $class->teacher->name }}</td>
                                         <td>{{ $class->name }}</td>
                                         <td>{{ $class->level }}</td>
-                                        <td>
+                                        <td class="col-1">
                                             <div class="d-flex align-items-center gap-3">
                                                 <a href="{{ route('admin.class.edit', $class->id) }}"
                                                     class="btn btn-warning btn-sm">Edit</a>
@@ -40,7 +40,7 @@
                                                         onclick="return confirm('Apakah kamu yakin ingin menghapus?')"
                                                         class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
-                                          </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
