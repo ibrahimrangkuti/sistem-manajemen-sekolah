@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'school_name' => 'SMKN 5 Kab. Tangerang',
             'headmaster' => 'Surta Wijaya, S.Kom. M.M',
             'phone' => '(021) 59330830',
-            'address' => 'Jln. IR. Sutami KM.1,2 Desa. Mauk Barat, Kec. Mauk Tangerang Banten',cl
+            'address' => 'Jln. IR. Sutami KM.1,2 Desa. Mauk Barat, Kec. Mauk Tangerang Banten',
         ]);
     }
 }

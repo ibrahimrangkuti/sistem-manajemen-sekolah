@@ -23,6 +23,7 @@ class SettingController extends Controller
             'address' => ['string']
         ]);
 
+        $validatedData['email'] = $request->email;
         $validatedData['phone'] = $request->phone;
         Setting::first()->update($validatedData);
 
