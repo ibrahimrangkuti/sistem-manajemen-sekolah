@@ -56,12 +56,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script>
-        let table;
-        $(function() {
-            table = $('.table').DataTable()
-        });
-    </script>
-@endpush

@@ -34,7 +34,7 @@
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('admin.student.index') }}" class='sidebar-link'>
-                        <ion-icon name="people"></ion-icon>
+                        <ion-icon name="school"></ion-icon>
                         <span>Siswa</span>
                     </a>
                 </li>
@@ -45,13 +45,13 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('admin.department.index') }}" class='sidebar-link'>
                         <ion-icon name="grid"></ion-icon>
                         <span>Jurusan</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('admin.lesson.index') }}" class='sidebar-link'>
                         <ion-icon name="book"></ion-icon>
                         <span>Mata Pelajaran</span>
                     </a>
@@ -79,9 +79,14 @@
                         <ion-icon name="mail"></ion-icon>
                         <span>Pesan</span>
                     </a>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.settings') }}" class='sidebar-link'>
+                        <ion-icon name="cog"></ion-icon>
+                        <span>Pengaturan</span>
+                    </a>
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                {{-- <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
                         <span>Components</span>
@@ -130,7 +135,7 @@
                             <a href="component-tooltip.html">Tooltip</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
             </ul>
         </div>

@@ -10,7 +10,7 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::latest()->get();
 
         return view('pages.admin.teacher.index', compact('teachers'));
     }
@@ -26,7 +26,7 @@ class TeacherController extends Controller
             'nik' => ['required', 'numeric', 'min:16', 'unique:teachers,nik'],
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:teachers,email'],
-            'password' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:3'],
             'gender' => ['required'],
             'phone' => ['numeric'],
             'address' => ['string'],

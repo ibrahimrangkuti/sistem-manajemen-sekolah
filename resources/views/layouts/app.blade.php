@@ -27,6 +27,9 @@
         @yield('content')
     </main>
 
+    <!-- Footer -->
+    @include('components.footer')
+
     @stack('script')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -39,13 +42,14 @@
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script>
         var typed = new Typed('#hero-title', {
-            strings: ['Mengasah Potensi, Meraih Prestasi: SMKN 5 Kab. Tangerang Membentuk Generasi Berkualitas'],
+            strings: [
+                'Mengasah Potensi, Meraih Prestasi: {{ $setting->school_name }} Membentuk Generasi Berkualitas'
+            ],
             typeSpeed: 30,
         });
     </script>
 
 </body>
-<!-- Footer -->
-{{-- @include('components.footer') --}}
+
 
 </html>

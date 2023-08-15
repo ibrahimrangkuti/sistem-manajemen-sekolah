@@ -3,9 +3,9 @@
     <div class="container py-5 px-lg-5">
         <div class="row justify-content-between align-items-center g-5">
             <div class="col-12 col-md-6">
-                <h2 class="mb-4">SMKN 5 Kab. Tangerang</h2>
-                <p>Jln. IR. Sutami KM.1,2 Desa. Mauk Barat, Kec. Mauk Tangerang Banten</p>
-                <p>+012 345 67890</p>
+                <h2 class="mb-4">{{ $setting->school_name }}</h2>
+                <p>{{ $setting->address }}</p>
+                <p>{{ $setting->phone }}</p>
                 <p>smkn5kabtangerang@gmail.com</p>
             </div>
             <div class="col-12 col-md-6">

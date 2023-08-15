@@ -58,7 +58,8 @@
                         </a>
                         <span class="text-muted">Administrator</span>
                     </div>
-                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="" class="rounded-circle w-25">
+                    <img src="https://ui-avatars.com/api/?name=Ibrahim+Rangkutis" alt=""
+                        class="rounded-circle w-25">
                     <ul class="dropdown-menu shadow mt-4">
                         <li><a class="dropdown-item" href="#">Profil</a></li>
                         <li><a class="dropdown-item" href="#">Keluar</a></li>
@@ -91,7 +92,10 @@
     <script src="{{ asset('mazer/assets/js/pages/dashboard.js') }}"></script>
 
     <script src="{{ asset('mazer/assets/js/main.js') }}"></script>
-    @stack('script')
+    {{-- @stack('script') --}}
+    <script>
+        $('.table').DataTable()
+    </script>
 </body>
 
 </html>

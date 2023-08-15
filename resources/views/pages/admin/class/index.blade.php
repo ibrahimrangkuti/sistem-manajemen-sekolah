@@ -30,7 +30,17 @@
                                         <td>{{ $class->name }}</td>
                                         <td>{{ $class->level }}</td>
                                         <td>
-                                            <a href="">Hapus</a>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <a href="{{ route('admin.class.edit', $class->id) }}"
+                                                    class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('admin.class.delete', $class->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit"
+                                                        onclick="return confirm('Apakah kamu yakin ingin menghapus?')"
+                                                        class="btn btn-danger btn-sm">Hapus</button>
+                                                </form>
+                                          </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -42,12 +52,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script>
-        let table;
-        $(function() {
-            table = $('.table').DataTable()
-        });
-    </script>
-@endpush

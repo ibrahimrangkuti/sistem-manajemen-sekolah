@@ -18,5 +18,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // \App\Models\Student::factory(30)->create();
+
+        \App\Models\Setting::create([
+            'school_name' => 'SMKN 5 Kab. Tangerang',
+            'headmaster' => 'Surta Wijaya, S.Kom. M.M',
+            'phone' => '(021) 59330830',
+            'address' => 'Jln. IR. Sutami KM.1,2 Desa. Mauk Barat, Kec. Mauk Tangerang Banten',cl
+        ]);
     }
 }

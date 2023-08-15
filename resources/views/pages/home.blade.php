@@ -36,7 +36,7 @@
                         Shalawat teriring salam kita sanjungkan kepada junjungan kita Nabi Muhammad SAW beserta keluarganya,
                         para sahabatnya dan umatnya sampai akhir zaman.
                     </p>
-                    <span class="fw-semibold fst-italic">Surta Wijaya, S.Kom. M.M</span>
+                    <span class="fw-semibold fst-italic">{{ $setting->headmaster }}</span>
                 </div>
             </div>
         </div>

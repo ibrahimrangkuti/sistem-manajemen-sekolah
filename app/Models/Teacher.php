@@ -15,4 +15,9 @@ class Teacher extends Model
     {
         return $this->hasOne(Classes::class);
     }
+
+    public function department()
+    {
+        return $this->hasOne(Department::class);
+    }
 }
