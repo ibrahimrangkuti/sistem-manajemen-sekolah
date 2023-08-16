@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Jurusan</h6>
-                                        <h6 class="font-extrabold mb-0">2000</h6>
+                                        <h6 class="font-extrabold mb-0">{{ App\Models\Department::count() }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Mata Pelajaran</h6>
-                                        <h6 class="font-extrabold mb-0">2000</h6>
+                                        <h6 class="font-extrabold mb-0">{{ \App\Models\Lesson::count() }}</h6>
                                     </div>
                                 </div>
                             </div>
