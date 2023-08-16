@@ -57,6 +57,12 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a href="{{ route('admin.lesson.index') }}" class='sidebar-link'>
+                        <ion-icon name="calendar"></ion-icon>
+                        <span>Jadwal Pelajaran</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a href="index.html" class='sidebar-link'>
                         <ion-icon name="body"></ion-icon>
                         <span>Ekstrakurikuler</span>
@@ -76,9 +82,16 @@
                 </li>
                 <li class="sidebar-item">
                     <a href="index.html" class='sidebar-link'>
+                        <ion-icon name="briefcase"></ion-icon>
+                        <span>Lowongan</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="index.html" class='sidebar-link'>
                         <ion-icon name="mail"></ion-icon>
                         <span>Pesan</span>
                     </a>
+                </li>
                 <li class="sidebar-item">
                     <a href="{{ route('admin.settings') }}" class='sidebar-link'>
                         <ion-icon name="cog"></ion-icon>

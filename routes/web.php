@@ -11,32 +11,25 @@ use App\Http\Controllers\Admin\LessonController as AdminLessonController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VacancyController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
-
 Route::get('/berita', [PagesController::class, 'news']);
-
 Route::get('/forum', [PagesController::class, 'forum']);
-
 Route::get('/post/detail', [PostController::class, 'show'])->name('post.show');
-
 Route::get('/lowongan', [PagesController::class, 'vacancy']);
-
 Route::get('/lowongan/detail', [VacancyController::class, 'show']);
-
-Route::get('/login', [AuthController::class, 'login']);
-
 Route::get('/portal-orangtua', function () {
     return view('pages.portalortu');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings');
     Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
 
-    // Kela
+    // Kelas
     Route::prefix('class')->name('class.')->group(function () {
         Route::get('/', [AdminClassController::class, 'index'])->name('index');
         Route::get('/create', [AdminClassController::class, 'create'])->name('create');
@@ -49,6 +42,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Siswa
     Route::prefix('student')->name('student.')->group(function () {
         Route::get('/', [AdminStudentController::class, 'index'])->name('index');
+        Route::get('/create', [AdminStudentController::class, 'create'])->name('create');;
+        Route::post('/create', [AdminStudentController::class, 'store'])->name('store');;
+        Route::get('/edit/{id}', [AdminStudentController::class, 'edit'])->name('edit');;
+        Route::put('/edit/{id}', [AdminStudentController::class, 'update'])->name('update');;
+        Route::delete('{id}', [AdminStudentController::class, 'delete'])->name('delete');;
     });
 
     // Guru

@@ -5,11 +5,12 @@
 @endsection
 
 @section('content')
-    <a href="" class="btn btn-success mb-3">Tambah Siswa</a>
+    <a href="{{ route('admin.student.create') }}" class="btn btn-success mb-3">Tambah Siswa</a>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    @include('components.alert')
                     <div class="table-responsive">
                         <table class="table table-striped table-boredered table-hover">
                             <thead>
@@ -45,7 +46,18 @@
                                         <td>{{ $student->date_of_birth }}</td>
                                         <td>{{ $student->status }}</td>
                                         <td class="col-1">
-                                            <a href="">Hapus</a>
+                                            <div class="d-flex gap-2">
+                                                <a href="{{ route('admin.student.edit', $student->id) }}"
+                                                    class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('admin.student.delete', $student->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit"
+                                                        onclick="return confirm('Apakah kamu yakin ingin menghapus?')"
+                                                        class="btn btn-danger btn-sm">Hapus</button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

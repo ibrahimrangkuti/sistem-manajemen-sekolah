@@ -105,6 +105,25 @@
                         </a>
                     </div>
                     <div class="col-6 col-lg-4 col-md-6">
+                        <a href="{{ route('admin.lesson.index') }}">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon text-white" style="background-color: #84cc16">
+                                                <ion-icon name="calendar"></ion-icon>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Jadwal Pelajaran</h6>
+                                            <h6 class="font-extrabold mb-0">2000</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-lg-4 col-md-6">
                         <div class="card">
                             <div class="card-body px-3 py-4-5">
                                 <div class="row">
@@ -149,6 +168,23 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Postingan</h6>
+                                        <h6 class="font-extrabold mb-0">2000</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-3 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="stats-icon text-white" style="background-color: #f97316">
+                                            <ion-icon name="briefcase"></ion-icon>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h6 class="text-muted font-semibold">Lowongan</h6>
                                         <h6 class="font-extrabold mb-0">2000</h6>
                                     </div>
                                 </div>

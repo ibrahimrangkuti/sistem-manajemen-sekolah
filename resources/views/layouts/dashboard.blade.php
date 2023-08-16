@@ -51,12 +51,12 @@
 
             <div class="page-heading d-flex justify-content-between align-items-center">
                 <h3>@yield('title')</h3>
-                <div class="dropdown d-none d-md-flex align-items-center">
+                <div class="dropdown d-none d-md-flex align-items-center gap-3">
                     <div data-bs-toggle="dropdown" class="d-flex flex-column">
-                        <a class="dropdown-toggle font-semibold" href="" aria-expanded="false">
+                        <a class="dropdown-toggle font-semibold text-end" href="" aria-expanded="false">
                             Ibrahim Rangkuti
                         </a>
-                        <span class="text-muted">Administrator</span>
+                        <span class="text-muted text-end">Administrator</span>
                     </div>
                     <img src="https://ui-avatars.com/api/?name=Ibrahim+Rangkutis" alt=""
                         class="rounded-circle w-25">

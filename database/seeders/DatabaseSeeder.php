@@ -21,12 +21,18 @@ class DatabaseSeeder extends Seeder
 
         // \App\Models\Student::factory(30)->create();
 
-        \App\Models\Setting::create([
-            'school_name' => 'SMKN 5 Kab. Tangerang',
-            'headmaster' => 'Surta Wijaya, S.Kom. M.M',
-            'email' => 'contact@smkn5kabtangerang.sch.id',
-            'phone' => '(021) 59330830',
-            'address' => 'Jln. IR. Sutami KM.1,2 Desa. Mauk Barat, Kec. Mauk Tangerang Banten',
+        \App\Models\User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123'),
         ]);
+
+        // \App\Models\Setting::create([
+        //     'school_name' => 'SMKN 5 Kab. Tangerang',
+        //     'headmaster' => 'Surta Wijaya, S.Kom. M.M',
+        //     'email' => 'contact@smkn5kabtangerang.sch.id',
+        //     'phone' => '(021) 59330830',
+        //     'address' => 'Jln. IR. Sutami KM.1,2 Desa. Mauk Barat, Kec. Mauk Tangerang Banten',
+        // ]);
     }
 }
