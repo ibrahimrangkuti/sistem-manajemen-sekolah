@@ -55,7 +55,7 @@
                                         <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $lesson->name }}</td>
                                         <td class="col-1">
-                                            <div class="d-flex gap-3">
+                                            <div class="d-flex gap-2">
                                                 <a href="?id={{ $lesson->id }}" class="btn btn-warning btn-sm">Edit</a>
                                                 <form action="{{ route('admin.lesson.delete', $lesson->id) }}"
                                                     method="POST">

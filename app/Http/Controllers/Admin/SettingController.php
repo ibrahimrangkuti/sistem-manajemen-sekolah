@@ -23,6 +23,13 @@ class SettingController extends Controller
             'address' => ['string']
         ]);
 
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $logoName = time() . '.' . $logo->getClientOriginalExtension();
+            $logo->move(public_path('img/logo'), $logoName);
+            $validatedData['logo_path'] = 'img/logo/' . $logoName;
+        }
+
         $validatedData['email'] = $request->email;
         $validatedData['phone'] = $request->phone;
         Setting::first()->update($validatedData);

@@ -39,4 +39,44 @@ class TeacherController extends Controller
 
         return redirect()->route('admin.teacher.index')->with('success', 'Data guru berhasil ditambahkan!');
     }
+
+    public function edit($id)
+    {
+        $teacher = Teacher::find($id);
+
+        return view('pages.admin.teacher.edit', compact('teacher'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $teacher = Teacher::find($id);
+
+        $validatedData = $request->validate([
+            'nik' => ['numeric', 'min:16', 'unique:teachers,nik,' . $id],
+            'name' => ['string'],
+            'email' => ['email', 'unique:teachers,email,' . $id],
+            'phone' => ['numeric'],
+            'address' => ['string'],
+            'place_of_birth' => ['string'],
+            'date_of_birth' => ['date']
+        ]);
+
+        $validatedData['gender'] = $request->gender;
+        if ($request->password !== null) {
+            $validatedData['password'] = bcrypt($request->password);
+        } else {
+            $validatedData['password'] = $teacher->password;
+        }
+
+        $teacher->update($validatedData);
+
+        return redirect()->route('admin.teacher.index')->with('success', 'Data guru berhasil diubah!');
+    }
+
+    public function delete($id)
+    {
+        Teacher::find($id)->delete();
+
+        return back()->with('success', 'Data guru berhasil dihapus!');
+    }
 }

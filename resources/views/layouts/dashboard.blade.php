@@ -92,7 +92,7 @@
     <script src="{{ asset('mazer/assets/js/pages/dashboard.js') }}"></script>
 
     <script src="{{ asset('mazer/assets/js/main.js') }}"></script>
-    {{-- @stack('script') --}}
+    @stack('scripts')
     <script>
         $('.table').DataTable()
     </script>

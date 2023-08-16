@@ -18,7 +18,7 @@
                         <span class="text-muted">Administrator</span>
                     </div>
                 </div>
-                <li class="sidebar-title">Master</li>
+                <li class="sidebar-title">Menu</li>
 
                 <li class="sidebar-item active">
                     <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>

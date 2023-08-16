@@ -56,6 +56,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [AdminTeacherController::class, 'index'])->name('index');
         Route::get('/create', [AdminTeacherController::class, 'create'])->name('create');
         Route::post('/create', [AdminTeacherController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [AdminTeacherController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [AdminTeacherController::class, 'update'])->name('update');
+        Route::delete('{id}', [AdminTeacherController::class, 'delete'])->name('delete');
     });
 
     // Jurusan

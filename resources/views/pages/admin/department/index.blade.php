@@ -26,14 +26,18 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="name" class="form-label">Nama Jurusan</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        value="{{ $department ? $department->name : '' }}" />
+                                    <input type="text" class="form-control @error('name') @enderror" id="name"
+                                        name="name" value="{{ $department ? $department->name : '' }}" />
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="teacher" class="form-label">Kepala Jurusan</label>
                                     <select name="teacher" id="teacher" class="form-control">
+                                        <option hidden>Pilih Kepala Jurusan</option>
                                         @foreach ($teachers as $teacher)
                                             <option value="{{ $teacher->id }}"
                                                 {{ $department ? ($teacher->id === $department->teacher_id ? 'selected' : '') : null }}>
@@ -57,8 +61,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('admin.department.deleteAll') }}" onclick="return confirm('Yakin bro mau dihapus?')"
-                        class="btn btn-danger btn-sm mb-3">Hapus Semua</a>
+                    {{-- <a href="{{ route('admin.department.deleteAll') }}" onclick="return confirm('Yakin bro mau dihapus?')"
+                        class="btn btn-danger btn-sm mb-3">Hapus Semua</a> --}}
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -76,7 +80,7 @@
                                         <td>{{ $department->name }}</td>
                                         <td>{{ $department->teacher->name }}</td>
                                         <td class="col-1">
-                                            <div class="d-flex gap-3">
+                                            <div class="d-flex gap-2">
                                                 <a href="?id={{ $department->id }}" class="btn btn-warning btn-sm">Edit</a>
                                                 <form action="{{ route('admin.department.delete', $department->id) }}"
                                                     method="POST">

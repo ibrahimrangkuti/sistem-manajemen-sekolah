@@ -16,6 +16,7 @@
                                 <div class="form-group mb-3">
                                     <label for="teacher" class="form-label">Wali Kelas</label>
                                     <select name="teacher" id="teacher" class="form-control">
+                                        <option hidden>Pilih Wali Kelas</option>
                                         @foreach ($teachers as $teacher)
                                             <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                                         @endforeach
@@ -26,6 +27,7 @@
                                 <div class="form-group mb-3">
                                     <label for="department" class="form-label">Jurusan</label>
                                     <select name="department" id="department" class="form-control">
+                                        <option hidden>Pilih Jurusan</option>
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}">{{ $department->name }}</option>
                                         @endforeach

@@ -67,38 +67,42 @@
                         </a>
                     </div>
                     <div class="col-6 col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-3 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="stats-icon bg-info text-white">
-                                            <ion-icon name="grid"></ion-icon>
+                        <a href="{{ route('admin.department.index') }}">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon bg-info text-white">
+                                                <ion-icon name="grid"></ion-icon>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Jurusan</h6>
-                                        <h6 class="font-extrabold mb-0">{{ App\Models\Department::count() }}</h6>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Jurusan</h6>
+                                            <h6 class="font-extrabold mb-0">{{ App\Models\Department::count() }}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-6 col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-3 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="stats-icon bg-primary text-white">
-                                            <ion-icon name="book"></ion-icon>
+                        <a href="{{ route('admin.lesson.index') }}">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon bg-primary text-white">
+                                                <ion-icon name="book"></ion-icon>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Mata Pelajaran</h6>
-                                        <h6 class="font-extrabold mb-0">{{ \App\Models\Lesson::count() }}</h6>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Mata Pelajaran</h6>
+                                            <h6 class="font-extrabold mb-0">{{ \App\Models\Lesson::count() }}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-6 col-lg-4 col-md-6">
                         <div class="card">

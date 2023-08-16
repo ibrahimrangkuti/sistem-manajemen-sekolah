@@ -10,13 +10,15 @@
             <div class="card">
                 <div class="card-body">
                     @include('components.alert')
-                    <form action="{{ route('admin.settings.update') }}" method="POST">
+                    <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="logo" class="form-label">Logo</label>
                                     <input type="file" name="logo" id="logo" class="form-control">
+                                    <img id="previewLogo" src="{{ asset($setting->logo_path) }}" alt="Preview"
+                                        class="my-3" width="60" height="80">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -81,3 +83,17 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#logo').change(function() {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#previewLogo').attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+        })
+    </script>
+@endpush
