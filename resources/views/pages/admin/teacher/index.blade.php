@@ -42,7 +42,7 @@
                                         <td>{{ $teacher->address }}</td>
                                         <td>{{ $teacher->place_of_birth }}</td>
                                         <td>{{ $teacher->date_of_birth }}</td>
-                                        <td>{{ $teacher->status }}</td>
+                                        <td>{{ $teacher->is_active ? 'Aktif' : 'Tidak Aktif' }}</td>
                                         <td class="col-1">
                                             <div class="d-flex gap-2">
                                                 <a href="{{ route('admin.teacher.edit', $teacher->id) }}"

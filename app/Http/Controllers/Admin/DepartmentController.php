@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Classes;
 use App\Models\Department;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -18,7 +19,7 @@ class DepartmentController extends Controller
             $department = Department::find(request()->id);
         }
 
-        $teachers = Teacher::all();
+        $teachers = User::where('role', 'guru')->get();
         $departments = Department::with('teacher')->latest()->get();
         return view('pages.admin.department.index', compact('teachers', 'departments', 'department'));
     }
@@ -30,7 +31,7 @@ class DepartmentController extends Controller
             'teacher' => 'required'
         ]);
 
-        $validatedData['teacher_id'] = $request->teacher;
+        $validatedData['user_id'] = $request->teacher;
         Department::create($validatedData);
 
         return back()->with('success', 'Data jurusan berhasil ditambahkan!');

@@ -13,11 +13,11 @@ class Classes extends Model
 
     public function students()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(User::class, 'user_id');
     }
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -35,7 +35,7 @@
                                     <tr>
                                         <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $student->nis }}</td>
-                                        <td>{{ $student->class->name }}</td>
+                                        <td>{{ $student->class?->name }}</td>
                                         <td>{{ $student->photo }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>

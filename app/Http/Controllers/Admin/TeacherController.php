@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
     public function index()
     {
-        $teachers = Teacher::latest()->get();
+        $teachers = User::where('role', 'guru')->latest()->get();
 
         return view('pages.admin.teacher.index', compact('teachers'));
     }
@@ -23,9 +23,9 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nik' => ['required', 'numeric', 'min:16', 'unique:teachers,nik'],
+            'nik' => ['required', 'numeric', 'min:16', 'unique:users,nik'],
             'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:teachers,email'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:3'],
             'gender' => ['required'],
             'phone' => ['numeric'],
@@ -34,27 +34,28 @@ class TeacherController extends Controller
             'date_of_birth' => ['required', 'date']
         ]);
 
+        $validatedData['role'] = 'guru';
         $validatedData['password'] = bcrypt($request->password);
-        Teacher::create($validatedData);
+        User::create($validatedData);
 
         return redirect()->route('admin.teacher.index')->with('success', 'Data guru berhasil ditambahkan!');
     }
 
     public function edit($id)
     {
-        $teacher = Teacher::find($id);
+        $teacher = User::where('role', 'guru')->where('id', $id)->first();
 
         return view('pages.admin.teacher.edit', compact('teacher'));
     }
 
     public function update(Request $request, $id)
     {
-        $teacher = Teacher::find($id);
+        $teacher = User::where('role', 'guru')->where('id', $id)->first();
 
         $validatedData = $request->validate([
-            'nik' => ['numeric', 'min:16', 'unique:teachers,nik,' . $id],
+            'nik' => ['numeric', 'min:16', 'unique:users,nik,' . $id],
             'name' => ['string'],
-            'email' => ['email', 'unique:teachers,email,' . $id],
+            'email' => ['email', 'unique:users,email,' . $id],
             'phone' => ['numeric'],
             'address' => ['string'],
             'place_of_birth' => ['string'],
@@ -75,7 +76,7 @@ class TeacherController extends Controller
 
     public function delete($id)
     {
-        Teacher::find($id)->delete();
+        User::where('role', 'guru')->where('id', $id)->delete();
 
         return back()->with('success', 'Data guru berhasil dihapus!');
     }

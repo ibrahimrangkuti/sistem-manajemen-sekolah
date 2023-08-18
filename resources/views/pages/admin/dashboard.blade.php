@@ -40,7 +40,8 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Siswa</h6>
-                                            <h6 class="font-extrabold mb-0">{{ \App\Models\Student::count() }}</h6>
+                                            <h6 class="font-extrabold mb-0">
+                                                {{ \App\Models\User::where('role', 'siswa')->count() }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +60,8 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Guru</h6>
-                                            <h6 class="font-extrabold mb-0">{{ \App\Models\Teacher::count() }}</h6>
+                                            <h6 class="font-extrabold mb-0">
+                                                {{ \App\Models\User::where('role', 'guru')->count() }}</h6>
                                         </div>
                                     </div>
                                 </div>

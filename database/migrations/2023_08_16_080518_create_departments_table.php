@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('classes', function (Blueprint $table) {
-            $table->foreignId('department_id')->after('id')->constrained();
+        Schema::create('departments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->text('logo_path')->nullable();
+            $table->string('name')->unique();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('classes', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('department_id');
-        });
+        Schema::dropIfExists('departments');
     }
 };

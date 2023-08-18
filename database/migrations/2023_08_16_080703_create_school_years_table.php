@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('settings', function (Blueprint $table) {
-            $table->string('email')->after('headmaster')->nullable();
+        Schema::create('school_years', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->year('start_year');
+            $table->year('end_year');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('settings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('school_years');
     }
 };

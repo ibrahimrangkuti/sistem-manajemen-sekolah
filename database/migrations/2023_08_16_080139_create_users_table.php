@@ -11,22 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id');
-            $table->string('nis')->unique();
+            $table->unsignedBigInteger('class_id')->nullable();
             $table->text('photo')->nullable();
+            $table->string('nis')->nullable();
+            $table->string('nik')->nullable();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->default(bcrypt('123'));
             $table->enum('gender', ['L', 'P']);
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('place_of_birth')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->enum('role', ['admin', 'guru', 'siswa', 'ortu'])->default('siswa');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('users');
     }
 };

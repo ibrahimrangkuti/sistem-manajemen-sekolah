@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Classes;
 use App\Models\Department;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -19,7 +20,7 @@ class ClassController extends Controller
 
     public function create()
     {
-        $teachers = Teacher::all();
+        $teachers = User::where('role', 'guru')->get();
         $departments = Department::all();
 
         return view('pages.admin.class.create', compact('teachers', 'departments'));
@@ -32,7 +33,7 @@ class ClassController extends Controller
         ]);
 
         $validatedData['department_id'] = $request->department;
-        $validatedData['teacher_id'] = $request->teacher;
+        $validatedData['user_id'] = $request->teacher;
         $validatedData['level'] = $request->level;
         Classes::create($validatedData);
 
@@ -42,7 +43,7 @@ class ClassController extends Controller
     public function edit($id)
     {
         $class = Classes::find($id);
-        $teachers = Teacher::all();
+        $teachers = User::where('role', 'guru')->get();
         $departments = Department::all();
 
         return view('pages.admin.class.edit', compact('class', 'teachers', 'departments'));
@@ -56,7 +57,7 @@ class ClassController extends Controller
             'name' => 'required|string|unique:classes,name,' . $class->id,
         ]);
 
-        $class->teacher_id = $request->teacher;
+        $class->user_id = $request->teacher;
         $class->department_id = $request->department;
         $class->name = $request->name;
         $class->level = $request->level;

@@ -53,16 +53,22 @@
                 <h3>@yield('title')</h3>
                 <div class="dropdown d-none d-md-flex align-items-center gap-3">
                     <div data-bs-toggle="dropdown" class="d-flex flex-column">
-                        <a class="dropdown-toggle font-semibold text-end" href="" aria-expanded="false">
-                            Ibrahim Rangkuti
+                        <a class="dropdown-toggle font-semibold" href="" aria-expanded="false">
+                            {{ Auth::user()->name }}
                         </a>
-                        <span class="text-muted text-end">Administrator</span>
+                        @if (Auth::user()->role == 'admin')
+                            <span class="text-muted">Administrator</span>
+                        @elseif(Auth::user()->role == 'guru')
+                            <span class="text-muted">Guru</span>
+                        @else
+                            <span class="text-muted">Siswa</span>
+                        @endif
                     </div>
                     <img src="https://ui-avatars.com/api/?name=Ibrahim+Rangkutis" alt=""
                         class="rounded-circle w-25">
                     <ul class="dropdown-menu shadow mt-4">
                         <li><a class="dropdown-item" href="#">Profil</a></li>
-                        <li><a class="dropdown-item" href="#">Keluar</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>
                     </ul>
                 </div>
             </div>

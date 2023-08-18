@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('teacher_id')->constrained();
-            $table->string('name');
-            $table->text('logo_path')->nullable();
-            $table->timestamps();
+        Schema::table('settings', function (Blueprint $table) {
+            $table->text('logo_path')->after('id')->nullable();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::table('settings', function (Blueprint $table) {
+            $table->dropColumn('logo_path');
+        });
     }
 };

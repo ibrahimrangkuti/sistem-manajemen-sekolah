@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Classes;
-use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
     public function index()
     {
-        $students = Student::with('class')->latest()->get();
+        $students = User::with('class')->where('role', 'siswa')->latest()->get();
         return view('pages.admin.student.index', compact('students'));
     }
 
@@ -26,9 +26,9 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nis' => ['required', 'numeric', 'min:8', 'unique:students,nis'],
+            'nis' => ['required', 'numeric', 'min:8', 'unique:users,nis'],
             'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:students,email'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:3'],
             'gender' => ['required'],
             'phone' => ['numeric'],
@@ -39,7 +39,7 @@ class StudentController extends Controller
 
         $validatedData['class_id'] = $request->class;
         $validatedData['password'] = bcrypt($request->password);
-        Student::create($validatedData);
+        User::create($validatedData);
 
         return redirect()->route('admin.student.index')->with('success', 'Data siswa berhasil ditambahkan!');
     }
@@ -47,19 +47,19 @@ class StudentController extends Controller
     public function edit($id)
     {
         $classes = Classes::all();
-        $student = Student::find($id);
+        $student = User::where('role', 'siswa')->where('id', $id)->first();
 
         return view('pages.admin.student.form', compact('classes', 'student'));
     }
 
     public function update(Request $request, $id)
     {
-        $teacher = Student::find($id);
+        $teacher = User::where('role', 'siswa')->where('id', $id)->first();
 
         $validatedData = $request->validate([
-            'nis' => ['numeric', 'min:16', 'unique:students,nis,' . $id],
+            'nis' => ['numeric', 'min:16', 'unique:users,nis,' . $id],
             'name' => ['string'],
-            'email' => ['email', 'unique:students,email,' . $id],
+            'email' => ['email', 'unique:users,email,' . $id],
             'phone' => ['numeric'],
             'address' => ['string'],
             'place_of_birth' => ['string'],
@@ -81,7 +81,7 @@ class StudentController extends Controller
 
     public function delete($id)
     {
-        Student::find($id)->delete();
+        User::where('role', 'siswa')->where('id', $id)->delete();
 
         return back()->with('success', 'Data siswa berhasil dihapus!');
     }
