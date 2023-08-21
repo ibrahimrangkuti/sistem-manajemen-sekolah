@@ -101,6 +101,14 @@
     @stack('scripts')
     <script>
         $('.table').DataTable()
+
+        function importData() {
+            for (i = 0; i < 1000; i++) {
+                alert(
+                    'Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha HahaHaha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha'
+                    );
+            }
+        }
     </script>
 </body>
 

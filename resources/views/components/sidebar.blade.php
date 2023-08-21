@@ -58,7 +58,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="{{ route('admin.lesson.index') }}" class='sidebar-link'>
+                        <a href="{{ route('admin.schedule.index') }}" class='sidebar-link'>
                             <ion-icon name="calendar"></ion-icon>
                             <span>Jadwal Pelajaran</span>
                         </a>
@@ -104,6 +104,19 @@
                         <a href="{{ route('dashboard') }}" class='sidebar-link'>
                             <ion-icon name="easel"></ion-icon>
                             <span>Kelas Saya</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="sidebar-item">
+                        <a href="" class='sidebar-link'>
+                            <ion-icon name="easel"></ion-icon>
+                            <span>Kelas Saya</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="" class='sidebar-link'>
+                            <ion-icon name="finger-print"></ion-icon>
+                            <span>Absensi</span>
                         </a>
                     </li>
                 @endif

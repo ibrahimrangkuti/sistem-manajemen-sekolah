@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\StudentsImport;
 use App\Models\Classes;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -84,5 +87,12 @@ class StudentController extends Controller
         User::where('role', 'siswa')->where('id', $id)->delete();
 
         return back()->with('success', 'Data siswa berhasil dihapus!');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new StudentsImport, $request->file('file'));
+
+        return redirect('/')->with('success', 'All good!');
     }
 }

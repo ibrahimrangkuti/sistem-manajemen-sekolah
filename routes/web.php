@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\DepartmentController as AdminDepartmentController;
 use App\Http\Controllers\Admin\ExtracurricularController as AdminEkskulController;
 use App\Http\Controllers\Admin\LessonController as AdminLessonController;
+use App\Http\Controllers\Admin\ScheduleController as AdminScheduleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostController;
@@ -55,11 +56,12 @@ Route::middleware('auth')->group(function () {
         // Siswa
         Route::prefix('student')->name('student.')->group(function () {
             Route::get('/', [AdminStudentController::class, 'index'])->name('index');
-            Route::get('/create', [AdminStudentController::class, 'create'])->name('create');;
-            Route::post('/create', [AdminStudentController::class, 'store'])->name('store');;
-            Route::get('/edit/{id}', [AdminStudentController::class, 'edit'])->name('edit');;
-            Route::put('/edit/{id}', [AdminStudentController::class, 'update'])->name('update');;
-            Route::delete('{id}', [AdminStudentController::class, 'delete'])->name('delete');;
+            Route::get('/create', [AdminStudentController::class, 'create'])->name('create');
+            Route::post('/create', [AdminStudentController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [AdminStudentController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [AdminStudentController::class, 'update'])->name('update');
+            Route::delete('{id}', [AdminStudentController::class, 'delete'])->name('delete');
+            Route::post('/import', [AdminStudentController::class, 'import'])->name('import');
         });
 
         // Guru
@@ -90,6 +92,14 @@ Route::middleware('auth')->group(function () {
             Route::delete('/delete/{id}', [AdminLessonController::class, 'delete'])->name('delete');
         });
 
+        // Jadwal Pelajaran
+        Route::prefix('schedule')->name('schedule.')->group(function () {
+            Route::get('/', [AdminScheduleController::class, 'index'])->name('index');
+            Route::get('/create', [AdminScheduleController::class, 'create'])->name('create');
+            Route::post('/create', [AdminScheduleController::class, 'store'])->name('store');
+        });
+
+        // Ekskul
         Route::prefix('ekskul')->name('ekskul.')->group(function () {
             Route::get('/', [AdminEkskulController::class, 'index'])->name('index');
         });

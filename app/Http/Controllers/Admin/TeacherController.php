@@ -10,7 +10,7 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $teachers = User::where('role', 'guru')->latest()->get();
+        $teachers = User::whereRole('guru')->latest()->get();
 
         return view('pages.admin.teacher.index', compact('teachers'));
     }
@@ -28,8 +28,8 @@ class TeacherController extends Controller
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:3'],
             'gender' => ['required'],
-            'phone' => ['numeric'],
-            'address' => ['string'],
+            // 'phone' => ['numeric'],
+            // 'address' => ['string'],
             'place_of_birth' => ['required', 'string'],
             'date_of_birth' => ['required', 'date']
         ]);
@@ -43,14 +43,14 @@ class TeacherController extends Controller
 
     public function edit($id)
     {
-        $teacher = User::where('role', 'guru')->where('id', $id)->first();
+        $teacher = User::whereRole('guru')->where('id', $id)->first();
 
         return view('pages.admin.teacher.edit', compact('teacher'));
     }
 
     public function update(Request $request, $id)
     {
-        $teacher = User::where('role', 'guru')->where('id', $id)->first();
+        $teacher = User::whereRole('guru')->where('id', $id)->first();
 
         $validatedData = $request->validate([
             'nik' => ['numeric', 'min:16', 'unique:users,nik,' . $id],
@@ -76,7 +76,7 @@ class TeacherController extends Controller
 
     public function delete($id)
     {
-        User::where('role', 'guru')->where('id', $id)->delete();
+        User::whereRole('guru')->where('id', $id)->delete();
 
         return back()->with('success', 'Data guru berhasil dihapus!');
     }

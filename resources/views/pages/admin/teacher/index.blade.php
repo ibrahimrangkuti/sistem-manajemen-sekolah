@@ -5,7 +5,10 @@
 @endsection
 
 @section('content')
-    <a href="{{ route('admin.teacher.create') }}" class="btn btn-success mb-3">Tambah Guru</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="{{ route('admin.teacher.create') }}" class="btn btn-success">Tambah Guru</a>
+        <span>Total <b>{{ \App\Models\User::whereRole('guru')->count() }} guru</b></span>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
