@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="body" class="form-label">Isi</label>
-                            <textarea name="body" id="body" cols="30" class="form-control"></textarea>
+                            <textarea id="editor" name="body" id="body" cols="30" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-success float-end">Tambah Berita</button>
                     </form>
@@ -63,15 +63,15 @@
                                 @foreach ($news as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded" width="200"></td>
+                                        <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded"
+                                                width="200"></td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->body }}</td>
 
                                         <td>
                                             <div class="d-flex">
-                                                <form action="{{ route('admin.news.delete', $item->id) }}"
-                                                    method="POST">
+                                                <form action="{{ route('admin.news.delete', $item->id) }}" method="POST">
                                                     @method('delete')
                                                     @csrf
                                                     <button type="submit"
