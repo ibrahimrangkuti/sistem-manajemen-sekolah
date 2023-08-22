@@ -54,4 +54,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function ekskul()
+    {
+        return $this->hasMany(Extracurricular::class);
+    }
+
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
+    public function presences()
+    {
+        return $this->hasMany(StudentPresence::class);
+    }
 }

@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="index.html" class='sidebar-link'>
+                        <a href="{{ route('admin.news.index') }}" class='sidebar-link'>
                             <ion-icon name="newspaper"></ion-icon>
                             <span>Berita</span>
                         </a>
@@ -100,12 +100,14 @@
                         </a>
                     </li>
                 @elseif (Auth::user()->role === 'guru')
-                    <li class="sidebar-item">
-                        <a href="{{ route('dashboard') }}" class='sidebar-link'>
-                            <ion-icon name="easel"></ion-icon>
-                            <span>Kelas Saya</span>
-                        </a>
-                    </li>
+                    @if (\App\Models\Classes::where('user_id', Auth::user()->id)->count())
+                        <li class="sidebar-item">
+                            <a href="{{ route('teacher.myclass.index') }}" class='sidebar-link'>
+                                <ion-icon name="easel"></ion-icon>
+                                <span>Kelas Saya</span>
+                            </a>
+                        </li>
+                    @endif
                 @else
                     <li class="sidebar-item">
                         <a href="" class='sidebar-link'>

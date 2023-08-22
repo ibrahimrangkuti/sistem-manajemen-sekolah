@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+// Admin
 use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\ClassController as AdminClassController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
@@ -9,6 +10,10 @@ use App\Http\Controllers\Admin\DepartmentController as AdminDepartmentController
 use App\Http\Controllers\Admin\ExtracurricularController as AdminEkskulController;
 use App\Http\Controllers\Admin\LessonController as AdminLessonController;
 use App\Http\Controllers\Admin\ScheduleController as AdminScheduleController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+
+// Guru
+use App\Http\Controllers\Teacher\MyClassController as TeacherMyClassController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostController;
@@ -102,9 +107,25 @@ Route::middleware('auth')->group(function () {
         // Ekskul
         Route::prefix('ekskul')->name('ekskul.')->group(function () {
             Route::get('/', [AdminEkskulController::class, 'index'])->name('index');
+            Route::post('/', [AdminEkskulController::class, 'store'])->name('store');
+            Route::post('{id}', [AdminEkskulController::class, 'update'])->name('update');
+            Route::delete('{id}', [AdminEkskulController::class, 'delete'])->name('delete');
+        });
+
+        // Berita
+        Route::prefix('news')->name('news.')->group(function () {
+            Route::get('/', [AdminNewsController::class, 'index'])->name('index');
+            Route::post('/', [AdminNewsController::class, 'store'])->name('store');
+            Route::post('{id}', [AdminNewsController::class, 'update'])->name('update');
+            Route::delete('{id}', [AdminNewsController::class, 'delete'])->name('delete');
         });
     });
 
     Route::name('teacher.')->group(function () {
+        // Kelas Saya
+        Route::prefix('myclass')->name('myclass.')->group(function () {
+            Route::get('/', [TeacherMyClassController::class, 'index'])->name('index');
+            Route::get('/presence-history', [TeacherMyClassController::class, 'presenceHistory'])->name('presenceHistory');
+        });
     });
 });

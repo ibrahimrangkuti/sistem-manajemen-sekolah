@@ -25,4 +25,9 @@ class Classes extends Model
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function student_presences()
+    {
+        return $this->hasMany(StudentPresence::class);
+    }
 }

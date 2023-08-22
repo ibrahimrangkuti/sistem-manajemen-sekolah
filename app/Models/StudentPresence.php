@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Extracurricular extends Model
+class StudentPresence extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
 
-    public function teacher()
+    public function class()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Classes::class);
     }
 
-    public function students()
+    public function student()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
