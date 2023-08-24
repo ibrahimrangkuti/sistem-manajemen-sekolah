@@ -12,19 +12,39 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <td class="col-2">Kelas</td>
+                                <td>Kelas</td>
                                 <td>{{ $class->name }}</td>
                             </tr>
                             <tr>
-                                <td class="col-2">Tingkat</td>
+                                <td>Tingkat</td>
                                 <td>{{ $class->level }}</td>
                             </tr>
                             <tr>
-                                <td class="col-1">Wali Kelas</td>
+                                <td>Wali Kelas</td>
                                 <td>{{ $class->teacher->name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Laki - Laki</td>
+                                <td>{{ $maleCount }} orang</td>
+                            </tr>
+                            <tr>
+                                <td>Perempuan</td>
+                                <td>{{ $femaleCount }} orang</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Total Siswa</td>
+                                <td class="fw-bold">{{ $students->count() }} orang</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,7 +54,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
                         <h1 class="card-title">Anggota Kelas</h1>
                         <a href="{{ route('teacher.myclass.presenceHistory') }}" class="btn btn-outline-primary">Riwayat
                             Kehadiran</a>
@@ -61,7 +81,7 @@
                                 @foreach ($students as $student)
                                     <tr>
                                         <td class="col-1">{{ $loop->iteration }}</td>
-                                        <td>{{ $student->nis }}</td>
+                                        <td>{{ $student->nis }} </td>
                                         <td>{{ $student->photo }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
@@ -70,7 +90,7 @@
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->place_of_birth }}</td>
                                         <td>{{ $student->date_of_birth }}</td>
-                                        <td>{{ $student->status }}</td>
+                                        <td>{{ $student->is_active ? 'Aktif' : 'Tidak Aktif' }}</td>
                                         {{-- <td class="col-1">
                                             <div class="d-flex gap-2">
                                                 <a href="{{ route('admin.student.edit', $student->id) }}"

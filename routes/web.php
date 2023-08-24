@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+
 // Admin
 use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\ClassController as AdminClassController;
@@ -14,7 +15,10 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 // Guru
 use App\Http\Controllers\Teacher\MyClassController as TeacherMyClassController;
+use App\Http\Controllers\Teacher\ScheduleController as TeacherScheduleController;
+
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VacancyController;
@@ -41,9 +45,11 @@ Route::get('/logout', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
     // Admin
-    Route::name('admin.')->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
         // Admin
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings');
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
@@ -98,7 +104,7 @@ Route::middleware('auth')->group(function () {
         });
 
         // Jadwal Pelajaran
-        Route::prefix('schedule')->name('schedule.')->group(function () {
+        Route::prefix('schedules')->name('schedule.')->group(function () {
             Route::get('/', [AdminScheduleController::class, 'index'])->name('index');
             Route::get('/create', [AdminScheduleController::class, 'create'])->name('create');
             Route::post('/create', [AdminScheduleController::class, 'store'])->name('store');
@@ -116,16 +122,30 @@ Route::middleware('auth')->group(function () {
         Route::prefix('news')->name('news.')->group(function () {
             Route::get('/', [AdminNewsController::class, 'index'])->name('index');
             Route::post('/', [AdminNewsController::class, 'store'])->name('store');
-            Route::post('{id}', [AdminNewsController::class, 'update'])->name('update');
+            Route::put('{id}', [AdminNewsController::class, 'update'])->name('update');
             Route::delete('{id}', [AdminNewsController::class, 'delete'])->name('delete');
         });
     });
 
+    // Guru
     Route::name('teacher.')->group(function () {
         // Kelas Saya
         Route::prefix('myclass')->name('myclass.')->group(function () {
             Route::get('/', [TeacherMyClassController::class, 'index'])->name('index');
             Route::get('/presence-history', [TeacherMyClassController::class, 'presenceHistory'])->name('presenceHistory');
         });
+
+        // Jadwal Mengajar
+        Route::prefix('schedule')->name('schedule.')->group(function () {
+            Route::get('/', [TeacherScheduleController::class, 'index'])->name('index');
+        });
+    });
+
+    // Postingan Forum
+    Route::prefix('posts')->name('posts.')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('index');
+        Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::put('{id}', [PostController::class, 'update'])->name('update');
+        Route::delete('{id}', [PostController::class, 'delete'])->name('delete');
     });
 });

@@ -25,9 +25,9 @@ class User extends Authenticatable
 
     protected $guarded = ['id'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
+    /**{{  }}
+     * The attributes that should be hidden {{ for  }}serialization.
+     *{{  }}
      * @var array<int, string>
      */
     protected $hidden = [
@@ -68,5 +68,10 @@ class User extends Authenticatable
     public function presences()
     {
         return $this->hasMany(StudentPresence::class);
+    }
+
+    public function post()
+    {
+        return $this->hasMany(PostForum::class);
     }
 }

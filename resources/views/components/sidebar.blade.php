@@ -12,10 +12,18 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <div class="d-flex d-md-none align-items-center gap-3">
-                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="" class="rounded-circle w-25">
+                    <img src="{{ asset(Auth::user()->photo) }}" alt="" class="rounded-circle shadow w-25">
                     <div class="d-flex flex-column">
-                        <a class="font-semibold">Ibrahim Rangkuti</a>
-                        <span class="text-muted">Administrator</span>
+                        <a class="font-semibold">{{ Auth::user()->name }}</a>
+                        <span class="text-muted">
+                            @if (Auth::user()->role == 'admin')
+                                Administrator
+                            @elseif(Auth::user()->role == 'guru')
+                                Guru
+                            @elseif(Auth::user()->role == 'siswa')
+                                Siswa
+                            @endif
+                        </span>
                     </div>
                 </div>
                 <li class="sidebar-title">Menu</li>
@@ -77,12 +85,6 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
-                            <ion-icon name="bookmarks"></ion-icon>
-                            <span>Postingan</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="index.html" class='sidebar-link'>
                             <ion-icon name="briefcase"></ion-icon>
                             <span>Lowongan</span>
                         </a>
@@ -101,13 +103,19 @@
                     </li>
                 @elseif (Auth::user()->role === 'guru')
                     @if (\App\Models\Classes::where('user_id', Auth::user()->id)->count())
-                        <li class="sidebar-item">
-                            <a href="{{ route('teacher.myclass.index') }}" class='sidebar-link'>
-                                <ion-icon name="easel"></ion-icon>
-                                <span>Kelas Saya</span>
-                            </a>
+                        <li class="sidebar-item"></li>
+                        <a href="{{ route('teacher.myclass.index') }}" class='sidebar-link'>
+                            <ion-icon name="easel"></ion-icon>
+                            <span>Kelas Saya</span>
+                        </a>
                         </li>
                     @endif
+                    <li class="sidebar-item">
+                        <a href="{{ route('teacher.schedule.index') }}" class='sidebar-link'>
+                            <ion-icon name="calendar"></ion-icon>
+                            <span>Jadwal Mengajar</span>
+                        </a>
+                    </li>
                 @else
                     <li class="sidebar-item">
                         <a href="" class='sidebar-link'>
@@ -122,6 +130,13 @@
                         </a>
                     </li>
                 @endif
+
+                <li class="sidebar-item">
+                    <a href="{{ route('posts.index') }}" class='sidebar-link'>
+                        <ion-icon name="bookmarks"></ion-icon>
+                        <span>Postingan</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item">
                     <a href="{{ route('dashboard') }}" class='sidebar-link'>

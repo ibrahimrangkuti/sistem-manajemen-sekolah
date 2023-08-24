@@ -64,8 +64,8 @@
                             <span class="text-muted">Siswa</span>
                         @endif
                     </div>
-                    <img src="https://ui-avatars.com/api/?name=Ibrahim+Rangkutis" alt=""
-                        class="rounded-circle w-25">
+                    <img src="{{ asset(Auth::user()->photo) }}" alt="" class="rounded-circle shadow"
+                        width="50">
                     <ul class="dropdown-menu shadow mt-4">
                         <li><a class="dropdown-item" href="#">Profil</a></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>
@@ -110,6 +110,16 @@
     <script>
         $('.table-striped').DataTable()
 
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            var formattedTime = hours + ':' + minutes + ':' + seconds;
+
+            document.getElementById('clock').textContent = formattedTime;
+        }
+
         function importData() {
             for (i = 0; i < 1000; i++) {
                 alert(
@@ -117,6 +127,8 @@
                 );
             }
         }
+
+        setInterval(updateClock, 1000);
     </script>
 </body>
 

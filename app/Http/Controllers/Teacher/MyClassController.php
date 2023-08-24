@@ -16,8 +16,10 @@ class MyClassController extends Controller
     {
         $class = Classes::where('user_id', Auth::user()->id)->first();
         $students = User::whereRole('siswa')->where('class_id', $class->id)->get();
+        $maleCount = User::whereRole('siswa')->where('class_id', $class->id)->whereGender('L')->count();
+        $femaleCount = User::whereRole('siswa')->where('class_id', $class->id)->whereGender('P')->count();
 
-        return view('pages.teacher.myclass.index', compact('class', 'students'));
+        return view('pages.teacher.myclass.index', compact('class', 'students', 'maleCount', 'femaleCount'));
     }
 
     public function presenceHistory()
