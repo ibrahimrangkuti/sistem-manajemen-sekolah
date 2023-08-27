@@ -12,7 +12,7 @@
                         @foreach ($mondaySchedules as $mondaySchedule)
                             <li
                                 class="list-group-item {{ $currentDate->format('l') === 'Monday' ? 'list-group-item-info' : '' }}">
-                                {{ $mondaySchedule->lesson->name }}</li>
+                                {{ $mondaySchedule?->lesson->name }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -26,7 +26,7 @@
                         @foreach ($tuesdaySchedules as $tuesdaySchedule)
                             <li
                                 class="list-group-item {{ $currentDate->format('l') === 'Tuesday' ? 'list-group-item-info' : '' }}">
-                                {{ $tuesdaySchedule->lesson->name }}</li>
+                                {{ $tuesdaySchedule?->lesson->name }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -40,7 +40,7 @@
                         @foreach ($wednesdaySchedules as $wednesdaySchedule)
                             <li
                                 class="list-group-item {{ $currentDate->format('l') === 'Wednesday' ? 'list-group-item-info' : '' }}">
-                                {{ $mondaySchedule->lesson->name }}</li>
+                                {{ $wednesdaySchedule?->lesson->name }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -54,7 +54,7 @@
                         @foreach ($thursdaySchedules as $thursdaySchedule)
                             <li
                                 class="list-group-item {{ $currentDate->format('l') === 'Thursday' ? 'list-group-item-info' : '' }}">
-                                {{ $thursdaySchedule->lesson->name }}</li>
+                                {{ $thursdaySchedule?->lesson->name }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -68,7 +68,7 @@
                         @foreach ($fridaySchedules as $fridaySchedule)
                             <li
                                 class="list-group-item {{ $currentDate->format('l') === 'Friday' ? 'list-group-item-info' : '' }}">
-                                {{ $fridaySchedule->lesson->name }}</li>
+                                {{ $fridaySchedule?->lesson->name }}</li>
                         @endforeach
                     </ul>
                 </div>

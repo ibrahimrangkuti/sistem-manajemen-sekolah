@@ -6,6 +6,10 @@
     font-family: "Poppins", sans-serif;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 /* width */
 ::-webkit-scrollbar {
     display: none;
@@ -33,7 +37,7 @@ a {
 }
 
 section {
-    padding: 100px 0;
+    padding: 40px 0;
 }
 
 .category > a {

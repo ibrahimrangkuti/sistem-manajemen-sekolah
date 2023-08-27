@@ -70,7 +70,7 @@ class User extends Authenticatable
         return $this->hasMany(StudentPresence::class);
     }
 
-    public function post()
+    public function posts()
     {
         return $this->hasMany(PostForum::class);
     }

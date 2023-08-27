@@ -24,6 +24,7 @@
                         <div class="d-flex justify-content-center mb-3">
                             <img src="{{ asset('assets/img/logo-smk.png') }}" alt="" width="60">
                         </div>
+                        @include('components.alert')
                         <form action="{{ route('processLogin') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">

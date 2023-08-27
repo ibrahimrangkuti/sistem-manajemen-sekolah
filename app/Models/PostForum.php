@@ -15,4 +15,9 @@ class PostForum extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function commentars()
+    {
+        return $this->hasMany(CommentarForum::class);
+    }
 }

@@ -64,14 +64,75 @@
                             <span class="text-muted">Siswa</span>
                         @endif
                     </div>
-                    <img src="{{ asset(Auth::user()->photo) }}" alt="" class="rounded-circle shadow"
-                        width="50">
+                    <img src="{{ Auth::user()->photo != null ? asset(Auth::user()->photo) : 'https://ui-avatars.com/api/?name=' . Auth::user()->name }}"
+                        alt="" class="rounded-circle shadow" width="50">
                     <ul class="dropdown-menu shadow mt-4">
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile') }}">Profil</a></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>
                     </ul>
                 </div>
             </div>
+
+            @if (Route::is('dashboard'))
+                @include('components.alert')
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="text-muted">Selamat Datang di Sistem Informasi SMKN 5 Kab. Tangerang!</h6>
+                                <h5>Halo, {{ Auth::user()->name }}</h5>
+                                <div class="mt-3">
+                                    <a href="{{ route('profile') }}" class="btn btn-outline-primary btn-sm">Ubah
+                                        Profil</a>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        Ganti Password
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ganti Password
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form action="{{ route('changePassword') }}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <div class="form-group mb-3">
+                                                            <label for="old_password" class="form-label">Password
+                                                                Lama</label>
+                                                            <input type="password" name="old_password" id="old_password"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <label for="new_password" class="form-label">Password
+                                                                Baru</label>
+                                                            <input type="password" name="new_password" id="new_password"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             @yield('content')
 
             {{-- <footer>

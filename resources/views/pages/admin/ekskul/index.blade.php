@@ -41,7 +41,9 @@
             <div class="card">
                 <div class="card-body">
                     @include('components.alert')
-                    <form action="{{ !request('id') ? route('admin.ekskul.store') : route('admin.ekskul.update', $ekskul->id) }}" method="POST">
+                    <form
+                        action="{{ !request('id') ? route('admin.ekskul.store') : route('admin.ekskul.update', $ekskul->id) }}"
+                        method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -77,7 +79,7 @@
                                         value="{{ $ekskul ? $ekskul->tiktok_link : null }}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="youtube" class="form-label">Youtube</label>
                                     <input type="text" name="youtube" id="youtube" class="form-control"

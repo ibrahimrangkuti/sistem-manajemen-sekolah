@@ -21,24 +21,13 @@
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="title" class="form-label">Judul</label>
-                                    <input type="text" class="form-control" id="title" name="title"
-                                        value="{{ $editNews ? $editNews->title : null }}">
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                        id="title" name="title" value="{{ $editNews ? $editNews->title : null }}">
+                                    @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
-                            {{-- <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label for="author" class="form-label">Nama</label>
-                                    <select name="author" id="author" class="form-control">
-                                        @foreach ($administrator as $admin)
-                                            @if ($editNews)
-                                                <option value="{{ $editNews->user->id }}" selected>{{ $editNews->user->name }}</option>
-                                            @endif
-
-                                            <option value="{{ $admin->id }}">{{ $admin->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
                         </div>
                         <div class="form-group mb-3">
                             <label for="image" class="form-label">Gambar</label>
@@ -46,7 +35,11 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="body" class="form-label">Isi</label>
-                            <textarea id="editor" name="body" id="body" cols="30" class="form-control">{{ $editNews ? $editNews->body : null }}</textarea>
+                            <textarea id="editor" name="body" id="body" cols="30"
+                                class="form-control @error('body') is-invalid @enderror">{{ $editNews ? $editNews->body : null }}</textarea>
+                            @error('body')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         @if (request('id'))
@@ -79,8 +72,8 @@
                                 @foreach ($news as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset($item->image) }}" alt=""
-                                                class="img-fluid rounded"width="200"></td>
+                                        <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded"
+                                                width="100"></td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->title }}</td>
                                         <td>

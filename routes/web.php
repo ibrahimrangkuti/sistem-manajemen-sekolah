@@ -28,7 +28,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/berita', [PagesController::class, 'news']);
 Route::get('/forum', [PagesController::class, 'forum']);
-Route::get('/post/detail', [PostController::class, 'show'])->name('post.show');
+// Route::get('/post/detail/{slug}', [PostController::class, 'show'])->name('post.show');
+Route::get('/news/{slug}', [PagesController::class, 'showNews'])->name('news.show');
+Route::get('/forum/{slug}', [PagesController::class, 'showForum'])->name('forum.show');
+Route::post('/forum/{slug}', [PagesController::class, 'addComentar'])->name('forum.add-comentar');
 Route::get('/lowongan', [PagesController::class, 'vacancy']);
 Route::get('/lowongan/detail', [VacancyController::class, 'show']);
 Route::get('/portal-orangtua', function () {
@@ -47,9 +50,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
 
     // Admin
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::name('admin.')->group(function () {
         // Admin
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings');
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
@@ -110,6 +114,10 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', [AdminScheduleController::class, 'store'])->name('store');
         });
 
+        // Tugas Harian
+        Route::prefix('daily-task')->name('dailytask.')->group(function () {
+        });
+
         // Ekskul
         Route::prefix('ekskul')->name('ekskul.')->group(function () {
             Route::get('/', [AdminEkskulController::class, 'index'])->name('index');
@@ -145,6 +153,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('posts')->name('posts.')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
         Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::post('{id}', [PostController::class, 'approved'])->name('approved');
+        Route::post('{id}', [PostController::class, 'disapproved'])->name('disapproved');
         Route::put('{id}', [PostController::class, 'update'])->name('update');
         Route::delete('{id}', [PostController::class, 'delete'])->name('delete');
     });

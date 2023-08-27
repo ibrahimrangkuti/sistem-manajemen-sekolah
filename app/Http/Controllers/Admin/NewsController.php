@@ -50,12 +50,14 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $News =News::find($id);
+        $News = News::find($id);
 
         $validatedData = $request->validate([
             'title' => ['required'],
             'body' => ['required'],
         ]);
+
+        $validatedData['slug'] = Str::slug($request->title);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -75,7 +77,6 @@ class NewsController extends Controller
         $News->update($validatedData);
 
         return redirect()->route('admin.news.index')->with('success', 'Data berita berhasil diubah!');
-
     }
 
     public function delete($id)

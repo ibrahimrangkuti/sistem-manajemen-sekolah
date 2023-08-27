@@ -72,6 +72,12 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
+                        <a href="#" onclick="return alert('Coming soon!')" class='sidebar-link'>
+                            <ion-icon name="clipboard"></ion-icon>
+                            <span>Tugas Harian</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
                         <a href="{{ route('admin.ekskul.index') }}" class='sidebar-link'>
                             <ion-icon name="body"></ion-icon>
                             <span>Ekstrakurikuler</span>
@@ -98,22 +104,28 @@
                     <li class="sidebar-item">
                         <a href="{{ route('admin.settings') }}" class='sidebar-link'>
                             <ion-icon name="cog"></ion-icon>
-                            <span>Pengaturan</span>
+                            <span>Pengaturan Website</span>
                         </a>
                     </li>
                 @elseif (Auth::user()->role === 'guru')
                     @if (\App\Models\Classes::where('user_id', Auth::user()->id)->count())
-                        <li class="sidebar-item"></li>
-                        <a href="{{ route('teacher.myclass.index') }}" class='sidebar-link'>
-                            <ion-icon name="easel"></ion-icon>
-                            <span>Kelas Saya</span>
-                        </a>
+                        <li class="sidebar-item">
+                            <a href="{{ route('teacher.myclass.index') }}" class='sidebar-link'>
+                                <ion-icon name="easel"></ion-icon>
+                                <span>Kelas Saya</span>
+                            </a>
                         </li>
                     @endif
                     <li class="sidebar-item">
                         <a href="{{ route('teacher.schedule.index') }}" class='sidebar-link'>
                             <ion-icon name="calendar"></ion-icon>
                             <span>Jadwal Mengajar</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('teacher.schedule.index') }}" class='sidebar-link'>
+                            <ion-icon name="clipboard"></ion-icon>
+                            <span>Tugas Harian</span>
                         </a>
                     </li>
                 @else
@@ -139,9 +151,16 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="{{ route('dashboard') }}" class='sidebar-link'>
+                    <a href="{{ route('profile') }}" class='sidebar-link'>
                         <ion-icon name="person-circle"></ion-icon>
                         <span>Profil</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="{{ route('logout') }}" class='sidebar-link'>
+                        <ion-icon name="log-out"></ion-icon>
+                        <span>Keluar</span>
                     </a>
                 </li>
 

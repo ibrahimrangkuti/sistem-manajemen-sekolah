@@ -1,0 +1,110 @@
+@extends('layouts.dashboard')
+
+@section('title', 'Postingan Forum')
+
+@section('content')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    @include('components.alert')
+                    <form action="{{ !request('id') ? route('posts.store') : route('posts.update', $editPost->id) }}" enctype="multipart/form-data" method="POST">
+                        @csrf
+
+                        @if (request('id'))
+                            @method('put')
+                            <input type="hidden" name="oldImage" value="{{ $editPost->image }}">
+                        @endif
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label for="title" class="form-label">Judul</label>
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                        id="title" name="title" value="{{ $editPost ? $editPost->title : null }}">
+                                    @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="image" class="form-label">Gambar</label>
+                            <input type="file" class="form-control" id="image" name="image">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="body" class="form-label">Isi</label>
+                            <textarea id="editor" name="body" id="body" cols="30"
+                                class="form-control @error('body') is-invalid @enderror">{{ $editPost ? $editPost->body : null }}</textarea>
+                            @error('body')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-success float-end">Tambah Postingan Forum</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Gambar</th>
+                                    <th>Pembuat</th>
+                                    <th>Judul</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($postForum as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            <img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded"
+                                                width="100">
+                                        </td>
+                                        <td>{{ $item->user->name }}</td>
+                                        <td>{{ $item->title }}</td>
+                                        <td>
+                                            @if ($item->status === '1')
+                                                Menunggu Persetujuan
+                                            @elseif ($item->status === '2')
+                                                Disetujui
+                                            @else
+                                                Ditolak
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                @if (Auth::user()->role === 'Admin')
+                                                <a href="{{ route('posts.approved', $item->id) }}">tidak disetujui</a>
+                                                @endif
+                                                <a href="{{ route('posts.approved', $item->id) }}" class="btn btn-primary">Setujui</a>
+                                                <a href="?id={{ $item->id }}" class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('posts.delete', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+@endsection

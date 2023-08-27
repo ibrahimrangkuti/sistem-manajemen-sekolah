@@ -1,8 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title')
-    Pengaturan
-@endsection
+@section('title', 'Pengaturan Website')
 
 @section('content')
     <div class="row">

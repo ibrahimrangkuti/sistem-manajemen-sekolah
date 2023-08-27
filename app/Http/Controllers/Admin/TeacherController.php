@@ -34,6 +34,8 @@ class TeacherController extends Controller
             'date_of_birth' => ['required', 'date']
         ]);
 
+        $validatedData['phone'] = $request->phone;
+        $validatedData['address'] = $request->address;
         $validatedData['role'] = 'guru';
         $validatedData['password'] = bcrypt($request->password);
         User::create($validatedData);

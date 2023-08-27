@@ -85,56 +85,19 @@
         <div class="container">
             <h2 class="mb-5 text-center text-md-start">Berita Terbaru</h2>
             <div class="row row-gap-3">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80."
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-truncate">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Id,
-                                nostrum omnis! Molestiae odit at mollitia, sequi dolorem praesentium saepe itaque
-                                sunt harum, alias in quam dolore provident temporibus, cupiditate dolores!</h5>
-                            <span class="text-muted">Author here</span>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Baca selengkapnya</a>
+                @foreach ($news as $item)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="{{ asset($item->image) }}" class="card-img-top object-fit-cover" height="280">
+                            <div class="card-body">
+                                <h5 class="card-title text-truncate">{{ $item->title }}</h5>
+                                <span class="text-muted">{{ $item->user->name }}</span>
+                                <p class="card-text">{!! Str::limit($item->body, 150) !!}</p>
+                                <a href="{{ route('news.show', $item->slug) }}" class="btn btn-primary">Baca selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80."
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-truncate">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Id,
-                                nostrum omnis! Molestiae odit at mollitia, sequi dolorem praesentium saepe itaque
-                                sunt harum, alias in quam dolore provident temporibus, cupiditate dolores!</h5>
-                            <span class="text-muted">Author here</span>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Baca selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80."
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-truncate">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Id,
-                                nostrum omnis! Molestiae odit at mollitia, sequi dolorem praesentium saepe itaque
-                                sunt harum, alias in quam dolore provident temporibus, cupiditate dolores!</h5>
-                            <span class="text-muted">Author here</span>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Baca selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -220,8 +183,7 @@
                     <span class="fw-semibold fs-4">TKRO</span>
                 </div>
                 <div class="d-flex flex-column align-items-center gap-3">
-                    <img src="{{ asset('assets/img/logo-jurusan/tpm.png') }}" alt="" width="150"
-                        height="150">
+                    <img src="{{ asset('assets/img/logo-jurusan/tpm.png') }}" alt="" width="150" height="150">
                     <span class="fw-semibold fs-4">TPM</span>
                 </div>
                 <div class="d-flex flex-column align-items-center gap-3">
@@ -230,13 +192,11 @@
                     <span class="fw-semibold fs-4">TBSM</span>
                 </div>
                 <div class="d-flex flex-column align-items-center gap-3">
-                    <img src="{{ asset('assets/img/logo-jurusan/tkj.png') }}" alt="" width="150"
-                        height="150">
+                    <img src="{{ asset('assets/img/logo-jurusan/tkj.png') }}" alt="" width="150" height="150">
                     <span class="fw-semibold fs-4">TKJ</span>
                 </div>
                 <div class="d-flex flex-column align-items-center gap-3">
-                    <img src="{{ asset('assets/img/logo-jurusan/mm.png') }}" alt="" width="150"
-                        height="150">
+                    <img src="{{ asset('assets/img/logo-jurusan/mm.png') }}" alt="" width="150" height="150">
                     <span class="fw-semibold fs-4">DKV</span>
                 </div>
                 <div class="d-flex flex-column align-items-center gap-3">
