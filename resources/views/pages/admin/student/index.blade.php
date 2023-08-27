@@ -50,7 +50,6 @@
                                     <th>No</th>
                                     <th>NIS</th>
                                     <th>Kelas</th>
-                                    <th>Foto</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Jenis Kelamin</th>
@@ -68,7 +67,6 @@
                                         <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $student->nis }}</td>
                                         <td>{{ $student->class?->name }}</td>
-                                        <td>{{ $student->photo }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->gender }}</td>

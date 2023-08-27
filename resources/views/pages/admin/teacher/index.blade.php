@@ -20,7 +20,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>NIK</th>
-                                    <th>Foto</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Jenis Kelamin</th>
@@ -37,7 +36,6 @@
                                     <tr>
                                         <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $teacher->nik }}</td>
-                                        <td>{{ $teacher->photo }}</td>
                                         <td>{{ $teacher->name }}</td>
                                         <td>{{ $teacher->email }}</td>
                                         <td>{{ $teacher->gender }}</td>
