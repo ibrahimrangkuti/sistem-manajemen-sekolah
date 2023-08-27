@@ -107,7 +107,7 @@
                         </a>
                     </div>
                     <div class="col-6 col-lg-4 col-md-6">
-                        <a href="{{ route('admin.lesson.index') }}">
+                        <a href="{{ route('admin.schedule.index') }}">
                             <div class="card">
                                 <div class="card-body px-3 py-4-5">
                                     <div class="row">
@@ -118,7 +118,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Jadwal Pelajaran</h6>
-                                            <h6 class="font-extrabold mb-0">2000</h6>
+                                            <h6 class="font-extrabold mb-0">{{ App\Models\Schedule::count() }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -126,38 +126,42 @@
                         </a>
                     </div>
                     <div class="col-6 col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-3 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="stats-icon bg-success text-white">
-                                            <ion-icon name="body"></ion-icon>
+                        <a href="{{ route('admin.ekskul.index') }}">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon bg-success text-white">
+                                                <ion-icon name="body"></ion-icon>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Ekstrakurikuler</h6>
-                                        <h6 class="font-extrabold mb-0">2000</h6>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Ekstrakurikuler</h6>
+                                            <h6 class="font-extrabold mb-0">{{ App\Models\Extracurricular::count() }}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-6 col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-3 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="stats-icon purple text-white">
-                                            <ion-icon name="newspaper"></ion-icon>
+                        <a href="{{ route('admin.news.index') }}">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon purple text-white">
+                                                <ion-icon name="newspaper"></ion-icon>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Berita</h6>
-                                        <h6 class="font-extrabold mb-0">2000</h6>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Berita</h6>
+                                            <h6 class="font-extrabold mb-0">{{ App\Models\News::count() }}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-6 col-lg-4 col-md-6">
                         <div class="card">

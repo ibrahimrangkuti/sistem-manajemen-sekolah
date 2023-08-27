@@ -52,7 +52,7 @@
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" name="password" id="password" class="form-control">
                             </div>
-                            <a href="" class="text-decoration-none">Lupa password?</a>
+                            <a href="{{ route('forgotPassword') }}" class="text-decoration-none">Lupa password?</a>
                             <button type="submit" class="btn btn-primary w-100 mt-3">Masuk</button>
                         </form>
                     </div>

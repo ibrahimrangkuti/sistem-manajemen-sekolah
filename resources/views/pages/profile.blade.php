@@ -121,7 +121,7 @@
                         </div>
                         <div>
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Ganti Password
                             </button>

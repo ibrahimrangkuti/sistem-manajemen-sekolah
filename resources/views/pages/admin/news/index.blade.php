@@ -62,9 +62,10 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Gambar</th>
+                                    {{-- <th>Gambar</th> --}}
                                     <th>Pembuat</th>
                                     <th>Judul</th>
+                                    <th>Dibuat pada</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -72,10 +73,11 @@
                                 @foreach ($news as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded"
-                                                width="100"></td>
+                                        {{-- <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded"
+                                                width="100"></td> --}}
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->title }}</td>
+                                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <a href="?id={{ $item->id }}" class="btn btn-warning btn-sm">Edit</a>

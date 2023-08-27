@@ -50,7 +50,7 @@ class ProfileController extends Controller
         }
 
         if (Hash::check($request->new_password, Auth::user()->password)) {
-            return back()->with('failed', 'Password tidak boleh sama dengan sebelumnya!');
+            return back()->with('failed', 'Password baru tidak boleh sama dengan sebelumnya!');
         }
 
         $user = User::findOrFail(Auth::user()->id);

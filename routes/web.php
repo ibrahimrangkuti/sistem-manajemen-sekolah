@@ -22,7 +22,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VacancyController;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
@@ -40,6 +43,13 @@ Route::get('/portal-orangtua', function () {
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'processLogin'])->name('processLogin');
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');;
+Route::post('/forgot-password', [AuthController::class, 'processForgotPassword'])->name('processForgotPassword');;
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('pages.auth.reset-password', ['token' => $token]);
+})->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'processResetPassword'])->name('password.update');
+
 Route::get('/logout', function () {
     Auth::logout();
     return redirect()->route('login');

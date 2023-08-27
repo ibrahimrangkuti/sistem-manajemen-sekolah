@@ -72,7 +72,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" onclick="return alert('Coming soon!')" class='sidebar-link'>
+                        <a href="javascript:void(0)" onclick="return alert('Coming soon!')" class='sidebar-link'>
                             <ion-icon name="clipboard"></ion-icon>
                             <span>Tugas Harian</span>
                         </a>
@@ -115,17 +115,24 @@
                                 <span>Kelas Saya</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" onclick="return alert('Coming soon!')" class='sidebar-link'>
+                                <ion-icon name="clipboard"></ion-icon>
+                                <span>Tugas Harian</span>
+                            </a>
+                        </li>
+                    @elseif (\App\Models\Department::where('user_id', Auth::user()->id)->count())
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" onclick="return alert('Coming soon!')" class='sidebar-link'>
+                                <ion-icon name="grid"></ion-icon>
+                                <span>Jurusan Saya</span>
+                            </a>
+                        </li>
                     @endif
                     <li class="sidebar-item">
                         <a href="{{ route('teacher.schedule.index') }}" class='sidebar-link'>
                             <ion-icon name="calendar"></ion-icon>
                             <span>Jadwal Mengajar</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="{{ route('teacher.schedule.index') }}" class='sidebar-link'>
-                            <ion-icon name="clipboard"></ion-icon>
-                            <span>Tugas Harian</span>
                         </a>
                     </li>
                 @else
