@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('class_id')->nullable();
             $table->text('photo')->nullable();
-            $table->string('nis')->nullable();
-            $table->string('nik')->nullable();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('nis')->unique()->nullable();
+            $table->string('nik')->unique()->nullable();
+            $table->string('name')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->string('password')->default(bcrypt('123'));
-            $table->enum('gender', ['L', 'P']);
+            $table->enum('gender', ['L', 'P'])->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('place_of_birth')->nullable();

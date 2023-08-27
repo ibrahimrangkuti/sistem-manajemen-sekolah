@@ -48,6 +48,9 @@ class PagesController extends Controller
     public function news()
     {
         $news = News::latest()->get();
+        if (request('search')) {
+            $news = News::where('title', 'like', '%' . request('search') . '%')->orWhere('body', 'like', '%' . request('search') . '%')->get();
+        }
 
         return view('pages.news', compact('news'));
     }

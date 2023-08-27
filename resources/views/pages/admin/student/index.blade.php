@@ -9,9 +9,12 @@
         <div>
             <a href="{{ route('admin.student.create') }}" class="btn btn-success">Tambah Siswa</a>
             <!-- Button trigger modal -->
-            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Import Data
-            </button> --}}
+            </button>
+            <a href="{{ route('admin.student.delete-all') }}"
+                onclick="return confirm('Apakah kamu yakin ingin menghapus semua data?')" class="btn btn-danger">Hapus Semua
+                Data</a>
             {{-- <button onclick="importData()" class="btn btn-primary">Import Data</button> --}}
 
             <!-- Modal -->

@@ -17,13 +17,18 @@ class StudentsImport implements ToCollection, WithHeadingRow
      */
     public function collection(Collection $rows)
     {
+        // dd($rows);
         foreach ($rows as $row) {
+            // dd($row['date_of_birth']);
             User::create([
                 'class_id' => $row['class_id'],
                 'nis' => $row['nis'],
                 'name' => $row['name'],
                 'gender' => $row['gender'],
-                'address' => $row['address']
+                'address' => $row['address'],
+                'place_of_birth' => $row['place_of_birth'],
+                'date_of_birth' => $row['date_of_birth'],
+                'role' => 'siswa'
             ]);
         }
     }

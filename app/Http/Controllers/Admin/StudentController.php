@@ -93,6 +93,6 @@ class StudentController extends Controller
     {
         Excel::import(new StudentsImport, $request->file('file'));
 
-        return redirect('/')->with('success', 'All good!');
+        return back()->with('success', 'Data siswa berhasil diimport!');
     }
 }

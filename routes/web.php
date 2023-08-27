@@ -87,6 +87,10 @@ Route::middleware('auth')->group(function () {
             Route::put('/edit/{id}', [AdminStudentController::class, 'update'])->name('update');
             Route::delete('{id}', [AdminStudentController::class, 'delete'])->name('delete');
             Route::post('/import', [AdminStudentController::class, 'import'])->name('import');
+            Route::get('/delete-all', function () {
+                \App\Models\User::whereRole('siswa')->delete();
+                return back()->with('success', 'Semua data siswa berhasil dihapus!');
+            })->name('delete-all');
         });
 
         // Guru
