@@ -10,6 +10,7 @@ class Schedule extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
     protected $with = ['lesson', 'teacher', 'class'];
 
     public function lesson()

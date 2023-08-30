@@ -161,6 +161,105 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <h3 class="mb-5">Data Orang Tua</h3>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    {{-- @include('components.alert') --}}
+                    <form action="{{ route('parent.profile.update') }}" method="POST">
+                        @csrf
+                        @method('put')
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label for="parent_nik" class="form-label">NIK</label>
+                                    <input type="number" name="parent_nik" id="parent_nik" class="form-control"
+                                        value={{ $parent ? $parent->nik : null }}>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="parent_name" class="form-label">Nama</label>
+                                    <input type="text" name="parent_name" id="parent_name"
+                                        class="form-control @error('parent_name') is-invalid @enderror"
+                                        value={{ $parent ? $parent->name : null }}>
+                                    @error('parent_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="parent_email" class="form-label">Email</label>
+                                    <input type="email" name="parent_email" id="parent_email"
+                                        class="form-control @error('parent_email') is-invalid @enderror"
+                                        value={{ $parent ? $parent->email : null }}>
+                                    @error('parent_email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="parent_gender" class="form-label">Jenis Kelamin</label>
+                                    <select name="parent_gender" id="parent_gender" class="form-control">
+                                        <option value="L">Laki - Laki</option>
+                                        <option value="P">Perempuan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="parent_phone" class="form-label">Telepon</label>
+                                    <input type="number" name="parent_phone" id="parent_phone"
+                                        class="form-control @error('parent_phone') is-invalid @enderror"
+                                        value={{ $parent ? $parent->phone : null }}>
+                                    @error('parent_phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="parent_place_of_birth" class="form-label">Tempat Lahir</label>
+                                    <input type="text" name="parent_place_of_birth" id="parent_place_of_birth"
+                                        class="form-control @error('parent_place_of_birth') is-invalid @enderror"
+                                        value="{{ $parent ? $parent->place_of_birth : null }}">
+                                    @error('parent_place_of_birth')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="parent_date_of_birth" class="form-label">Tanggal Lahir</label>
+                                    <input type="date" name="parent_date_of_birth" id="parent_date_of_birth"
+                                        class="form-control @error('parent_date_of_birth') is-invalid @enderror"
+                                        value="{{ $parent ? $parent->date_of_birth : null }}">
+                                    @error('parent_date_of_birth')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label for="parent_address" class="form-label">Alamat</label>
+                                    <textarea name="parent_address" id="parent_address" cols="30" rows="3"
+                                        class="form-control @error('parent_address') is-invalid @enderror">{{ $parent ? $parent->address : null }}</textarea>
+                                    @error('parent_address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success float-end">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')

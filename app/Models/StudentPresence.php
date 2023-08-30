@@ -11,6 +11,8 @@ class StudentPresence extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['class', 'student'];
+
     public function class()
     {
         return $this->belongsTo(Classes::class);

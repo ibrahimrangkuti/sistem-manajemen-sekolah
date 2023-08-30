@@ -37,6 +37,12 @@ class AuthController extends Controller
             } else {
                 return back()->with('failed', 'Email atau password salah!');
             }
+        } elseif ($request->parent_phone !== null && $request->nis !== null ) {
+            if(Auth::attempt($request->only('parent_phone', 'nis'))) {
+                return redirect()->route('dashboard');
+            } else {
+                return back()->with('failed', 'Nomor telepon atau NIS');
+            }
         }
     }
 

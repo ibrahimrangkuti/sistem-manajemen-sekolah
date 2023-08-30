@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('place_of_birth')->nullable();
             $table->date('date_of_birth')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->enum('role', ['admin', 'guru', 'siswa', 'ortu'])->default('siswa');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

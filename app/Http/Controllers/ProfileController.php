@@ -12,7 +12,9 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('pages.profile');
+        $parent = User::where('student_id', Auth::user()->id)->first();
+
+        return view('pages.profile', compact('parent'));
     }
 
     public function updateProfile(Request $request)
@@ -41,6 +43,35 @@ class ProfileController extends Controller
         $user->update($validatedData);
 
         return redirect()->route('profile')->with('success', 'Profil berhasil diubah!');
+    }
+
+    public function updateParentProfile(Request $request)
+    {
+        // $user = User::where('student_id', Auth::user()->id)->first();
+        // $parent = User::where('student_id', Auth::user()->id)->firstOrFail();
+
+        $request->validate([
+            'parent_nik' => ['numeric', 'unique:users,nik'],
+            'parent_name' => ['string'],
+            'parent_email' => ['email', 'unique:users,email'],
+        ]);
+
+        $data['student_id'] = Auth::user()->id;
+        $data['nik'] = $request->parent_nik;
+        $data['name'] = $request->parent_name;
+        $data['email'] = $request->parent_email;
+        $data['phone'] = $request->parent_phone;
+        $data['gender'] = $request->parent_gender;
+        $data['phone'] = $request->parent_phone;
+        $data['place_of_birth'] = $request->parent_place_of_birth;
+        $data['date_of_birth'] = $request->parent_date_of_birth;
+        $data['address'] = $request->parent_address;
+        $data['role'] = 'ortu';
+
+        // $user->updateOrCreate($data);
+        User::updateOrCreate($data);
+
+        return back()->with('success', 'Data orang tua berhasil diedit!');
     }
 
     public function changePassword(Request $request)

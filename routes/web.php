@@ -26,7 +26,6 @@ use App\Http\Controllers\VacancyController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
@@ -50,7 +49,6 @@ Route::get('/reset-password/{token}', function (string $token) {
     return view('pages.auth.reset-password', ['token' => $token]);
 })->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'processResetPassword'])->name('password.update');
-
 Route::get('/logout', function () {
     Auth::logout();
     return redirect()->route('login');
@@ -61,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/parent-profile', [ProfileController::class, 'updateParentProfile'])->name('parent.profile.update');
     Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
 
     // Admin

@@ -11,6 +11,8 @@ class Classes extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['teacher'];
+
     public function students()
     {
         return $this->hasMany(User::class, 'user_id');

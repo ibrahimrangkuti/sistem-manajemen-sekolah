@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Extracurricular extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
+
+    protected $with = ['teacher'];
 
     public function teacher()
     {

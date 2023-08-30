@@ -11,6 +11,8 @@ class Department extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['teacher'];
+
     public function teacher()
     {
         return $this->belongsTo(User::class, 'user_id');
