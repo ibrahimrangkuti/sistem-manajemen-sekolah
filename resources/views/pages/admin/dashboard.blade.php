@@ -156,7 +156,8 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Berita</h6>
-                                            <h6 class="font-extrabold mb-0">{{ App\Models\News::count() }}</h6>
+                                            <h6 class="font-extrabold mb-0">
+                                                {{ App\Models\Post::whereType('news')->count() }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +175,8 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Postingan</h6>
-                                        <h6 class="font-extrabold mb-0">2000</h6>
+                                        <h6 class="font-extrabold mb-0">
+                                            {{ \App\Models\Post::whereType('forum')->count() }}</h6>
                                     </div>
                                 </div>
                             </div>

@@ -16,31 +16,23 @@
                                     <label for="photo" class="form-label">Foto</label>
                                     <input type="file" name="photo" id="photo" class="form-control">
                                     <img id="previewPhoto" src="{{ asset(Auth::user()->photo) }}" alt="Preview"
-                                        class="my-3" width="60" height="80">
+                                        class="my-3 rounded-circle" width="80" height="80">
                                 </div>
                             </div>
                             @if (Auth::user()->role == 'guru')
                                 <div class="col-md-12">
                                     <div class="form-group mb-3">
                                         <label for="nik" class="form-label">NIK</label>
-                                        <input type="number" name="nik" id="nik"
-                                            class="form-control @error('nik') is-invalid @enderror"
-                                            value="{{ Auth::user()->nik }}">
-                                        @error('nik')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <input type="number" name="nik" id="nik" class="form-control"
+                                            value="{{ Auth::user()->nik }}" disabled>
                                     </div>
                                 </div>
                             @elseif(Auth::user()->role == 'siswa')
                                 <div class="col-md-12">
                                     <div class="form-group mb-3">
                                         <label for="nis" class="form-label">NIS</label>
-                                        <input type="number" name="nis" id="nis"
-                                            class="form-control @error('nis') is-invalid @enderror"
-                                            value="{{ Auth::user()->nis }}">
-                                        @error('nis')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <input type="number" name="nis" id="nis" class="form-control"
+                                            value="{{ Auth::user()->nis }}" disabled>
                                     </div>
                                 </div>
                             @endif

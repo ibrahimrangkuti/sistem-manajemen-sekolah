@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\News;
+use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,16 +15,16 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::latest()->get();
+        $news = Post::where('type', 'news')->get();
 
         $editNews = [];
         if (request('id')) {
-            $editNews = News::find(request('id'));
+            $editNews = Post::find(request('id'));
         }
 
-        $administrator = User::whereRole('admin')->where('is_active', '1')->get();
+        $categories = Category::where('type', 'news')->orWhere('type', 'general')->get();
 
-        return view('pages.admin.news.index', compact('news', 'administrator', 'editNews'));
+        return view('pages.admin.news.index', compact('news', 'categories', 'editNews'));
     }
 
     public function store(Request $request)
@@ -42,15 +43,17 @@ class NewsController extends Controller
 
         $validatedData['user_id'] = Auth::user()->id;
         $validatedData['slug'] = Str::slug($request->title);
+        $validatedData['type'] = "news";
+        $validatedData['category_id'] = $request->category;
 
-        News::create($validatedData);
+        Post::create($validatedData);
 
         return back()->with('success', 'Data berita berhasil ditambahkan!');
     }
 
     public function update(Request $request, $id)
     {
-        $News = News::find($id);
+        $News = Post::find($id);
 
         $validatedData = $request->validate([
             'title' => ['required'],
@@ -81,7 +84,7 @@ class NewsController extends Controller
 
     public function delete($id)
     {
-        $news = News::find($id);
+        $news = Post::find($id);
 
         if ($news->image) {
             $delImage = public_path($news->image);

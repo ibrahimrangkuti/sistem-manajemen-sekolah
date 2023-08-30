@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PostForum;
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,17 +14,19 @@ class PostController extends Controller
     public function index()
     {
         if (Auth::user()->role === 'admin') {
-            $postForum = PostForum::latest()->get();
+            $posts = Post::whereType('post')->latest()->get();
         } else {
-            $postForum = PostForum::where('user_id', Auth::user()->id)->latest()->get();
+            $posts = Post::whereType('post')->where('user_id', Auth::user()->id)->latest()->get();
         }
 
         $editPost = [];
         if (request('id')) {
-            $editPost = PostForum::find(request('id'));
+            $editPost = Post::find(request('id'));
         }
 
-        return view('pages.posts.index', compact('postForum', 'editPost'));
+        $categories = Category::where('type', 'post')->orWhere('type', 'general')->get();
+
+        return view('pages.post.index', compact('posts', 'editPost', 'categories'));
     }
 
     public function store(Request $request)
@@ -41,20 +44,21 @@ class PostController extends Controller
         }
 
         $validatedData['user_id'] = Auth::user()->id;
+        $validatedData['category_id'] = $request->category;
         $validatedData['slug'] = Str::slug($request->title);
 
         if (Auth::user()->role === 'admin') {
             $validatedData['status'] = 2;
         }
 
-        PostForum::create($validatedData);
+        Post::create($validatedData);
 
         return back()->with('success', 'Data postingan berhasil ditambahkan!');
     }
 
     public function update(Request $request, $id)
     {
-        $post = PostForum::find($id);
+        $post = Post::find($id);
 
         $validatedData = $request->validate([
             'title' => ['required'],
@@ -85,23 +89,25 @@ class PostController extends Controller
 
     public function approved($id)
     {
-        $post = PostForum::find($id);
+        $post = Post::findOrFail($id);
         $post->status = 2;
+        $post->update();
 
         return back()->with('success', 'Data postingan disetujui!');
     }
 
     public function disapproved($id)
     {
-        $post = PostForum::find($id);
+        $post = Post::findOrFail($id);
         $post->status = 3;
+        $post->update();
 
         return back()->with('success', 'Data postingan tidak disetujui!');
     }
 
     public function delete($id)
     {
-        $post = PostForum::find($id);
+        $post = Post::find($id);
 
         if ($post->image) {
             $delImage = public_path($post->image);

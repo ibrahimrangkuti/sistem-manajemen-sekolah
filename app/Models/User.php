@@ -62,11 +62,6 @@ class User extends Authenticatable
         return $this->hasMany(Extracurricular::class);
     }
 
-    public function news()
-    {
-        return $this->hasMany(News::class);
-    }
-
     public function presences()
     {
         return $this->hasMany(StudentPresence::class);
@@ -74,6 +69,6 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(PostForum::class);
+        return $this->hasMany(Post::class);
     }
 }

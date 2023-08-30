@@ -93,7 +93,8 @@
                                 <h5 class="card-title text-truncate">{{ $item->title }}</h5>
                                 <span class="text-muted">{{ $item->user->name }}</span>
                                 <p class="card-text">{!! Str::limit($item->body, 150) !!}</p>
-                                <a href="{{ route('news.show', $item->slug) }}" class="btn btn-primary">Baca selengkapnya</a>
+                                <a href="{{ route('news.show', $item->slug) }}" class="btn btn-primary">Baca
+                                    selengkapnya</a>
                             </div>
                         </div>
                     </div>
@@ -105,78 +106,6 @@
     <section id="departments" class="departments">
         <div class="container">
             <h2 class="mb-5 text-center text-md-start">Konsentrasi Keahlian</h2>
-            {{-- <div class="row row-gap-3 justify-content-center">
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>TKRO</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>TPM</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>TBSM</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>TKJ</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>DKV</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>RPL</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>MP</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>AK</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>APHP</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <span>PH</span>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             <div class="d-flex gap-3 overflow-scroll">
                 <div class="d-flex flex-column align-items-center gap-3">
                     <img src="{{ asset('assets/img/logo-jurusan/tkro.png') }}" alt="" width="150" height="150">

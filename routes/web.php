@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ExtracurricularController as AdminEkskulControlle
 use App\Http\Controllers\Admin\LessonController as AdminLessonController;
 use App\Http\Controllers\Admin\ScheduleController as AdminScheduleController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 // Guru
 use App\Http\Controllers\Teacher\MyClassController as TeacherMyClassController;
@@ -32,7 +33,7 @@ Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/berita', [PagesController::class, 'news']);
 Route::get('/forum', [PagesController::class, 'forum']);
 // Route::get('/post/detail/{slug}', [PostController::class, 'show'])->name('post.show');
-Route::get('/news/{slug}', [PagesController::class, 'showNews'])->name('news.show');
+Route::get('/berita/{slug}', [PagesController::class, 'showNews'])->name('news.show');
 Route::get('/forum/{slug}', [PagesController::class, 'showForum'])->name('forum.show');
 Route::post('/forum/{slug}', [PagesController::class, 'addComentar'])->name('forum.add-comentar');
 Route::get('/lowongan', [PagesController::class, 'vacancy']);
@@ -91,6 +92,10 @@ Route::middleware('auth')->group(function () {
                 \App\Models\User::whereRole('siswa')->delete();
                 return back()->with('success', 'Semua data siswa berhasil dihapus!');
             })->name('delete-all');
+            Route::post('/delete-by-class', function (Request $request) {
+                \App\Models\User::whereRole('siswa')->where('class_id', $request->class)->delete();
+                return back()->with('success', 'Semua data siswa berhasil dihapus!');
+            })->name('delete-by-class');
         });
 
         // Guru
@@ -147,6 +152,13 @@ Route::middleware('auth')->group(function () {
             Route::put('{id}', [AdminNewsController::class, 'update'])->name('update');
             Route::delete('{id}', [AdminNewsController::class, 'delete'])->name('delete');
         });
+
+        Route::prefix('category')->name('category.')->group(function () {
+            Route::get('/', [AdminCategoryController::class, 'index'])->name('index');
+            Route::post('/', [AdminCategoryController::class, 'store'])->name('store');
+            Route::put('{id}', [AdminCategoryController::class, 'update'])->name('update');
+            Route::delete('{id}', [AdminCategoryController::class, 'delete'])->name('delete');
+        });
     });
 
     // Guru
@@ -167,8 +179,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('posts')->name('posts.')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
         Route::post('/', [PostController::class, 'store'])->name('store');
-        Route::post('{id}', [PostController::class, 'approved'])->name('approved');
-        Route::post('{id}', [PostController::class, 'disapproved'])->name('disapproved');
+        Route::get('{id}/approved', [PostController::class, 'approved'])->name('approved');
+        Route::get('{id}/disapproved', [PostController::class, 'disapproved'])->name('disapproved');
         Route::put('{id}', [PostController::class, 'update'])->name('update');
         Route::delete('{id}', [PostController::class, 'delete'])->name('delete');
     });

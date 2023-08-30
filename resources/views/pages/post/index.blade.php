@@ -8,7 +8,8 @@
             <div class="card">
                 <div class="card-body">
                     @include('components.alert')
-                    <form action="{{ !request('id') ? route('posts.store') : route('posts.update', $editPost->id) }}" enctype="multipart/form-data" method="POST">
+                    <form action="{{ !request('id') ? route('posts.store') : route('posts.update', $editPost->id) }}"
+                        enctype="multipart/form-data" method="POST">
                         @csrf
 
                         @if (request('id'))
@@ -31,6 +32,14 @@
                         <div class="form-group mb-3">
                             <label for="image" class="form-label">Gambar</label>
                             <input type="file" class="form-control" id="image" name="image">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="category" class="form-label">Kategori</label>
+                            <select name="category" id="category" class="form-control">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="body" class="form-label">Isi</label>
@@ -57,38 +66,43 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Gambar</th>
                                     <th>Pembuat</th>
                                     <th>Judul</th>
+                                    <th>Kategori</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($postForum as $item)
+                                @foreach ($posts as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded"
                                                 width="100">
-                                        </td>
+                                        </td> --}}
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->title }}</td>
+                                        <td>{{ $item->category->name }}</td>
                                         <td>
                                             @if ($item->status === '1')
-                                                Menunggu Persetujuan
+                                                <span class="text-warning">Menunggu Persetujuan</span>
                                             @elseif ($item->status === '2')
-                                                Disetujui
+                                                <span class="text-success">Disetujui</span>
                                             @else
-                                                Ditolak
+                                                <span class="text-danger">Ditolak</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <div class="d-flex gap-2">
-                                                @if (Auth::user()->role === 'Admin')
-                                                <a href="{{ route('posts.approved', $item->id) }}">tidak disetujui</a>
+                                            <div class="d-flex justify-content-end gap-2">
+                                                @if (Auth::user()->role === 'admin')
+                                                    @if ($item->status == '1')
+                                                        <a href="{{ route('posts.approved', $item->id) }}"
+                                                            class="btn btn-outline-success btn-sm">Setuju</a>
+                                                        <a href="{{ route('posts.disapproved', $item->id) }}"
+                                                            class="btn btn-outline-danger btn-sm">Tidak Setuju</a>
+                                                    @endif
                                                 @endif
-                                                <a href="{{ route('posts.approved', $item->id) }}" class="btn btn-primary">Setujui</a>
                                                 <a href="?id={{ $item->id }}" class="btn btn-warning btn-sm">Edit</a>
                                                 <form action="{{ route('posts.delete', $item->id) }}" method="POST">
                                                     @csrf

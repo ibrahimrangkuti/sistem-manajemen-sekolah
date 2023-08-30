@@ -15,7 +15,9 @@ class StudentController extends Controller
     public function index()
     {
         $students = User::with('class')->where('role', 'siswa')->latest()->get();
-        return view('pages.admin.student.index', compact('students'));
+        $classes = Classes::all();
+
+        return view('pages.admin.student.index', compact('students', 'classes'));
     }
 
     public function create()

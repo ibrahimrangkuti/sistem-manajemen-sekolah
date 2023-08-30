@@ -20,9 +20,9 @@ class ProfileController extends Controller
         $user = User::findOrFail(Auth::user()->id);
 
         $validatedData = $request->validate([
-            'nik' => ['numeric', 'unique:users,nik,' . $user->id],
+            // 'nik' => ['numeric', 'unique:users,nik,' . $user->id],
             'name' => ['string'],
-            'email' => ['email', 'unique:users,email,' . $user->id],
+            // 'email' => ['email', 'unique:users,email,' . $user->id],
         ]);
 
         if ($request->hasFile('photo')) {

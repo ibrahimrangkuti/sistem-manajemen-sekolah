@@ -9,16 +9,20 @@
         <div>
             <a href="{{ route('admin.student.create') }}" class="btn btn-success">Tambah Siswa</a>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
                 Import Data
             </button>
             <a href="{{ route('admin.student.delete-all') }}"
-                onclick="return confirm('Apakah kamu yakin ingin menghapus semua data?')" class="btn btn-danger">Hapus Semua
+                onclick="return confirm('Apakah kamu yakin ingin menghapus semua data?')" class="btn btn-outline-danger">Hapus
+                Semua
                 Data</a>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Hapus Berdasarkan Kelas
+            </button>
             {{-- <button onclick="importData()" class="btn btn-primary">Import Data</button> --}}
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -31,8 +35,37 @@
                                 <input type="file" name="file" id="file" class="form-control">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Berdasarkan Kelas</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('admin.student.delete-by-class') }}" method="POST">
+                            <div class="modal-body">
+                                @csrf
+                                <select name="class" id="class" class="form-control">
+                                    @foreach ($classes as $class)
+                                        @if (\App\Models\User::whereRole('siswa')->where('class_id', $class->id)->count() > 0)
+                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit"
+                                    onclick="return confirm('Apakah kamu yakin ingin menghapus semua data?')"
+                                    class="btn btn-success">Simpan</button>
                             </div>
                         </form>
                     </div>

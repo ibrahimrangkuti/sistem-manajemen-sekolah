@@ -34,6 +34,14 @@
                             <input type="file" class="form-control" id="image" name="image">
                         </div>
                         <div class="form-group mb-3">
+                            <label for="category" class="form-label">Kategori</label>
+                            <select name="category" id="category" class="form-control">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
                             <label for="body" class="form-label">Isi</label>
                             <textarea id="editor" name="body" id="body" cols="30"
                                 class="form-control @error('body') is-invalid @enderror">{{ $editNews ? $editNews->body : null }}</textarea>
@@ -76,7 +84,8 @@
                                         {{-- <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded"
                                                 width="100"></td> --}}
                                         <td>{{ $item->user->name }}</td>
-                                        <td>{{ $item->title }}</td>
+                                        <td><a href="{{ route('news.show', $item->slug) }}"
+                                                target="_blank">{{ $item->title }}</a></td>
                                         <td>{{ $item->created_at->format('d/m/Y') }}</td>
                                         <td>
                                             <div class="d-flex gap-2">

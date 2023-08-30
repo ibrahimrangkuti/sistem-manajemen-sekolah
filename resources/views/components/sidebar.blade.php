@@ -28,7 +28,13 @@
                 </div>
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item active">
+                <li class="sidebar-item">
+                    <a href="{{ route('home') }}" class='sidebar-link'>
+                        <ion-icon name="home"></ion-icon>
+                        <span>Beranda Website</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a href="{{ route('dashboard') }}" class='sidebar-link'>
                         <ion-icon name="grid"></ion-icon>
                         <span>Dashboard</span>
@@ -81,6 +87,12 @@
                         <a href="{{ route('admin.ekskul.index') }}" class='sidebar-link'>
                             <ion-icon name="body"></ion-icon>
                             <span>Ekstrakurikuler</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('admin.category.index') }}" class='sidebar-link'>
+                            <ion-icon name="bookmark"></ion-icon>
+                            <span>Kategori</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
