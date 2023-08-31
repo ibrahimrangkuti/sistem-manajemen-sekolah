@@ -25,10 +25,7 @@ class DashboardController extends Controller
         } elseif (Auth::user()->role === 'guru') {
             return view('pages.teacher.dashboard');
         } elseif (Auth::user()->role === 'ortu') {
-            dd([
-                'nama_anak' => Auth::user()->student->name,
-                'nama_orangtua' => Auth::user()->name
-            ]);
+            return view('pages.parent.dashboard');
         }
     }
 }

@@ -175,6 +175,8 @@ Route::middleware('auth')->group(function () {
         });
     });
 
+    // Ortu
+
     // Postingan Forum
     Route::prefix('posts')->name('posts.')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('index');

@@ -15,7 +15,7 @@
                     </div>
                     <div class="table-responsive">
                         @if ($nowSchedule)
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="dataTable">
                                 <tbody>
                                     <tr>
                                         <td>Mata Pelajaran</td>
@@ -35,7 +35,7 @@
                                     </tr>
                                     <tr>
                                         <td>Waktu Selesai</td>
-                                        <td>{{ $nowSchedule->end_time }}</td>
+                                        <td>{{ $nowSchedule->en{{ d_ti }}me }}</td>
                                     </tr>
                                 </tbody>
                             </table>

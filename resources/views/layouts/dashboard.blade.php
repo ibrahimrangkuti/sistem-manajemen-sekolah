@@ -169,7 +169,7 @@
     </script>
     @stack('scripts')
     <script>
-        $('.table-striped').DataTable()
+        $('#dataTable').DataTable()
 
         function updateClock() {
             var now = new Date();

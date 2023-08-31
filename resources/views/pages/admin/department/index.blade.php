@@ -64,7 +64,7 @@
                     {{-- <a href="{{ route('admin.department.deleteAll') }}" onclick="return confirm('Yakin bro mau dihapus?')"
                         class="btn btn-danger btn-sm mb-3">Hapus Semua</a> --}}
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover" id="dataTable">
                             <thead>
                                 <tr>
                                     <th>No</th>

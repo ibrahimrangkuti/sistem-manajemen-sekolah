@@ -147,7 +147,7 @@
                             <span>Jadwal Mengajar</span>
                         </a>
                     </li>
-                @else
+                @elseif(Auth::user()->role === 'siswa')
                     <li class="sidebar-item">
                         <a href="" class='sidebar-link'>
                             <ion-icon name="easel"></ion-icon>
@@ -162,12 +162,14 @@
                     </li>
                 @endif
 
-                <li class="sidebar-item">
-                    <a href="{{ route('posts.index') }}" class='sidebar-link'>
-                        <ion-icon name="bookmarks"></ion-icon>
-                        <span>Postingan</span>
-                    </a>
-                </li>
+                @if (Auth::user()->role !== 'ortu')
+                    <li class="sidebar-item">
+                        <a href="{{ route('posts.index') }}" class='sidebar-link'>
+                            <ion-icon name="bookmarks"></ion-icon>
+                            <span>Postingan</span>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="sidebar-item">
                     <a href="{{ route('profile') }}" class='sidebar-link'>

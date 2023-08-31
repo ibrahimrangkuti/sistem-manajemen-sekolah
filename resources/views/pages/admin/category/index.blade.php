@@ -40,7 +40,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover" id="dataTable">
                             <thead>
                                 <tr>
                                     <th>No</th>

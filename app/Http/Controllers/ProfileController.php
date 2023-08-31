@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -35,6 +36,7 @@ class ProfileController extends Controller
             $validatedData['photo'] = 'img/photos/' . $photoName;
         }
 
+        $validatedData['name'] = Str::upper($request->name);
         $validatedData['phone'] = $request->phone;
         $validatedData['gender'] = $request->gender;
         $validatedData['phone'] = $request->phone;
@@ -59,7 +61,7 @@ class ProfileController extends Controller
 
         $data['student_id'] = Auth::user()->id;
         // $data['nik'] = $request->parent_nik;
-        $data['name'] = $request->parent_name;
+        $data['name'] = Str::upper($request->parent_name);
         $data['email'] = $request->parent_email;
         $data['phone'] = $request->parent_phone;
         $data['gender'] = $request->parent_gender;
