@@ -73,4 +73,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    public function isParent()
+    {
+        return $this->student_id !== null && $this->role === 'ortu';
+    }
+
+    public function student()
+    {
+        return $this->belongsTo($this, 'student_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo($this, 'parent_id');
+    }
 }

@@ -37,12 +37,6 @@ class AuthController extends Controller
             } else {
                 return back()->with('failed', 'Email atau password salah!');
             }
-        } elseif ($request->parent_phone !== null && $request->nis !== null ) {
-            if(Auth::attempt($request->only('parent_phone', 'nis'))) {
-                return redirect()->route('dashboard');
-            } else {
-                return back()->with('failed', 'Nomor telepon atau NIS');
-            }
         }
     }
 
@@ -86,5 +80,24 @@ class AuthController extends Controller
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('login')->with('success', __($status))
             : back()->withErrors(['email' => [__($status)]]);
+    }
+
+    public function loginOrangTua(Request $request)
+    {
+        $parent = User::where('phone', $request->parent_phone)->first();
+        if ($parent->isParent()) {
+            $checkStudent = User::find($parent->student_id);
+            if ($checkStudent->nis === $request->nis) {
+                if (Auth::loginUsingId($parent->id)) {
+                    return redirect()->route('home');
+                } else {
+                    dd('Yahhh');
+                }
+            } else {
+                dd('Nis salah');
+            }
+        } else {
+            dd('Kamu bukan orangtua');
+        }
     }
 }

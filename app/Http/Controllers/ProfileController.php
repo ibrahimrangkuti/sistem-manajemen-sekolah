@@ -13,6 +13,7 @@ class ProfileController extends Controller
     public function index()
     {
         $parent = User::where('student_id', Auth::user()->id)->first();
+        // dd(Auth::user()->parent->name);
 
         return view('pages.profile', compact('parent'));
     }
@@ -51,13 +52,13 @@ class ProfileController extends Controller
         // $parent = User::where('student_id', Auth::user()->id)->firstOrFail();
 
         $request->validate([
-            'parent_nik' => ['numeric', 'unique:users,nik'],
+            'parent_nik' => ['numeric'],
             'parent_name' => ['string'],
-            'parent_email' => ['email', 'unique:users,email'],
+            'parent_email' => ['email'],
         ]);
 
         $data['student_id'] = Auth::user()->id;
-        $data['nik'] = $request->parent_nik;
+        // $data['nik'] = $request->parent_nik;
         $data['name'] = $request->parent_name;
         $data['email'] = $request->parent_email;
         $data['phone'] = $request->parent_phone;
@@ -69,7 +70,10 @@ class ProfileController extends Controller
         $data['role'] = 'ortu';
 
         // $user->updateOrCreate($data);
-        User::updateOrCreate($data);
+        $parent = User::updateOrCreate(['nik' => $request->parent_nik], $data);
+        $user = User::find(Auth::user()->id);
+        $user->parent_id = $parent->id;
+        $user->update();
 
         return back()->with('success', 'Data orang tua berhasil diedit!');
     }

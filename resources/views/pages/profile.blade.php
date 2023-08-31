@@ -176,7 +176,7 @@
                                 <div class="form-group mb-3">
                                     <label for="parent_nik" class="form-label">NIK</label>
                                     <input type="number" name="parent_nik" id="parent_nik" class="form-control"
-                                        value={{ $parent ? $parent->nik : null }}>
+                                        value="{{ Auth::user()->parent->nik }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -184,7 +184,7 @@
                                     <label for="parent_name" class="form-label">Nama</label>
                                     <input type="text" name="parent_name" id="parent_name"
                                         class="form-control @error('parent_name') is-invalid @enderror"
-                                        value={{ $parent ? $parent->name : null }}>
+                                        value="{{ Auth::user()->parent->name }}">
                                     @error('parent_name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -195,7 +195,7 @@
                                     <label for="parent_email" class="form-label">Email</label>
                                     <input type="email" name="parent_email" id="parent_email"
                                         class="form-control @error('parent_email') is-invalid @enderror"
-                                        value={{ $parent ? $parent->email : null }}>
+                                        value="{{ Auth::user()->parent->email }}">
                                     @error('parent_email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -215,7 +215,7 @@
                                     <label for="parent_phone" class="form-label">Telepon</label>
                                     <input type="number" name="parent_phone" id="parent_phone"
                                         class="form-control @error('parent_phone') is-invalid @enderror"
-                                        value={{ $parent ? $parent->phone : null }}>
+                                        value="{{ Auth::user()->parent->phone }}">
                                     @error('parent_phone')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -226,7 +226,7 @@
                                     <label for="parent_place_of_birth" class="form-label">Tempat Lahir</label>
                                     <input type="text" name="parent_place_of_birth" id="parent_place_of_birth"
                                         class="form-control @error('parent_place_of_birth') is-invalid @enderror"
-                                        value="{{ $parent ? $parent->place_of_birth : null }}">
+                                        value="{{ Auth::user()->parent->place_of_birth }}">
                                     @error('parent_place_of_birth')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -237,7 +237,7 @@
                                     <label for="parent_date_of_birth" class="form-label">Tanggal Lahir</label>
                                     <input type="date" name="parent_date_of_birth" id="parent_date_of_birth"
                                         class="form-control @error('parent_date_of_birth') is-invalid @enderror"
-                                        value="{{ $parent ? $parent->date_of_birth : null }}">
+                                        value="{{ Auth::user()->parent->date_of_birth }}">
                                     @error('parent_date_of_birth')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -247,7 +247,7 @@
                                 <div class="form-group mb-3">
                                     <label for="parent_address" class="form-label">Alamat</label>
                                     <textarea name="parent_address" id="parent_address" cols="30" rows="3"
-                                        class="form-control @error('parent_address') is-invalid @enderror">{{ $parent ? $parent->address : null }}</textarea>
+                                        class="form-control @error('parent_address') is-invalid @enderror">{{ Auth::user()->parent->address }}</textarea>
                                     @error('parent_address')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

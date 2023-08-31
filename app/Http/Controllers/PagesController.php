@@ -12,6 +12,7 @@ class PagesController extends Controller
     public function home()
     {
         $news = Post::whereType('news')->latest()->take(3)->get();
+        // dd(Auth::user());
 
         return view('pages.home', compact('news'));
     }

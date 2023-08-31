@@ -40,6 +40,7 @@ Route::get('/lowongan/detail', [VacancyController::class, 'show']);
 Route::get('/portal-orangtua', function () {
     return view('pages.portalortu');
 });
+Route::post('/portal-orangtua', [AuthController::class, 'loginOrangTua'])->name('ortu.login');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'processLogin'])->name('processLogin');

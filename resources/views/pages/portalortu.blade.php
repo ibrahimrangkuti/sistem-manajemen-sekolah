@@ -6,16 +6,17 @@
             <div class="row align-items-center">
                 <div class="col-12 col-md-4 mb-5">
                     <h2 class="mb-3">Portal Orang Tua</h2>
-                    <form action="">
+                    <form action="{{ route('ortu.login') }}" method="POST">
+                        @csrf
                         <div class="form-group mb-3">
-                            <label for="" class="form-label">No. HP</label>
-                            <input type="number" name="" id="" class="form-control">
+                            <label for="parent_phone" class="form-label">No. HP</label>
+                            <input type="number" name="parent_phone" id="parent_phone" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="" class="form-label">NIS</label>
-                            <input type="number" name="" id="" class="form-control">
+                            <label for="nis" class="form-label">NIS</label>
+                            <input type="number" name="nis" id="nis" class="form-control">
                         </div>
-                        <button class="btn btn-primary w-100 mt-3">Masuk</button>
+                        <button type="submit" class="btn btn-primary w-100 mt-3">Masuk</button>
                     </form>
                 </div>
 
