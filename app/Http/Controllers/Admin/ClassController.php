@@ -8,12 +8,15 @@ use App\Models\Department;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ClassController extends Controller
 {
     public function index()
     {
         $classes = Classes::with('teacher')->latest()->get();
+
+        confirmDelete('Hapus Kelas', 'Apakah anda yakin ingin menghapus data?');
 
         return view('pages.admin.class.index', compact('classes'));
     }
@@ -37,13 +40,15 @@ class ClassController extends Controller
         $validatedData['level'] = $request->level;
         Classes::create($validatedData);
 
-        return redirect()->route('admin.class.index')->with('success', 'Data kelas berhasil ditambahkan!');
+        Alert::success('Berhasil!', 'Data kelas berhasil ditambahkan!');
+
+        return redirect()->route('admin.class.index');
     }
 
     public function edit($id)
     {
         $class = Classes::find($id);
-        $teachers = User::where('role', 'guru')->get();
+        $teachers = User::whereRole('guru')->get();
         $departments = Department::all();
 
         return view('pages.admin.class.edit', compact('class', 'teachers', 'departments'));
@@ -63,13 +68,22 @@ class ClassController extends Controller
         $class->level = $request->level;
         $class->update();
 
-        return redirect()->route('admin.class.index')->with('success', 'Data kelas berhasil diubah!');
+        Alert::success('Berhasil!', 'Data kelas berhasil diubah!');
+
+        return redirect()->route('admin.class.index');
     }
 
     public function delete($id)
     {
+        $students = User::whereRole('siswa')->where('class_id', $id)->get();
+        foreach ($students as $student) {
+            $student->update(['class_id' => null]);
+        }
+
         Classes::find($id)->delete();
 
-        return back()->with('success', 'Data kelas berhasil dihapus!');
+        Alert::success('Berhasil!', 'Data kelas berhasil dihapus!');
+
+        return back();
     }
 }

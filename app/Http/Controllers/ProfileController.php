@@ -57,9 +57,9 @@ class ProfileController extends Controller
         // $parent = User::where('student_id', Auth::user()->id)->firstOrFail();
 
         $request->validate([
-            'parent_nik' => ['numeric', 'unique:users,nik,' . Auth::user()->parent->id],
+            'parent_nik' => ['numeric', 'unique:users,nik'],
             'parent_name' => ['string'],
-            'parent_email' => ['email', 'unique:users,email,' . Auth::user()->parent->id],
+            'parent_email' => ['email', 'unique:users,email'],
         ]);
 
         $data['student_id'] = Auth::user()->id;

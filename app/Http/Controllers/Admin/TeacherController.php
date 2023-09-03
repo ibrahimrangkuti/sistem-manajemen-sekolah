@@ -4,13 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Department;
+use App\Models\Classes;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
 {
     public function index()
     {
         $teachers = User::whereRole('guru')->latest()->get();
+
+        confirmDelete('Hapus Guru', 'Apakah anda yakin ingin menghapus data?');
 
         return view('pages.admin.teacher.index', compact('teachers'));
     }
@@ -40,7 +45,8 @@ class TeacherController extends Controller
         $validatedData['password'] = bcrypt($request->password);
         User::create($validatedData);
 
-        return redirect()->route('admin.teacher.index')->with('success', 'Data guru berhasil ditambahkan!');
+        Alert::success('Berhasil!', 'Data guru berhasil ditambahkan!');
+        return redirect()->route('admin.teacher.index');
     }
 
     public function edit($id)
@@ -73,13 +79,27 @@ class TeacherController extends Controller
 
         $teacher->update($validatedData);
 
-        return redirect()->route('admin.teacher.index')->with('success', 'Data guru berhasil diubah!');
+        Alert::success('Berhasil!', 'Data guru berhasil diubah!');
+        return redirect()->route('admin.teacher.index');
     }
 
     public function delete($id)
     {
-        User::whereRole('guru')->where('id', $id)->delete();
+        $user = User::whereRole('guru')->where('id', $id)->first();
+        $checkDepartment = Department::where('user_id', $id)->first();
+        $checkClass = Classes::where('user_id', $id)->first();
 
-        return back()->with('success', 'Data guru berhasil dihapus!');
+        if ($checkDepartment) {
+            $checkDepartment->update(['user_id' => null]);
+        }
+
+        if ($checkClass) {
+            $checkClass->update(['user_id' => null]);
+        }
+
+        $user->delete();
+
+        Alert::success('Berhasil!', 'Data guru berhasil dihapus!');
+        return back();
     }
 }

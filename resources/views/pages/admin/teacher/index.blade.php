@@ -48,14 +48,8 @@
                                             <div class="d-flex gap-2">
                                                 <a href="{{ route('admin.teacher.edit', $teacher->id) }}"
                                                     class="btn btn-warning btn-sm">Edit</a>
-                                                <form action="{{ route('admin.teacher.delete', $teacher->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit"
-                                                        onclick="return confirm('Apakah kamu yakin ingin menghapus?')"
-                                                        class="btn btn-danger btn-sm">Hapus</button>
-                                                </form>
+                                                <a href="{{ route('admin.teacher.delete', $teacher->id) }}"
+                                                    class="btn btn-danger btn-sm" data-confirm-delete="true">Hapus</a>
                                             </div>
                                         </td>
                                     </tr>

@@ -26,11 +26,11 @@
                                 @foreach ($classes as $class)
                                     <tr>
                                         <td class="col-1">{{ $loop->iteration }}</td>
-                                        <td>{{ $class->teacher->name }}</td>
+                                        <td>{{ $class->teacher?->name }}</td>
                                         <td>{{ $class->name }}</td>
                                         <td>{{ $class->level }}</td>
                                         <td class="col-1">
-                                            <div class="d-flex align-items-center gap-3">
+                                            <div class="d-flex align-items-center gap-2">
                                                 <a href="{{ route('admin.class.edit', $class->id) }}"
                                                     class="btn btn-warning btn-sm">Edit</a>
                                                 <form action="{{ route('admin.class.delete', $class->id) }}" method="POST">

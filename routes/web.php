@@ -27,6 +27,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/berita', [PagesController::class, 'news']);
@@ -86,16 +87,11 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', [AdminStudentController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [AdminStudentController::class, 'edit'])->name('edit');
             Route::put('/edit/{id}', [AdminStudentController::class, 'update'])->name('update');
-            Route::delete('{id}', [AdminStudentController::class, 'delete'])->name('delete');
+            Route::delete('/delete/{id}', [AdminStudentController::class, 'delete'])->name('delete');
             Route::post('/import', [AdminStudentController::class, 'import'])->name('import');
-            Route::get('/delete-all', function () {
-                \App\Models\User::whereRole('siswa')->delete();
-                return back()->with('success', 'Semua data siswa berhasil dihapus!');
-            })->name('delete-all');
-            Route::post('/delete-by-class', function (Request $request) {
-                \App\Models\User::whereRole('siswa')->where('class_id', $request->class)->delete();
-                return back()->with('success', 'Semua data siswa berhasil dihapus!');
-            })->name('delete-by-class');
+            Route::get('/export', [AdminStudentController::class, 'export'])->name('export');
+            Route::delete('/delete-all', [AdminStudentController::class, 'deleteAll'])->name('delete-all');
+            Route::post('/delete-by-class', [AdminStudentController::class, 'deleteByClass'])->name('delete-by-class');
         });
 
         // Guru
@@ -105,7 +101,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', [AdminTeacherController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [AdminTeacherController::class, 'edit'])->name('edit');
             Route::post('/edit/{id}', [AdminTeacherController::class, 'update'])->name('update');
-            Route::delete('{id}', [AdminTeacherController::class, 'delete'])->name('delete');
+            Route::delete('/delete/{id}', [AdminTeacherController::class, 'delete'])->name('delete');
         });
 
         // Jurusan

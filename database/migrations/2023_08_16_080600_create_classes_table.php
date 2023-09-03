@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('department_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            // $table->foreignId('department_id')->constrained();
+            $table->unsignedBigInteger('department_id')->nullable();
+            // $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name');
             $table->enum('level', ['X', 'XI', 'XII']);
             $table->timestamps();

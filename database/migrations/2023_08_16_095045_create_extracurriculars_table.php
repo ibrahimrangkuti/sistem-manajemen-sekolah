@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('extracurriculars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->string('instagram_link')->nullable();

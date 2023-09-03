@@ -17,9 +17,11 @@
                                     <label for="teacher" class="form-label">Wali Kelas</label>
                                     <select name="teacher" id="teacher" class="form-control">
                                         @foreach ($teachers as $teacher)
-                                            <option value="{{ $teacher->id }}"
-                                                {{ $teacher->id === $class->teacher_id ? 'selected' : '' }}>
-                                                {{ $teacher->name }}</option>
+                                            @if (!\App\Models\Department::where('user_id', $teacher->id)->first())
+                                                <option value="{{ $teacher->id }}"
+                                                    {{ $teacher->id === $class->user_id ? 'selected' : '' }}>
+                                                    {{ $teacher->name }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -59,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success float-end">Tambah Kelas</button>
+                        <button type="submit" class="btn btn-success float-end">Simpan</button>
                     </form>
                 </div>
             </div>

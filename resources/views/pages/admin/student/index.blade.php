@@ -12,8 +12,8 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
                 Import Data
             </button>
-            <a href="{{ route('admin.student.delete-all') }}"
-                onclick="return confirm('Apakah kamu yakin ingin menghapus semua data?')" class="btn btn-outline-danger">Hapus
+            <a href="{{ route('admin.student.export') }}" class="btn btn-secondary">Export Data</a>
+            <a href="{{ route('admin.student.delete-all') }}" class="btn btn-outline-danger" data-confirm-delete="true">Hapus
                 Semua
                 Data</a>
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -64,7 +64,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit"
-                                    onclick="return confirm('Apakah kamu yakin ingin menghapus semua data?')"
+                                    onclick="return confirm('Apakah anda yakin ingin menghapus semua data?')"
                                     class="btn btn-success">Simpan</button>
                             </div>
                         </form>
@@ -110,19 +110,24 @@
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->place_of_birth }}</td>
                                         <td>{{ $student->date_of_birth }}</td>
-                                        <td>{{ $student->status }}</td>
+                                        <td>
+                                            <div class="badge bg-{{ $student->is_active ? 'success' : 'danger' }}">
+                                                {{ $student->is_active ? 'Aktif' : 'Tidak aktif' }}
+                                            </div>
+                                        </td>
                                         <td class="col-1">
                                             <div class="d-flex gap-2">
                                                 <a href="{{ route('admin.student.edit', $student->id) }}"
                                                     class="btn btn-warning btn-sm">Edit</a>
-                                                <form action="{{ route('admin.student.delete', $student->id) }}"
+                                                {{-- <form action="{{ route('admin.student.delete', $student->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit"
-                                                        onclick="return confirm('Apakah kamu yakin ingin menghapus?')"
+                                                    <button type="submit" data-confirm-delete="true"
                                                         class="btn btn-danger btn-sm">Hapus</button>
-                                                </form>
+                                                </form> --}}
+                                                <a href="{{ route('admin.student.delete', $student->id) }}"
+                                                    data-confirm-delete="true" class="btn btn-danger btn-sm">Hapus</a>
                                             </div>
                                         </td>
                                     </tr>

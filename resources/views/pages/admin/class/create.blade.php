@@ -18,7 +18,11 @@
                                     <select name="teacher" id="teacher" class="form-control">
                                         <option hidden>Pilih Wali Kelas</option>
                                         @foreach ($teachers as $teacher)
-                                            <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                            @if (
+                                                !\App\Models\Department::where('user_id', $teacher->id)->first() &&
+                                                    !\App\Models\Classes::where('user_id', $teacher->id)->first())
+                                                <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
