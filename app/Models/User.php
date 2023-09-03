@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->belongsTo(Classes::class);
     }
 
+    public function department()
+    {
+        return $this->hasOne(Department::class);
+    }
+
     public function schedules()
     {
         return $this->hasMany(Schedule::class);

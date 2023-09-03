@@ -32,7 +32,7 @@
                                 <td>{{ $femaleCount }} orang</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold">Total Siswa</td>
+                                <td class="fw-bold">Total Murid</td>
                                 <td class="fw-bold">{{ $students->count() }} orang</td>
                             </tr>
                         </tbody>
@@ -65,7 +65,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>NIS</th>
-                                    <th>Foto</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Jenis Kelamin</th>
@@ -82,7 +81,6 @@
                                     <tr>
                                         <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $student->nis }} </td>
-                                        <td>{{ $student->photo }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->gender }}</td>

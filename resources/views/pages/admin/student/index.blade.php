@@ -72,8 +72,39 @@
                 </div>
             </div>
         </div>
-        <span>Total <b>{{ \App\Models\User::whereRole('siswa')->count() }} siswa</b></span>
+        {{-- <span>Total <b>{{ \App\Models\User::whereRole('siswa')->count() }} siswa</b></span> --}}
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Laki - Laki</td>
+                                    <td>:</td>
+                                    <td class="col-8">{{ $maleCount }} orang</td>
+                                </tr>
+                                <tr>
+                                    <td>Perempuan</td>
+                                    <td>:</td>
+                                    <td class="col-8">{{ $femaleCount }} orang</td>
+                                </tr>
+                                <tr class="fw-bold">
+                                    <td>Total Murid</td>
+                                    <td>:</td>
+                                    <td class="col-8"74>{{ $students->count() }} orang</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">

@@ -135,7 +135,7 @@
                         </li>
                     @elseif (\App\Models\Department::where('user_id', Auth::user()->id)->count())
                         <li class="sidebar-item">
-                            <a href="javascript:void(0)" onclick="return alert('Coming soon!')" class='sidebar-link'>
+                            <a href="{{ route('teacher.mydepartment.index') }}" class='sidebar-link'>
                                 <ion-icon name="grid"></ion-icon>
                                 <span>Jurusan Saya</span>
                             </a>

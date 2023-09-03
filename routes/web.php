@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 // Guru
 use App\Http\Controllers\Teacher\MyClassController as TeacherMyClassController;
+use App\Http\Controllers\Teacher\MyDepartmentController as TeacherMyDepartmentController;
 use App\Http\Controllers\Teacher\ScheduleController as TeacherScheduleController;
 
 use App\Http\Controllers\DashboardController;
@@ -160,9 +161,14 @@ Route::middleware('auth')->group(function () {
     // Guru
     Route::name('teacher.')->group(function () {
         // Kelas Saya
-        Route::prefix('myclass')->name('myclass.')->group(function () {
+        Route::prefix('my-class')->name('myclass.')->group(function () {
             Route::get('/', [TeacherMyClassController::class, 'index'])->name('index');
             Route::get('/presence-history', [TeacherMyClassController::class, 'presenceHistory'])->name('presenceHistory');
+        });
+
+        // Jurusan Saya
+        Route::prefix('my-department')->name('mydepartment.')->group(function () {
+            Route::get('/', [TeacherMyDepartmentController::class, 'index'])->name('index');
         });
 
         // Jadwal Mengajar

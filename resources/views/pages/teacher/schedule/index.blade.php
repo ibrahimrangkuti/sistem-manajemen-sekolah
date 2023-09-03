@@ -35,7 +35,7 @@
                                     </tr>
                                     <tr>
                                         <td>Waktu Selesai</td>
-                                        <td>{{ $nowSchedule->en{{ d_ti }}me }}</td>
+                                        <td>{{ $nowSchedule->end_time }}</td>
                                     </tr>
                                 </tbody>
                             </table>

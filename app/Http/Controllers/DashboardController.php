@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\StudentPresence;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,17 @@ class DashboardController extends Controller
         } elseif (Auth::user()->role === 'guru') {
             return view('pages.teacher.dashboard');
         } elseif (Auth::user()->role === 'ortu') {
-            return view('pages.parent.dashboard');
+            $todayPresence = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', date('Y-m-d'))->first();
+
+            // retrieve student attendance data with a vulnerability of 7 days
+            if (request()->has('sort')) {
+                $sortTime = '-' . request('sort') . ' days';
+                $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime($sortTime)))->get();
+            } else {
+                $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime('-7 days')))->get();
+            }
+
+            return view('pages.parent.dashboard', compact('todayPresence', 'studentPresences'));
         }
     }
 }

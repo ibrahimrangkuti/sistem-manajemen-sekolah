@@ -21,17 +21,33 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-success">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h4 class="alert-heading">{{ Auth::user()->student->name }}</h4>
-                        <p>Hari ini hadir, absen pada jam 08:00</p>
+            @if (!$todayPresence)
+                <div class="alert alert-danger">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="alert-heading">{{ Auth::user()->student->name }}</h4>
+                            <p>Hari ini <b>{{ Auth::user()->student->name }}</b> belum absen kehadiran. Mohon diperhatikan
+                            </p>
+                        </div>
+                        <ion-icon name="finger-print" size="large" class="d-none d-md-block"></ion-icon>
                     </div>
-                    <ion-icon name="finger-print" size="large"></ion-icon>
+                    <hr />
+                    <p class="mb-0">{{ dayName(date('Y-m-d')) }}, {{ date('d/m/Y') }}</p>
                 </div>
-                <hr />
-                <p class="mb-0">Senin, 20/08/2023</p>
-            </div>
+            @else
+                <div class="alert alert-success">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="alert-heading">{{ Auth::user()->student->name }}</h4>
+                            <p>Hari ini {{ $todayPresence->status }}, absen pada jam
+                                {{ $todayPresence->created_at->format('H:i') }}</p>
+                        </div>
+                        <ion-icon name="finger-print" size="large" class="d-none d-md-block"></ion-icon>
+                    </div>
+                    <hr />
+                    <p class="mb-0">{{ dayName(date('Y-m-d')) }}, {{ date('d/m/Y') }}</p>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -39,7 +55,18 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">Riwayat Kehadiran Minggu Ini</h4>
+                    <h4 class="card-title mb-3">Riwayat Kehadiran</h4>
+                    <form method="GET" class="d-flex gap-2 mb-3">
+                        <select name="sort" id="sort" class="form-control">
+                            <option value="7" {{ request('sort') === '7' ? 'selected' : '' }}>Seminggu terakhir
+                            </option>
+                            <option value="31" {{ request('sort') === '31' ? 'selected' : '' }}>Sebulan terakhir
+                            </option>
+                            <option value="365" {{ request('sort') === '365' ? 'selected' : '' }}>Setahun terakhir
+                            </option>
+                        </select>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="dataTable">
                             <thead>
@@ -54,15 +81,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>{{ Auth::user()->student->name }}</td>
-                                    <td>{{ Auth::user()->student->class->name }}</td>
-                                    <td>Hadir</td>
-                                    <td>08:00</td>
-                                    <td>Senin</td>
-                                    <td>20/08/2023</td>
-                                </tr>
+                                @foreach ($studentPresences as $studentPresence)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ Auth::user()->student->name }}</td>
+                                        <td>{{ Auth::user()->student->class->name }}</td>
+                                        <td>
+                                            <span
+                                                class="badge bg-{{ $studentPresence->status === 'hadir' ? 'success' : 'warning' }}">
+                                                {{ Str::ucfirst($studentPresence->status) }}
+                                            </span>
+                                        </td>
+                                        <td>{{ $studentPresence->created_at->format('H:i') }}</td>
+                                        <td>{{ dayName($studentPresence->presence_date) }}</td>
+                                        <td>{{ $studentPresence->created_at->format('d/m/Y') }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -122,7 +156,8 @@
                                         <tr>
                                             <td>Email</td>
                                             <td>:</td>
-                                            <td>{{ Auth::user()->student->email ? Auth::user()->student->email : '-' }}
+                                            <td class="col-8">
+                                                {{ Auth::user()->student->email ? Auth::user()->student->email : '-' }}
                                             </td>
                                         </tr>
                                         <tr>

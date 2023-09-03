@@ -63,8 +63,10 @@
                             <span class="text-muted">Administrator</span>
                         @elseif(Auth::user()->role == 'guru')
                             <span class="text-muted">Guru</span>
-                        @else
+                        @elseif(Auth::user()->role == 'siswa')
                             <span class="text-muted">Siswa</span>
+                        @elseif(Auth::user()->role == 'ortu')
+                            <span class="text-muted">Orang Tua</span>
                         @endif
                     </div>
                     <img src="{{ Auth::user()->photo != null ? asset(Auth::user()->photo) : 'https://ui-avatars.com/api/?name=' . Auth::user()->name }}"

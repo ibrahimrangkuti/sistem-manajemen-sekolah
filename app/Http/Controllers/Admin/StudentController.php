@@ -18,9 +18,12 @@ class StudentController extends Controller
         $students = User::where('role', 'siswa')->get();
         $classes = Classes::all();
 
+        $maleCount = User::whereRole('siswa')->whereGender('L')->count();
+        $femaleCount = User::whereRole('siswa')->whereGender('P')->count();
+
         confirmDelete('Hapus Siswa', 'Apakah anda yakin ingin menghapus data?');
 
-        return view('pages.admin.student.index', compact('students', 'classes'));
+        return view('pages.admin.student.index', compact('students', 'classes', 'maleCount', 'femaleCount'));
     }
 
     public function create()
