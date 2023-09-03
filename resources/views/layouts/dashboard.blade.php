@@ -10,14 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('mazer/assets/css/bootstrap.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('mazer/assets/vendors/iconly/bold.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('mazer/assets/vendors/iconly/bold.css') }}"> --}}
 
     <link rel="stylesheet" href="{{ asset('mazer/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('mazer/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('mazer/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('mazer/assets/css/app.css') }}">
     <link rel="shortcut icon" href="{{ asset('mazer/assets/images/favicon.svg') }}" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/dataTable.min.css') }}">
 
     {{-- Icon --}}
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -37,9 +37,12 @@
             color: #fff;
         }
     </style>
+
 </head>
 
 <body>
+    @include('sweetalert::alert')
+
     <div id="app">
         @include('components.sidebar')
         <div id="main">
@@ -149,17 +152,19 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> --}}
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTable.min.js') }}"></script>
     <script src="{{ asset('mazer/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('mazer/assets/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('mazer/assets/vendors/apexcharts/apexcharts.js') }}"></script>
-    <script src="{{ asset('mazer/assets/js/pages/dashboard.js') }}"></script>
+    {{-- <script src="{{ asset('mazer/assets/vendors/apexcharts/apexcharts.js') }}"></script> --}}
+    {{-- <script src="{{ asset('mazer/assets/js/pages/dashboard.js') }}"></script> --}}
 
     <script src="{{ asset('mazer/assets/js/main.js') }}"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script> --}}
+    <script src="{{ asset('assets/js/ckeditor.js') }}"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'))
@@ -181,13 +186,13 @@
             document.getElementById('clock').textContent = formattedTime;
         }
 
-        function importData() {
-            for (i = 0; i < 1000; i++) {
-                alert(
-                    'Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha HahaHaha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha'
-                );
-            }
-        }
+        // function importData() {
+        //     for (i = 0; i < 1000; i++) {
+        //         alert(
+        //             'Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha HahaHaha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha Haha'
+        //         );
+        //     }
+        // }
 
         setInterval(updateClock, 1000);
     </script>

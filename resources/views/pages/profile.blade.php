@@ -162,7 +162,7 @@
         </div>
     </div>
 
-    @if (Auth::user()->role !== 'ortu')
+    @if (Auth::user()->role === 'siswa')
         <div class="row">
             <h3 class="mb-5">Data Orang Tua</h3>
             <div class="col-md-12">

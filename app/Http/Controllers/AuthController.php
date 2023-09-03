@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -17,25 +18,41 @@ class AuthController extends Controller
         return view('pages.auth.login');
     }
 
+    function showWelcomeMessage()
+    {
+        return Alert::success('Halo, ' . Auth::user()->name, 'Selamat datang di Sistem Informasi SMKN 5 Kab. Tangerang!');
+    }
+
+    function showAlertError($message)
+    {
+        return Alert::error('Gagal!', $message);
+    }
+
     public function processLogin(Request $request)
     {
         if ($request->nis !== null) {
             if (Auth::attempt($request->only('nis', 'password'))) {
+                $this->showWelcomeMessage();
                 return redirect()->route('dashboard');
             } else {
-                return back()->with('failed', 'NIS atau password salah!');
+                $this->showAlertError('NIS atau password salah!');
+                return back();
             }
         } elseif ($request->nik !== null) {
             if (Auth::attempt($request->only('nik', 'password'))) {
+                $this->showWelcomeMessage();
                 return redirect()->route('dashboard');
             } else {
-                return back()->with('failed', 'NIK atau password salah!');
+                $this->showAlertError('NIK atau password salah!');
+                return back();
             }
         } elseif ($request->email !== null) {
             if (Auth::attempt($request->only('email', 'password'))) {
+                $this->showWelcomeMessage();
                 return redirect()->route('dashboard');
             } else {
-                return back()->with('failed', 'Email atau password salah!');
+                $this->showAlertError('Email atau password salah!');
+                return back();
             }
         }
     }
@@ -89,15 +106,19 @@ class AuthController extends Controller
             $checkStudent = User::find($parent->student_id);
             if ($checkStudent->nis === $request->nis) {
                 if (Auth::loginUsingId($parent->id)) {
-                    return redirect()->route('home');
+                    $this->showWelcomeMessage();
+                    return redirect()->route('dashboard');
                 } else {
-                    dd('Yahhh');
+                    $this->showAlertError('No. HP atau NIS salah!');
+                    return back();
                 }
             } else {
-                dd('Nis salah');
+                $this->showAlertError('No. HP atau NIS salah!');
+                return back();
             }
         } else {
-            dd('Kamu bukan orangtua');
+            $this->showAlertError('No. HP atau NIS salah!');
+            return back();
         }
     }
 }

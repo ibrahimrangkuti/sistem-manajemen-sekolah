@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
@@ -45,7 +46,9 @@ class ProfileController extends Controller
         $validatedData['address'] = $request->address;
         $user->update($validatedData);
 
-        return redirect()->route('profile')->with('success', 'Profil berhasil diubah!');
+        Alert::success('Berhasil!', 'Profil berhasil diubah!');
+
+        return redirect()->route('profile');
     }
 
     public function updateParentProfile(Request $request)
@@ -54,9 +57,9 @@ class ProfileController extends Controller
         // $parent = User::where('student_id', Auth::user()->id)->firstOrFail();
 
         $request->validate([
-            'parent_nik' => ['numeric'],
+            'parent_nik' => ['numeric', 'unique:users,nik,' . Auth::user()->parent->id],
             'parent_name' => ['string'],
-            'parent_email' => ['email'],
+            'parent_email' => ['email', 'unique:users,email,' . Auth::user()->parent->id],
         ]);
 
         $data['student_id'] = Auth::user()->id;
@@ -77,23 +80,29 @@ class ProfileController extends Controller
         $user->parent_id = $parent->id;
         $user->update();
 
-        return back()->with('success', 'Data orang tua berhasil diedit!');
+        Alert::success('Berhasil!', 'Data orang tua berhasil diubah!');
+
+        return back();
     }
 
     public function changePassword(Request $request)
     {
         if (!Hash::check($request->old_password, Auth::user()->password)) {
-            return back()->with('failed', 'Password lama salah!');
+            Alert::error('Gagal!', 'Password lama tidak sesuai!');
+            return back();
         }
 
         if (Hash::check($request->new_password, Auth::user()->password)) {
-            return back()->with('failed', 'Password baru tidak boleh sama dengan sebelumnya!');
+            Alert::error('Gagal!', 'Password baru tidak boleh sama dengan sebelumnya!');
+            return back();
         }
 
         $user = User::findOrFail(Auth::user()->id);
         $user->password = bcrypt($request->new_password);
         $user->update();
 
-        return back()->with('success', 'Password berhasil diubah!');
+        Alert::success('Berhasil!', 'Password berhasil diubah!');
+
+        return back();
     }
 }
