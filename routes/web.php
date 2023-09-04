@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
 
     // Admin
-    Route::name('admin.')->group(function () {
+    Route::name('admin.')->middleware('role:admin')->group(function () {
         // Admin
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings');
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
@@ -159,7 +159,7 @@ Route::middleware('auth')->group(function () {
     });
 
     // Guru
-    Route::name('teacher.')->group(function () {
+    Route::name('teacher.')->middleware('role:guru')->group(function () {
         // Kelas Saya
         Route::prefix('my-class')->name('myclass.')->group(function () {
             Route::get('/', [TeacherMyClassController::class, 'index'])->name('index');
@@ -176,6 +176,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [TeacherScheduleController::class, 'index'])->name('index');
         });
     });
+
+    // Siswa
 
     // Ortu
 
