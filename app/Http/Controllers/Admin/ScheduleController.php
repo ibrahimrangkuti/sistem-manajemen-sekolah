@@ -8,6 +8,7 @@ use App\Models\Lesson;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ScheduleController extends Controller
 {
@@ -40,6 +41,8 @@ class ScheduleController extends Controller
 
         Schedule::create($data);
 
-        return redirect()->route('admin.schedule.index')->with('success', 'Data jadwal pelajaran berhasil ditambahkan!');
+        Alert::success('Berhasil!', 'Data jadwal pelajaran berhasil ditambahkan!');
+
+        return redirect()->route('admin.schedule.index');
     }
 }

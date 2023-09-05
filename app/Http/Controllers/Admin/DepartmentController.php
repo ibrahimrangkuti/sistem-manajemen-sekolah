@@ -9,6 +9,7 @@ use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DepartmentController extends Controller
 {
@@ -34,7 +35,9 @@ class DepartmentController extends Controller
         $validatedData['user_id'] = $request->teacher;
         Department::create($validatedData);
 
-        return back()->with('success', 'Data jurusan berhasil ditambahkan!');
+        Alert::success('Berhasil!', 'Data jurusan berhasil ditambahkan!');
+
+        return back();
     }
 
     public function update(Request $request, $id)
@@ -48,14 +51,18 @@ class DepartmentController extends Controller
         $department->name = $request->name;
         $department->update();
 
-        return redirect()->route('admin.department.index')->with('success', 'Data jurusan berhasil diubah!');
+        Alert::success('Berhasil!', 'Data jurusan berhasil diubah!');
+
+        return redirect()->route('admin.department.index');
     }
 
     public function delete($id)
     {
         Department::find($id)->delete();
 
-        return back()->with('success', 'Data jurusan berhasil dihapus!');
+        Alert::success('Berhasil!', 'Data jurusan berhasil dihapus!');
+
+        return back();
     }
 
     public function deleteAll()
@@ -64,6 +71,8 @@ class DepartmentController extends Controller
         Department::truncate();
         Schema::enableForeignKeyConstraints();
 
-        return back()->with('success', 'Semua data berhasil dihapus!');
+        Alert::success('Berhasil!', 'Semua data berhasil dihapus!');
+
+        return back()->with('success');
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
@@ -27,7 +28,9 @@ class CategoryController extends Controller
         $validatedData['type'] = $request->type;
 
         Category::create($validatedData);
+        
+        Alert::success('Berhasil!', 'Data kategori berhasil ditambahkan!');
 
-        return back()->with('success', 'Data kategori berhasil ditambahkan!');
+        return back();
     }
 }

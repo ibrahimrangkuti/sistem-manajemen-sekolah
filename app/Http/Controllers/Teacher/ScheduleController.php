@@ -92,9 +92,5 @@ class ScheduleController extends Controller
 
         Alert::success('Berhasil!', 'Data absensi berhasil ditambahkan!');
         return back();
-
-        // $data['class_id'] = $request->class_id;
-        // $user = User::where('class_id', $request->class_id)->where('role', 'siswa')->first();
-        // dd($user);
     }
 }

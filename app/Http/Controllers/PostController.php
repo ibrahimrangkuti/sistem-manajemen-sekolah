@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
 {
@@ -53,7 +54,9 @@ class PostController extends Controller
 
         Post::create($validatedData);
 
-        return back()->with('success', 'Data postingan berhasil ditambahkan!');
+        Alert::success('Berhasil!', 'Data postingan berhasil ditambahkan!');
+
+        return back();
     }
 
     public function update(Request $request, $id)
@@ -84,7 +87,9 @@ class PostController extends Controller
 
         $post->update($validatedData);
 
-        return redirect()->route('posts.index')->with('success', 'Data postingan berhasil diubah!');
+        Alert::success('Berhasil!', 'Data postingan berhasil diubah!');
+
+        return redirect()->route('posts.index');
     }
 
     public function approved($id)
@@ -93,7 +98,9 @@ class PostController extends Controller
         $post->status = 2;
         $post->update();
 
-        return back()->with('success', 'Data postingan disetujui!');
+        Alert::success('Berhasil!', 'Data postingan disetujui!');
+
+        return back();
     }
 
     public function disapproved($id)
@@ -102,7 +109,9 @@ class PostController extends Controller
         $post->status = 3;
         $post->update();
 
-        return back()->with('success', 'Data postingan tidak disetujui!');
+        Alert::success('Berhasil!', 'Data postingan tidak disetujui!');
+
+        return back();
     }
 
     public function delete($id)
@@ -118,6 +127,8 @@ class PostController extends Controller
 
         $post->delete();
 
-        return back()->with('success', 'Data Postingan berhasil dihapus!');
+        Alert::success('Berhasil!', 'Data Postingan berhasil dihapus!');
+
+        return back();
     }
 }

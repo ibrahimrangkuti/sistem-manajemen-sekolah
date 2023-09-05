@@ -7,7 +7,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @include('components.alert')
                     <form action="{{ route('admin.category.store') }}" method="POST">
                         @csrf
                         <div class="row">
