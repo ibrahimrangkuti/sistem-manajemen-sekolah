@@ -43,9 +43,10 @@ class NewsController extends Controller
         }
 
         $validatedData['user_id'] = Auth::user()->id;
-        $validatedData['slug'] = Str::slug($request->title);
+        $validatedData['slug'] = Str::slug($request->title) . '-' . time();
         $validatedData['type'] = "news";
         $validatedData['category_id'] = $request->category;
+        $validatedData['status'] = '2';
 
         Post::create($validatedData);
 
@@ -63,7 +64,7 @@ class NewsController extends Controller
             'body' => ['required'],
         ]);
 
-        $validatedData['slug'] = Str::slug($request->title);
+        $validatedData['slug'] = Str::slug($request->title) . '-' . time();
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

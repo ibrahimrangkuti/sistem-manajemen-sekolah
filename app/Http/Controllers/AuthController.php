@@ -15,6 +15,11 @@ class AuthController extends Controller
 {
     public function login()
     {
+        if (Auth::check()) {
+            Alert::error('Gagal!', 'Anda sudah login!');
+            return back();
+        }
+
         return view('pages.auth.login');
     }
 
@@ -30,6 +35,11 @@ class AuthController extends Controller
 
     public function processLogin(Request $request)
     {
+        if (Auth::check()) {
+            Alert::error('Gagal!', 'Anda sudah login!');
+            return back();
+        }
+
         if ($request->nis !== null) {
             if (Auth::attempt($request->only('nis', 'password'))) {
                 $this->showWelcomeMessage();
@@ -101,6 +111,11 @@ class AuthController extends Controller
 
     public function loginOrangTua(Request $request)
     {
+        if (Auth::check()) {
+            Alert::error('Gagal!', 'Anda sudah login!');
+            return back();
+        }
+
         $parent = User::where('phone', $request->parent_phone)->first();
         if ($parent->isParent()) {
             $checkStudent = User::find($parent->student_id);

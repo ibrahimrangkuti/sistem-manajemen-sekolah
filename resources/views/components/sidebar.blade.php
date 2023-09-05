@@ -101,12 +101,12 @@
                             <span>Berita</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    {{-- <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
                             <ion-icon name="briefcase"></ion-icon>
                             <span>Lowongan</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
                             <ion-icon name="mail"></ion-icon>

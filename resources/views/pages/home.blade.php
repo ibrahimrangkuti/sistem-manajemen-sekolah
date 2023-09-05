@@ -88,7 +88,8 @@
                 @foreach ($news as $item)
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="{{ asset($item->image) }}" class="card-img-top object-fit-cover" height="280">
+                            <img src="{{ $item->image ? asset($item->image) : asset('assets/img/no-img-placeholder.png') }}"
+                                class="card-img-top object-fit-cover" height="280">
                             <div class="card-body">
                                 <h5 class="card-title text-truncate">{{ $item->title }}</h5>
                                 <span class="text-muted">{{ $item->user->name }}</span>

@@ -31,15 +31,18 @@ use Illuminate\Support\Facades\Route;
 use RealRashid\SweetAlert\Facades\Alert;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
-Route::get('/berita', [PagesController::class, 'news']);
-Route::get('/forum', [PagesController::class, 'forum']);
+Route::get('/berita', [PagesController::class, 'news'])->name('news');
+Route::get('/forum', [PagesController::class, 'forum'])->name('forum');
 // Route::get('/post/detail/{slug}', [PostController::class, 'show'])->name('post.show');
 Route::get('/berita/{slug}', [PagesController::class, 'showNews'])->name('news.show');
 Route::get('/forum/{slug}', [PagesController::class, 'showForum'])->name('forum.show');
 Route::post('/forum/{slug}', [PagesController::class, 'addComentar'])->name('forum.add-comentar');
-Route::get('/lowongan', [PagesController::class, 'vacancy']);
-Route::get('/lowongan/detail', [VacancyController::class, 'show']);
 Route::get('/portal-orangtua', function () {
+    if (Auth::check()) {
+        Alert::error('Gagal!', 'Anda sudah login!');
+        return back();
+    }
+
     return view('pages.portalortu');
 });
 Route::post('/portal-orangtua', [AuthController::class, 'loginOrangTua'])->name('ortu.login');
@@ -53,6 +56,10 @@ Route::get('/reset-password/{token}', function (string $token) {
 })->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'processResetPassword'])->name('password.update');
 Route::get('/logout', function () {
+    if (!Auth::check()) {
+        return back();
+    }
+
     Auth::logout();
     return redirect()->route('login');
 })->name('logout');
@@ -74,6 +81,7 @@ Route::middleware('auth')->group(function () {
         // Kelas
         Route::prefix('class')->name('class.')->group(function () {
             Route::get('/', [AdminClassController::class, 'index'])->name('index');
+            Route::get('/detail/{id}', [AdminClassController::class, 'detail'])->name('detail');
             Route::get('/create', [AdminClassController::class, 'create'])->name('create');
             Route::post('/create', [AdminClassController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [AdminClassController::class, 'edit'])->name('edit');
