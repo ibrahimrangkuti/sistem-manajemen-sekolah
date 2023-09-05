@@ -31,6 +31,8 @@
                                         <td>{{ $class->level }}</td>
                                         <td class="col-1">
                                             <div class="d-flex align-items-center gap-2">
+                                                <a href="{{ route('admin.class.detail', $class->id) }}"
+                                                    class="btn btn-info btn-sm">Detail</a>
                                                 <a href="{{ route('admin.class.edit', $class->id) }}"
                                                     class="btn btn-warning btn-sm">Edit</a>
                                                 <form action="{{ route('admin.class.delete', $class->id) }}" method="POST">

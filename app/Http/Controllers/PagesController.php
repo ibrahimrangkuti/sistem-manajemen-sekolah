@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,18 +32,6 @@ class PagesController extends Controller
         return view('pages.post.show', compact('post'));
     }
 
-    // public function addComentar(Request $request, $slug)
-    // {
-    //     $post = Post::where('slug', $slug)->first();
-    //     CommentarForum::createa([
-    //         'post_forum_id' => $post->id,
-    //         'user_id' => Auth::user()->id,
-    //         'body' => $request->body
-    //     ]);
-
-    //     return back();
-    // }
-
     // Berita
     public function news()
     {
@@ -57,7 +46,10 @@ class PagesController extends Controller
     // Forum
     public function forum()
     {
-        return view('pages.forum');
+        $categories = Category::where('type', 'post')->orWhere('type', 'general')->get();
+        $posts = Post::whereType('post')->whereStatus('2')->get();
+
+        return view('pages.forum', compact('categories', 'posts'));
     }
 
     // Lowongan

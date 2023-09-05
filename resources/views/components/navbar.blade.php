@@ -19,9 +19,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/forum">Forum</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="/lowongan">Lowongan</a>
-                </li>
+                </li> --}}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/portal-orangtua">Portal Orangtua</a>

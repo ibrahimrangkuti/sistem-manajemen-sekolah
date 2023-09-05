@@ -3,10 +3,23 @@
 @section('content')
     <section id="post_detail" class="post-detail">
         <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ $post->type == 'news' ? route('news') : route('forum') }}">{{ $post->type == 'news' ? 'Berita' : 'Forum' }}</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $post->title }}</li>
+                </ol>
+            </nav>
+
             <div class="row">
                 <div class="col-md-12">
-                    <img src="{{ asset($post->image) }}" alt="" class="w-100 rounded" height="400"
-                        style="background-size: cover; object-fit: cover">
+                    @if ($post->type == 'news')
+                        <img src="{{ $post->image ? asset($post->image) : asset('assets/img/no-img-placeholder.png') }}"
+                            alt="" class="w-100 rounded mt-3" height="400"
+                            style="background-size: cover; object-fit: cover">
+                    @endif
                     <h3 class="my-3">{{ $post->title }}</h3>
                     <div class="d-flex justify-content-between mb-3">
                         <span class="text-secondary">{{ $post->user->name }}</span>
@@ -27,15 +40,6 @@
                                         <button type="submit" class="btn btn-success btn-sm float-end mt-3">Kirim</button>
                                     </form>
                                 </div>
-                                {{-- <div class="d-flex align-items-center gap-3 mt-3 comment-item">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-                                    alt="" class="rounded-circle object-fit-cover shadow" width="40"
-                                    height="40">
-                                <div>
-                                    <span class="fw-medium">User Name</span>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quibusdam.</p>
-                                </div>
-                            </div> --}}
                                 <div class="d-flex gap-3 mt-4">
                                     <div>
                                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"

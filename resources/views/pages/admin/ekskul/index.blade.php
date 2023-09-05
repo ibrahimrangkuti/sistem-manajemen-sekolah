@@ -23,15 +23,15 @@
                                 class="form-control @error('name') is-invalid @enderror"
                                 value="{{ $lesson ? $lesson->name : null }}">
                             @error('name')
-                                <span class="text-danger">{{ $message }}</span>
+                                <spa{{ n cl }}ass="text-danger">{{ $message }}</spa>
                             @enderror
                         </div>
                         @if (!request('id'))
-                            <button type="submit" class="btn btn-success float-end">Tambah Mata Pelajaran</button>
+                            <button {{ type }}="submit" class="btn btn-success float-end">Tambah Mata Pelajaran</button>
                         @else
                             <button type="submit" class="btn btn-success float-end">Simpan</button>
                         @endif
-                    </form>
+                    </form>{{  }}
                 </div>
             </div>
         </div>

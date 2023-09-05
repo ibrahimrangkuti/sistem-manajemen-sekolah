@@ -45,7 +45,7 @@ class PostController extends Controller
 
         $validatedData['user_id'] = Auth::user()->id;
         $validatedData['category_id'] = $request->category;
-        $validatedData['slug'] = Str::slug($request->title);
+        $validatedData['slug'] = Str::slug($request->title) . '-' . time();
 
         if (Auth::user()->role === 'admin') {
             $validatedData['status'] = 2;
@@ -65,7 +65,7 @@ class PostController extends Controller
             'body' => ['required'],
         ]);
 
-        $validatedData['slug'] = Str::slug($request->title);
+        $validatedData['slug'] = Str::slug($request->title) . '-' . time();
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

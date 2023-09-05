@@ -21,6 +21,16 @@ class ClassController extends Controller
         return view('pages.admin.class.index', compact('classes'));
     }
 
+    public function detail($id)
+    {
+        $class = Classes::find($id);
+        $students = User::where('class_id', $id)->get();
+        $maleCount = User::where('class_id', $id)->whereGender('L')->count();
+        $femaleCount = User::where('class_id', $id)->whereGender('P')->count();
+
+        return view('pages.admin.class.detail', compact('class', 'students', 'maleCount', 'femaleCount'));
+    }
+
     public function create()
     {
         $teachers = User::where('role', 'guru')->get();

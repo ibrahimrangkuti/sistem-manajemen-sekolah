@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" id="posts">
+    <section class="container" id="posts">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Berita</li>
+            </ol>
+        </nav>
+
         <div class="py-3">
             <h1>Berita Terbaru</h1>
             <p>Terkait SMKN 5</p>
@@ -18,8 +25,8 @@
             @foreach ($news as $item)
                 <div class="col-md-4">
                     <div class="card box">
-                        <img src="{{ asset($item->image) }}" class="card-img-top object-fit-cover" alt="..."
-                            height="280">
+                        <img src="{{ $item->image ? asset($item->image) : asset('assets/img/no-img-placeholder.png') }}"
+                            class="card-img-top object-fit-cover" height="280">
                         <div class="card-body">
                             <h5 class="card-title text-truncate">{{ $item->title }}</h5>
                             <span class="text-muted">{{ $item->user->name }}</span>
@@ -31,5 +38,5 @@
             @endforeach
 
         </div>
-    </div>
+    </section>
 @endsection

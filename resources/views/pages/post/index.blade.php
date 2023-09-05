@@ -77,10 +77,6 @@
                                 @foreach ($posts as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        {{-- <td>
-                                            <img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded"
-                                                width="100">
-                                        </td> --}}
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->category->name }}</td>
