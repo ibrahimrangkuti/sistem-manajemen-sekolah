@@ -93,4 +93,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo($this, 'parent_id');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
 }

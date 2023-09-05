@@ -47,7 +47,11 @@ class PagesController extends Controller
     public function forum()
     {
         $categories = Category::where('type', 'post')->orWhere('type', 'general')->get();
-        $posts = Post::whereType('post')->whereStatus('2')->get();
+        $posts = Post::filter()->whereType('post')->whereStatus('2')->paginate(20);
+
+        if (request()->has('category')) {
+            $posts = Post::filter()->whereType('post')->whereStatus('2')->where('category_id', request('category'))->paginate(20);
+        }
 
         return view('pages.forum', compact('categories', 'posts'));
     }

@@ -13,6 +13,14 @@ class Post extends Model
 
     protected $with = ['user', 'category'];
 
+    public function scopeFilter($query)
+    {
+        if (request('keyword')) {
+            return $query->where('title', 'like', '%' . request('keyword') . '%')
+                ->orWhere('body', 'like', '%' . request('keyword') . '%');
+        }
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
