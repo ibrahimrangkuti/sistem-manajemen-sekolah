@@ -9,7 +9,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @include('components.alert')
                     <form
                         action="{{ !request()->id ? route('admin.department.store') : route('admin.department.update', $department->id) }}"
                         method="POST">

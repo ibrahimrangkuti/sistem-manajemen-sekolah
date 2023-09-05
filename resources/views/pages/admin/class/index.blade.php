@@ -7,7 +7,6 @@
 @section('content')
     <a href="{{ route('admin.class.create') }}" class="btn btn-success mb-3">Tambah Kelas</a>
     <div class="row">
-        @include('components.alert')
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">

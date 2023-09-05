@@ -8,7 +8,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @include('components.alert')
                     <form
                         action="{{ !request('id') ? route('admin.lesson.store') : route('admin.lesson.update', $lesson->id) }}"
                         method="POST">

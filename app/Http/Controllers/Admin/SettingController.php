@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SettingController extends Controller
 {
@@ -34,6 +35,8 @@ class SettingController extends Controller
         $validatedData['phone'] = $request->phone;
         Setting::first()->update($validatedData);
 
-        return back()->with('success', 'Pengaturan website berhasil diubah!');
+        Alert::success('Berhasil!', 'Pengaturan website berhasil diubah!');
+
+        return back();
     }
 }

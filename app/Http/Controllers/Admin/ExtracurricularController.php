@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Extracurricular;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ExtracurricularController extends Controller
 {
@@ -33,7 +34,9 @@ class ExtracurricularController extends Controller
         $validatedData['youtube_link'] = $request->youtube;
         Extracurricular::create($validatedData);
 
-        return redirect()->route('admin.ekskul.index')->with('success', 'Data ekskul berhasil ditambahkan!');
+        Alert::success('Berhasil!', 'Data ekskul berhasil ditambahkan!');
+
+        return redirect()->route('admin.ekskul.index');
     }
 
     public function update(Request $request, $id)
@@ -49,13 +52,17 @@ class ExtracurricularController extends Controller
         $validatedData['youtube_link'] = $request->youtube;
         $ekskul->update($validatedData);
 
-        return redirect()->route('admin.ekskul.index')->with('success', 'Data ekskul berhasil diubah!');
+        Alert::success('Berhasil!', 'Data ekskul berhasil diubah!');
+
+        return redirect()->route('admin.ekskul.index');
     }
 
     public function delete($id)
     {
         Extracurricular::find($id)->delete();
 
-        return redirect()->route('admin.ekskul.index')->with('success', 'Data ekskul berhasil dihapus!');
+        Alert::success('Berhasil!', 'Data ekskul berhasil dihapus!');
+
+        return redirect()->route('admin.ekskul.index');
     }
 }

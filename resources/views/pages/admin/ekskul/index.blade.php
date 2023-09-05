@@ -40,7 +40,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @include('components.alert')
                     <form
                         action="{{ !request('id') ? route('admin.ekskul.store') : route('admin.ekskul.update', $ekskul->id) }}"
                         method="POST">

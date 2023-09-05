@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NewsController extends Controller
 {
@@ -49,7 +50,9 @@ class NewsController extends Controller
 
         Post::create($validatedData);
 
-        return back()->with('success', 'Data berita berhasil ditambahkan!');
+        Alert::success('Berhasil!', 'Data berita berhasil ditambahkan!');
+
+        return back();
     }
 
     public function update(Request $request, $id)
@@ -80,7 +83,9 @@ class NewsController extends Controller
 
         $News->update($validatedData);
 
-        return redirect()->route('admin.news.index')->with('success', 'Data berita berhasil diubah!');
+        Alert::success('Berhasil!', 'Data berita berhasil diubah!');
+
+        return redirect()->route('admin.news.index');
     }
 
     public function delete($id)
@@ -96,6 +101,8 @@ class NewsController extends Controller
 
         $news->delete();
 
-        return back()->with('success', 'Data berita berhasil dihapus!');
+        Alert::success('Berhasil!', 'Data berita berhasil dihapus!');
+
+        return back();
     }
 }

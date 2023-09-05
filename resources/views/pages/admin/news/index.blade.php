@@ -7,7 +7,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @include('components.alert')
                     <form
                         action="{{ !request('id') ? route('admin.news.store') : route('admin.news.update', $editNews->id) }}"
                         enctype="multipart/form-data" method="POST">

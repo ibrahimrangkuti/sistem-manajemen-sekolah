@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LessonController extends Controller
 {
@@ -28,7 +29,9 @@ class LessonController extends Controller
 
         Lesson::create($validatedData);
 
-        return back()->with('success', 'Data mata pelajaran berhasil ditambahkan!');
+        Alert::success('Berhasil!', 'Data mata pelajaran berhasil ditambahkan!');
+
+        return back();
     }
 
     public function update(Request $request, $id)
@@ -39,13 +42,17 @@ class LessonController extends Controller
 
         Lesson::find($id)->update($validatedData);
 
-        return redirect()->route('admin.lesson.index')->with('success', 'Data mata pelajaran berhasil diubah!');
+        Alert::success('Berhasil!', 'Data mata pelajaran berhasil diubah!');
+
+        return redirect()->route('admin.lesson.index');
     }
 
     public function delete($id)
     {
         Lesson::find($id)->delete();
 
-        return back()->with('success', 'Data mata pelajaran berhasil dihapus!');
+        Alert::success('Berhasil!', 'Data mata pelajaran berhasil dihapus!');
+
+        return back();
     }
 }
