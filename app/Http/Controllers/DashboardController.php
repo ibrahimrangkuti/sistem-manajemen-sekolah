@@ -10,33 +10,52 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function __invoke()
     {
         if (Auth::user()->role === 'admin') {
-            return view('pages.admin.dashboard');
+            return $this->DashboardAdmin();
         } elseif (Auth::user()->role === 'siswa') {
-            // dd(Auth::user()->parent);
-            $currentDate = Carbon::now();
-            $mondaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Senin')->get();
-            $tuesdaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Selasa')->get();
-            $wednesdaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Rabu')->get();
-            $thursdaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Kamis')->get();
-            $fridaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Jumat')->get();
-            return view('pages.student.dashboard', compact('currentDate', 'mondaySchedules', 'tuesdaySchedules', 'wednesdaySchedules', 'thursdaySchedules', 'fridaySchedules'));
+            return $this->DashboardSiswa();
         } elseif (Auth::user()->role === 'guru') {
-            return view('pages.teacher.dashboard');
+            return $this->DashboardGuru();
         } elseif (Auth::user()->role === 'ortu') {
-            $todayPresence = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', date('Y-m-d'))->first();
-
-            // retrieve student attendance data with a vulnerability of 7 days
-            if (request()->has('sort')) {
-                $sortTime = '-' . request('sort') . ' days';
-                $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime($sortTime)))->get();
-            } else {
-                $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime('-7 days')))->get();
-            }
-
-            return view('pages.parent.dashboard', compact('todayPresence', 'studentPresences'));
+            return $this->DashboardOrtu();
         }
+    }
+
+    public function DashboardAdmin()
+    {
+        return view('pages.admin.dashboard');
+    }
+
+    public function DashboardSiswa()
+    {
+        $currentDate = Carbon::now();
+        $mondaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Senin')->get();
+        $tuesdaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Selasa')->get();
+        $wednesdaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Rabu')->get();
+        $thursdaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Kamis')->get();
+        $fridaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Jumat')->get();
+        return view('pages.student.dashboard', compact('currentDate', 'mondaySchedules', 'tuesdaySchedules', 'wednesdaySchedules', 'thursdaySchedules', 'fridaySchedules'));
+    }
+
+    public function DashboardGuru()
+    {
+        return view('pages.teacher.dashboard');
+    }
+
+    public function DashboardOrtu()
+    {
+        $todayPresence = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', date('Y-m-d'))->first();
+
+        // retrieve student attendance data with a vulnerability of 7 days
+        if (request()->has('sort')) {
+            $sortTime = '-' . request('sort') . ' days';
+            $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime($sortTime)))->get();
+        } else {
+            $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime('-7 days')))->get();
+        }
+
+        return view('pages.parent.dashboard', compact('todayPresence', 'studentPresences'));
     }
 }
