@@ -72,12 +72,25 @@ class StudentController extends Controller
         $validatedData = $request->validate([
             'nis' => ['numeric', 'min:16', 'unique:users,nis,' . $id],
             'name' => ['string'],
-            'email' => ['email', 'unique:users,email,' . $id],
-            'phone' => ['numeric'],
             'address' => ['string'],
             'place_of_birth' => ['string'],
             'date_of_birth' => ['date']
         ]);
+
+        // if ($request->has('email') || $request->has('phone')) {
+        //     $request->validate([
+        //         'email' => ['email', 'unique:users,email,' . $id],
+        //         'phone' => ['numeric'],
+        //     ]);
+        // }
+
+        // validate if email or phone is not null
+        if ($request->email !== null || $request->phone !== null) {
+            $request->validate([
+                'email' => ['email', 'unique:users,email,' . $id],
+                'phone' => ['numeric'],
+            ]);
+        }
 
         $validatedData['class_id'] = $request->class;
         $validatedData['gender'] = $request->gender;

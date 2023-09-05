@@ -15,7 +15,7 @@
                     </div>
                     <div class="table-responsive">
                         @if ($nowSchedule)
-                            <table class="table table-bordered" id="dataTable">
+                            <table class="table table-bordered">
                                 <tbody>
                                     <tr>
                                         <td>Mata Pelajaran</td>
@@ -37,6 +37,13 @@
                                         <td>Waktu Selesai</td>
                                         <td>{{ $nowSchedule->end_time }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Absen</td>
+                                        <td>
+                                            <a href="{{ route('teacher.schedule.absen', $nowSchedule->id) }}"
+                                                class="btn btn-primary btn-sm">Absen</a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         @else
@@ -52,7 +59,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover" id="dataTable">
                             <thead>
                                 <tr>
                                     <th>No</th>

@@ -174,6 +174,8 @@ Route::middleware('auth')->group(function () {
         // Jadwal Mengajar
         Route::prefix('schedule')->name('schedule.')->group(function () {
             Route::get('/', [TeacherScheduleController::class, 'index'])->name('index');
+            Route::get('/{id}/absen', [TeacherScheduleController::class, 'absen'])->name('absen');
+            Route::post('/{id}/absen', [TeacherScheduleController::class, 'storeAbsen'])->name('storeAbsen');
         });
     });
 
