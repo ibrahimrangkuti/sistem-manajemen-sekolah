@@ -38,8 +38,8 @@ class NewsController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('img/image'), $imageName);
-            $validatedData['image'] = 'img/image/' . $imageName;
+            $image->move(public_path('img/news_image'), $imageName);
+            $validatedData['image'] = 'img/news_image/' . $imageName;
         }
 
         $validatedData['user_id'] = Auth::user()->id;
@@ -69,7 +69,7 @@ class NewsController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('img/image'), $imageName);
+            $image->move(public_path('img/news_image'), $imageName);
 
             // hapus gambar lama
             if ($request->oldImage) {
@@ -78,7 +78,7 @@ class NewsController extends Controller
                     File::delete($oldImagePath);
                 }
             }
-            $validatedData['image'] = 'img/image/' . $imageName;
+            $validatedData['image'] = 'img/news_image/' . $imageName;
         }
 
         $news->update($validatedData);
