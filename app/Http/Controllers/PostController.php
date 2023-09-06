@@ -76,7 +76,7 @@ class PostController extends Controller
             $image->move(public_path('img/post'), $imageName);
 
             // hapus gambar lama
-            if (isset($request->oldImage)) {
+            if ($request->oldImage) {
                 $oldImagePath = public_path($request->oldImage);
                 if (File::exists($oldImagePath)) {
                     File::delete($oldImagePath);
