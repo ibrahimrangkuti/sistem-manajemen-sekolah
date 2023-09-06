@@ -20,7 +20,7 @@ class MessageController extends Controller
             $messages = Message::where('sender_id', Auth::user()->id)->orWhere('receiver_id', Auth::user()->id)->latest()->get();
         }
 
-        $receivers = User::where('is_active', '1')->get();
+        $receivers = User::where('is_active', 1)->orderBy('role', 'asc')->get();
 
         return view('pages.message.index', compact('messages', 'receivers'));
     }
