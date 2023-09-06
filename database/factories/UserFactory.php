@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Classes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,28 +18,35 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = \Faker\Factory::create('id_ID');
+
         $roles = ['guru', 'siswa'];
-        $randomRole = fake()->randomElement($roles);
+        $randomRole = $faker->randomElement($roles);
+
+        $name = fake()->unique()->name();
+
+        $classes = Classes::pluck('id');
+        $randomClass = $faker->randomElement($classes);
 
         $attributes =  [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $name,
+            'email' => str_replace("'", "", str_replace(' ', '_', Str::lower($name))) . '@gmail.com',
             'password' => bcrypt('123'),
-            'gender' => fake()->randomElement(['L', 'P']),
-            'phone' => '08' . fake()->unique()->numerify('##########'),
-            'address' => fake()->address(),
-            'place_of_birth' => fake()->city(),
+            'gender' => $faker->randomElement(['L', 'P']),
+            'phone' => '08' . $faker->unique()->numerify('##########'),
+            'address' => $faker->address(),
+            'place_of_birth' => $faker->city(),
             'role' => $randomRole,
             'is_active' => '1'
         ];
 
         if ($randomRole == 'guru') {
-            $attributes['nik'] = fake()->unique()->numerify('################');
-            $attributes['date_of_birth'] = fake()->dateTimeBetween('-50 years', '-25 years')->format('Y-m-d');
+            $attributes['nik'] = $faker->unique()->numerify('################');
+            $attributes['date_of_birth'] = $faker->dateTimeBetween('-50 years', '-25 years')->format('Y-m-d');
         } elseif ($randomRole == 'siswa') {
-            $attributes['class_id'] = rand(1, 2);
-            $attributes['nis'] = fake()->unique()->numerify('########');
-            $attributes['date_of_birth'] = fake()->dateTimeBetween('-18 years', '-15 years')->format('Y-m-d');
+            $attributes['class_id'] = $randomClass;
+            $attributes['nis'] = $faker->unique()->numerify('########');
+            $attributes['date_of_birth'] = $faker->dateTimeBetween('-18 years', '-15 years')->format('Y-m-d');
         }
 
         return $attributes;
