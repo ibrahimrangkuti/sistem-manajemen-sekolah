@@ -24,6 +24,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\MessageController;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +73,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('/parent-profile', [ProfileController::class, 'updateParentProfile'])->name('parent.profile.update');
     Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
+
+    // Message
+    Route::prefix('messages')->name('message.')->group(function () {
+        Route::get('/', [MessageController::class, 'index'])->name('index');
+        Route::post('/', [MessageController::class, 'store'])->name('store');
+        Route::get('/detail/{slug}', [MessageController::class, 'show'])->name('show');
+        Route::post('/reply/{slug}', [MessageController::class, 'reply'])->name('reply');
+    });
 
     // Admin
     Route::name('admin.')->middleware('role:admin')->group(function () {

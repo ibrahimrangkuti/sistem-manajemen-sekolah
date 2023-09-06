@@ -224,37 +224,30 @@
                         <h4>Kotak Pesan</h4>
                     </div>
                     <div class="card-content pb-4">
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('mazer/assets/images/faces/4.jpg') }}">
+                        @if ($messages->count() > 0)
+                            @foreach ($messages as $message)
+                                <a href="{{ route('message.show', $message->slug) }}">
+                                    <div class="recent-message d-flex px-4 py-3">
+                                        <div class="avatar avatar-lg">
+                                            <img src="{{ asset('mazer/assets/images/faces/4.jpg') }}">
+                                        </div>
+                                        <div class="name ms-4">
+                                            <h5 class="mb-1">{{ Str::limit($message->sender->name, 10) }}</h5>
+                                            <h6 class="text-muted mb-0">
+                                                {{ $message->created_at->diffForHumans() }}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+                            <div class="px-4">
+                                <a href="{{ route('message.index') }}"
+                                    class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Pesan
+                                    lainnya</a>
                             </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Hank Schrader</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('mazer/assets/images/faces/5.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Dean Winchester</h5>
-                                <h6 class="text-muted mb-0">@imdean</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('mazer/assets/images/faces/1.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">John Dodol</h5>
-                                <h6 class="text-muted mb-0">@dodoljohn</h6>
-                            </div>
-                        </div>
-                        <div class="px-4">
-                            <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Pesan
-                                lainnya</button>
-                        </div>
+                        @else
+                            <span class="px-4">Tidak ada pesan</span>
+                        @endif
                     </div>
                 </div>
             </div>

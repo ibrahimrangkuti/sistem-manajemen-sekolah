@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\Schedule;
 use App\Models\StudentPresence;
 use Carbon\Carbon;
@@ -25,7 +26,9 @@ class DashboardController extends Controller
 
     public function DashboardAdmin()
     {
-        return view('pages.admin.dashboard');
+        $messages = Message::where('receiver_id', Auth::user()->id)->take(5)->latest()->get();
+
+        return view('pages.admin.dashboard', compact('messages'));
     }
 
     public function DashboardSiswa()

@@ -9,6 +9,8 @@ class Message extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
@@ -17,5 +19,10 @@ class Message extends Model
     public function receiver()
     {
         return $this->belongsTo(User::class, 'receiver_id');
+    }
+
+    public function sub_messages()
+    {
+        return $this->hasMany(SubMessage::class);
     }
 }

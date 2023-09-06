@@ -12,3 +12,8 @@ function dayName($date)
         return $dayName[$day];
     }
 }
+
+function formattedDate($date)
+{
+    return dayName($date) . ', ' . $date->format('d/m/Y');
+}
