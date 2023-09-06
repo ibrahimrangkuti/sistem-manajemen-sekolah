@@ -3,6 +3,12 @@
 @section('content')
     <section id="forum" class="forum">
         <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Forum</li>
+                </ol>
+            </nav>
             <h1>Forum Diskusi</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae iusto officiis consectetur, sequi ad
                 tenetur vel commodi voluptate voluptatem sint consequuntur praesentium esse! Libero fugit eum neque
@@ -32,6 +38,8 @@
                                 <div class="card-body">
                                     <img src="{{ $post->user->photo != null ? asset($post->user->photo) : 'https://ui-avatars.com/api/?name=' . $post->user->name }}"
                                         alt="" class="rounded-circle mb-3" width="70" height="70">
+                                    <br>
+                                    <span class="badge bg-success mb-3">{{ $post->category->name }}</span>
                                     <h5 class="card-title text-truncate">{{ $post->title }}</h5>
                                     <h6 class="card-subtitle mb-2 text-body-secondary">{{ $post->user->name }}</h6>
                                     <p class="card-text text-secondary">{!! Str::limit($post->body) !!}</p>

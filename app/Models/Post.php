@@ -15,7 +15,7 @@ class Post extends Model
 
     public function scopeFilter($query)
     {
-        if (request('keyword')) {
+        if (request('keyword') !== null) {
             return $query->where('title', 'like', '%' . request('keyword') . '%')
                 ->orWhere('body', 'like', '%' . request('keyword') . '%');
         }

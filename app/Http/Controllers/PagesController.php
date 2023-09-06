@@ -35,12 +35,15 @@ class PagesController extends Controller
     // Berita
     public function news()
     {
-        $news = Post::whereType('news')->latest()->get();
-        if (request('search')) {
-            $news = Post::whereType('news')->where('title', 'like', '%' . request('search') . '%')->orWhere('body', 'like', '%' . request('search') . '%')->get();
+        $news = Post::filter()->whereType('news')->latest()->paginate(18);
+        $categories = Category::where('type', 'news')->orWhere('type', 'general')->get();
+
+        if (request('category')) {
+            $category = Category::where('slug', request('category'))->first();
+            $news = Post::filter()->whereType('news')->where('category_id', $category->id)->paginate(18);
         }
 
-        return view('pages.news', compact('news'));
+        return view('pages.news', compact('news', 'categories'));
     }
 
     // Forum
@@ -49,8 +52,9 @@ class PagesController extends Controller
         $categories = Category::where('type', 'post')->orWhere('type', 'general')->get();
         $posts = Post::filter()->whereType('post')->whereStatus('2')->paginate(20);
 
-        if (request()->has('category')) {
-            $posts = Post::filter()->whereType('post')->whereStatus('2')->where('category_id', request('category'))->paginate(20);
+        if (request('category')) {
+            $category = Category::where('slug', request('category'))->first();
+            $posts = Post::filter()->whereType('post')->whereStatus('2')->where('category_id', $category->id)->paginate(20);
         }
 
         return view('pages.forum', compact('categories', 'posts'));
