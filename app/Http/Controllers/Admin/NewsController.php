@@ -57,7 +57,7 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $News = Post::find($id);
+        $news = Post::find($id);
 
         $validatedData = $request->validate([
             'title' => ['required'],
@@ -72,7 +72,7 @@ class NewsController extends Controller
             $image->move(public_path('img/image'), $imageName);
 
             // hapus gambar lama
-            if (isset($request->oldImage)) {
+            if ($request->oldImage) {
                 $oldImagePath = public_path($request->oldImage);
                 if (File::exists($oldImagePath)) {
                     File::delete($oldImagePath);
@@ -81,7 +81,7 @@ class NewsController extends Controller
             $validatedData['image'] = 'img/image/' . $imageName;
         }
 
-        $News->update($validatedData);
+        $news->update($validatedData);
 
         Alert::success('Berhasil!', 'Data berita berhasil diubah!');
 
