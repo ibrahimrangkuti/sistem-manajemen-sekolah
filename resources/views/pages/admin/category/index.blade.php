@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="type" class="form-label">Tipe</label>
-                                <select name="type" id="type"
+                                <select name="type" id="type" data-search="true"
                                     class="form-control @error('type') is-invalid @enderror">
                                     @if (request('id'))
                                         <option hidden value="{{ $category->type }}">
@@ -121,3 +121,4 @@
         </div>
     </div>
 @endsection
+
