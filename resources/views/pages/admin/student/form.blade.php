@@ -48,7 +48,9 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="class" class="form-label">Kelas</label>
-                                    <select name="class" id="class" class="form-control">
+                                    <select name="class" id="class" class="form-select"
+                                        data-placeholder="Pilih Kelas">
+                                        <option></option>
                                         @foreach ($classes as $class)
                                             <option value="{{ $class->id }}"
                                                 {{ $student ? ($student->class_id === $class->id ? 'selected' : '') : null }}>
@@ -69,7 +71,9 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="gender" class="form-label">Jenis Kelamin</label>
-                                    <select name="gender" id="gender" class="form-control">
+                                    <select name="gender" id="gender" class="form-select"
+                                        data-placeholder="Pilih Jenis Kelamin">
+                                        <option></option>
                                         <option value="L"
                                             {{ $student ? ($student->gender === 'L' ? 'selected' : '') : null }}>L</option>
                                         <option value="P"
@@ -134,7 +138,9 @@
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="status" class="form-label">Status</label>
-                                    <select name="status" id="status" class="form-control">
+                                    <select name="status" id="status" class="form-select"
+                                        data-placeholder="Pilih Status">
+                                        <option></option>
                                         <option value="1">Aktif</option>
                                         <option value="0">Tidak Aktif</option>
                                     </select>

@@ -15,7 +15,8 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="lesson" class="form-label">Mata Pelajaran</label>
-                                    <select name="lesson" id="lesson" class="form-control">
+                                    <select name="lesson" id="lesson" class="form-select" data-placeholder="Pilih Mata Pelajaran">
+                                        <option></option>
                                         @foreach ($lessons as $lesson)
                                             <option value="{{ $lesson->id }}">{{ $lesson->name }}</option>
                                         @endforeach
@@ -25,7 +26,8 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="teacher" class="form-label">Guru</label>
-                                    <select name="teacher" id="teacher" class="form-control">
+                                    <select name="teacher" id="teacher" class="form-select" data-placeholder="Pilih Guru">
+                                        <option></option>
                                         @foreach ($teachers as $teacher)
                                             <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                                         @endforeach
@@ -35,7 +37,8 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="class" class="form-label">Kelas</label>
-                                    <select name="class" id="class" class="form-control">
+                                    <select name="class" id="class" class="form-select" data-placeholder="Pilih Kelas">
+                                        <option></option>
                                         @foreach ($classes as $class)
                                             <option value="{{ $class->id }}">{{ $class->name }}</option>
                                         @endforeach
@@ -45,7 +48,8 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="day" class="form-label">Hari</label>
-                                    <select name="day" id="day" class="form-control">
+                                    <select name="day" id="day" class="form-select" data-placeholder="Pilih Hari">
+                                        <option></option>
                                         <option value="Senin">Senin</option>
                                         <option value="Selasa">Selasa</option>
                                         <option value="Rabu">Rabu</option>

@@ -35,8 +35,9 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="teacher" class="form-label">Kepala Jurusan</label>
-                                    <select name="teacher" id="teacher" class="form-control">
-                                        <option hidden>Pilih Kepala Jurusan</option>
+                                    <select name="teacher" id="teacher" class="form-select"
+                                        data-placeholder="Pilih Kepala Jurusan">
+                                        <option></option>
                                         @foreach ($teachers as $teacher)
                                             <option value="{{ $teacher->id }}"
                                                 {{ $department ? ($teacher->id === $department->teacher_id ? 'selected' : '') : null }}>
@@ -60,8 +61,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    {{-- <a href="{{ route('admin.department.deleteAll') }}" onclick="return confirm('Yakin bro mau dihapus?')"
-                        class="btn btn-danger btn-sm mb-3">Hapus Semua</a> --}}
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="dataTable">
                             <thead>

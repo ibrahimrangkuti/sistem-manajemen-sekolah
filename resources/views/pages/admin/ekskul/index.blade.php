@@ -48,7 +48,8 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="teacher" class="form-label">Pembina</label>
-                                    <select name="teacher" id="teacher" class="form-control">
+                                    <select name="teacher" id="teacher" class="form-select" data-placeholder="Pilih Pembina">
+                                        <option></option>
                                         @foreach ($teachers as $teacher)
                                             <option value="{{ $teacher->id }}"
                                                 {{ $ekskul ? ($teacher->id == $ekskul->user_id ? 'selected' : '') : null }}>

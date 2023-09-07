@@ -15,7 +15,9 @@
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="teacher" class="form-label">Wali Kelas</label>
-                                    <select name="teacher" id="teacher" class="form-control">
+                                    <select name="teacher" id="teacher" class="form-select"
+                                        data-placeholder="Pilih Wali Kelas">
+                                        <option></option>
                                         @foreach ($teachers as $teacher)
                                             @if (!\App\Models\Department::where('user_id', $teacher->id)->first())
                                                 <option value="{{ $teacher->id }}"
@@ -29,7 +31,9 @@
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="department" class="form-label">Jurusan</label>
-                                    <select name="department" id="department" class="form-control">
+                                    <select name="department" id="department" class="form-select"
+                                        data-placeholder="Pilih Jurusan">
+                                        <option></option>
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}"
                                                 {{ $department->id === $class->department_id ? 'selected' : '' }}>
@@ -52,11 +56,11 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="level" class="form-label">Tingkat</label>
-                                    <select name="level" id="level" class="form-control">
-                                        <option value="{{ $class->level }}" hidden>{{ $class->level }}</option>
-                                        <option value="X">X</option>
-                                        <option value="XI">XI</option>
-                                        <option value="XII">XII</option>
+                                    <select name="level" id="level" class="form-select"
+                                        data-placeholder="Pilih Tingkat">
+                                        <option value="X" {{ $class->level == 'X' ? 'selected' : '' }}>X</option>
+                                        <option value="XI" {{ $class->level == 'XI' ? 'selected' : '' }}>XI</option>
+                                        <option value="XII" {{ $class->level == 'XII' ? 'selected' : '' }}>XII</option>
                                     </select>
                                 </div>
                             </div>

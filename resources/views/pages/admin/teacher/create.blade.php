@@ -49,7 +49,9 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="gender" class="form-label">Jenis Kelamin</label>
-                                    <select name="gender" id="gender" class="form-control">
+                                    <select name="gender" id="gender" class="form-select"
+                                        data-placeholder="Pilih Jenis Kelamin">
+                                        <option></option>
                                         <option value="L">L</option>
                                         <option value="P">P</option>
                                     </select>
@@ -109,7 +111,9 @@
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="status" class="form-label">Status</label>
-                                    <select name="status" id="status" class="form-control">
+                                    <select name="status" id="status" class="form-select"
+                                        data-placeholder="Pilih Status">
+                                        <option></option>
                                         <option value="1">Aktif</option>
                                         <option value="0">Tidak Aktif</option>
                                     </select>

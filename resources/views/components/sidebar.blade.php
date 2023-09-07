@@ -147,13 +147,14 @@
                         </a>
                     </li>
                 @elseif (Auth::user()->role !== 'ortu')
-                    <li class="sidebar-item">
-                        <a href="{{ route('posts.index') }}" class='sidebar-link'>
-                            <ion-icon name="bookmarks"></ion-icon>
-                            <span>Postingan</span>
-                        </a>
-                    </li>
                 @endif
+
+                <li class="sidebar-item">
+                    <a href="{{ route('posts.index') }}" class='sidebar-link'>
+                        <ion-icon name="bookmarks"></ion-icon>
+                        <span>Postingan</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item">
                     <a href="{{ route('message.index') }}" class='sidebar-link'>
