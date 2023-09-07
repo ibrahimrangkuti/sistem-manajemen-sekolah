@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Models\Classes;
 use App\Models\Schedule;
-use App\Models\StudentPresence;
+use App\Models\SchedulePresence;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +66,7 @@ class ScheduleController extends Controller
         $class = Classes::find($schedule->class_id);
         $students = User::where('role', 'siswa')->where('class_id', $class->id)->get();
         // $statusPresences = StudentPresence::where('schedule_id', $id)->where('presence_date', date('Y-m-d'))->pluck('status');
-        $studentPresence = StudentPresence::whereDate('presence_date', date('Y-m-d'))->pluck('status')->first();
+        $studentPresence = SchedulePresence::whereDate('presence_date', date('Y-m-d'))->pluck('status')->first();
         // dd($statusPresences);
 
         return view('pages.teacher.schedule.absen', compact('students', 'schedule', 'status'));
@@ -77,7 +77,7 @@ class ScheduleController extends Controller
         foreach ($request->absen as $userId => $status) {
 
             // store data to database or update if already exist using updateOrCreate
-            StudentPresence::updateOrCreate(
+            SchedulePresence::updateOrCreate(
                 [
                     'class_id' => $request->class_id,
                     'user_id' => $userId,

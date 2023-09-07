@@ -20,17 +20,17 @@ class UserFactory extends Factory
     {
         $faker = \Faker\Factory::create('id_ID');
 
-        $roles = ['guru', 'siswa'];
+        $roles = ['guru'];
         $randomRole = $faker->randomElement($roles);
 
-        $name = fake()->unique()->name();
+        $name = $faker->unique()->name();
 
         $classes = Classes::pluck('id');
         $randomClass = $faker->randomElement($classes);
 
         $attributes =  [
             'name' => $name,
-            'email' => str_replace("'", "", str_replace(' ', '_', Str::lower($name))) . '@gmail.com',
+            'email' => explode(' ', Str::lower($name))[0] . $faker->randomNumber() . '@gmail.com',
             'password' => bcrypt('123'),
             'gender' => $faker->randomElement(['L', 'P']),
             'phone' => '08' . $faker->unique()->numerify('##########'),

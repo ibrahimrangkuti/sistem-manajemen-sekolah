@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use App\Models\Schedule;
+use App\Models\SchedulePresence;
 use App\Models\StudentPresence;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -49,14 +50,14 @@ class DashboardController extends Controller
 
     public function DashboardOrtu()
     {
-        $todayPresence = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', date('Y-m-d'))->first();
+        $todayPresence = SchedulePresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', date('Y-m-d'))->first();
 
         // retrieve student attendance data with a vulnerability of 7 days
         if (request()->has('sort')) {
             $sortTime = '-' . request('sort') . ' days';
-            $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime($sortTime)))->get();
+            $studentPresences = SchedulePresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime($sortTime)))->get();
         } else {
-            $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime('-7 days')))->get();
+            $studentPresences = SchedulePresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime('-7 days')))->get();
         }
 
         return view('pages.parent.dashboard', compact('todayPresence', 'studentPresences'));

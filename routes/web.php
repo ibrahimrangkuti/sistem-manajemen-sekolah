@@ -121,6 +121,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{id}', [AdminTeacherController::class, 'edit'])->name('edit');
             Route::post('/edit/{id}', [AdminTeacherController::class, 'update'])->name('update');
             Route::delete('/delete/{id}', [AdminTeacherController::class, 'delete'])->name('delete');
+            Route::post('/import', [AdminTeacherController::class, 'import'])->name('import');
         });
 
         // Jurusan

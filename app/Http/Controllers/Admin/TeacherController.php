@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\TeachersImport;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\Classes;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
@@ -33,8 +35,6 @@ class TeacherController extends Controller
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:3'],
             'gender' => ['required'],
-            // 'phone' => ['numeric'],
-            // 'address' => ['string'],
             'place_of_birth' => ['required', 'string'],
             'date_of_birth' => ['required', 'date']
         ]);
@@ -100,6 +100,14 @@ class TeacherController extends Controller
         $user->delete();
 
         Alert::success('Berhasil!', 'Data guru berhasil dihapus!');
+        return back();
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new TeachersImport, $request->file('file'));
+
+        Alert::success('Berhasil!', 'Data guru berhasil diimport!');
         return back();
     }
 }
