@@ -13,7 +13,8 @@
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="receiver" class="form-label">Penerima</label>
-                                    <select name="receiver" id="receiver" class="form-control">
+                                    <select name="receiver" id="receiver" class="form-select" data-placeholder="Pilih penerima">
+                                        <option></option>
                                         @foreach ($receivers as $receiver)
                                             @if ($receiver->id != Auth::user()->id)
                                                 <option value="{{ $receiver->id }}">{{ $receiver->name }}

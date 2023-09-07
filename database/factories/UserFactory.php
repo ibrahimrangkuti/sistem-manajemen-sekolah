@@ -20,7 +20,7 @@ class UserFactory extends Factory
     {
         $faker = \Faker\Factory::create('id_ID');
 
-        $roles = ['guru'];
+        $roles = ['siswa'];
         $randomRole = $faker->randomElement($roles);
 
         $name = $faker->unique()->name();
