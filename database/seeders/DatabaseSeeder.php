@@ -18,13 +18,34 @@ class DatabaseSeeder extends Seeder
         // DB::table('users')->where('role', 'admin')->where('name', '!=', 'Admin')->delete();
         // \App\Models\User::factory(100)->create();
 
-        \App\Models\User::factory(100)->create();
+        // \App\Models\User::factory(100)->create();
 
+        \App\Models\User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123'),
+            'gender' => 'L',
+            'role' => 'admin'
+        ]);
         // \App\Models\User::create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@gmail.com',
+        //     'name' => 'Admin Rifki',
+        //     'email' => 'rifki@gmail.com',
         //     'password' => bcrypt('123'),
         //     'gender' => 'L',
+        //     'role' => 'admin'
+        // ]);
+        // \App\Models\User::create([
+        //     'name' => 'Admin Lala',
+        //     'email' => 'lala@gmail.com',
+        //     'password' => bcrypt('123'),
+        //     'gender' => 'P',
+        //     'role' => 'admin'
+        // ]);
+        // \App\Models\User::create([
+        //     'name' => 'Admin Anggi',
+        //     'email' => 'anggi@gmail.com',
+        //     'password' => bcrypt('123'),
+        //     'gender' => 'P',
         //     'role' => 'admin'
         // ]);
 

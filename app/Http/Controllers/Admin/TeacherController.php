@@ -29,24 +29,25 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
+        $faker = \Faker\Factory::create('id_ID');
+
         $validatedData = $request->validate([
             'nik' => ['required', 'numeric', 'min:16', 'unique:users,nik'],
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:3'],
             'gender' => ['required'],
-            'place_of_birth' => ['required', 'string'],
-            'date_of_birth' => ['required', 'date']
         ]);
 
-        $validatedData['phone'] = $request->phone;
-        $validatedData['address'] = $request->address;
+        $validatedData['place_of_birth'] = $faker->city;
+        $validatedData['date_of_birth'] = $faker->dateTimeBetween('-50 years', '-25 years')->format('Y-m-d');
+        $validatedData['phone'] = '08' . $faker->numerify('##########');
+        $validatedData['address'] = $faker->address();
         $validatedData['role'] = 'guru';
         $validatedData['password'] = bcrypt($request->password);
         User::create($validatedData);
 
         Alert::success('Berhasil!', 'Data guru berhasil ditambahkan!');
-        return redirect()->route('admin.teacher.index');
+        return redirect()->route('admin.teacher.create');
     }
 
     public function edit($id)
