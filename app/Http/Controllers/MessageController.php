@@ -46,7 +46,7 @@ class MessageController extends Controller
     {
         $message = Message::where('slug', $slug)->first();
 
-        if ($message->status == 'unread' && Auth::user()->id != $message->sender_id) {
+        if ($message->status == 'unread' && Auth::user()->id == $message->receiver_id) {
             $message->update(['status' => 'read']);
         }
 
