@@ -2,8 +2,6 @@
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
-                {{-- <a href="index.html"><img src="{{ asset('assets/img/logo-smk.png') }}" width="70"
-                        height="70"></a> --}}
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>

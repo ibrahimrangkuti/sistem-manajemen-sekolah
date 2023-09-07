@@ -41,7 +41,7 @@
             color: #fff;
         }
 
-        .select2-container .select2-selection--single {
+        /* .select2-container .select2-selection--single {
             display: block;
             width: 100%;
             height: 38px;
@@ -58,7 +58,7 @@
             appearance: none;
             border-radius: 0.25rem;
             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
+        } */
     </style>
 
 </head>
