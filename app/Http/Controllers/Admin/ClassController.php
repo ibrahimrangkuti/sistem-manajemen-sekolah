@@ -5,20 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Classes;
 use App\Models\Department;
-use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ClassController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $classes = Classes::with('teacher')->latest()->get();
+        $class = [];
+        if ($request->id) {
+            $class = Classes::find($request->id);
+        }
+
+        $classes = Classes::latest()->get();
+        $teachers = User::where('role', 'guru')->get();
+        $departments = Department::all();
 
         confirmDelete('Hapus Kelas', 'Apakah anda yakin ingin menghapus data?');
 
-        return view('pages.admin.class.index', compact('classes'));
+        return view('pages.admin.class.index', compact('classes', 'teachers', 'departments', 'class'));
     }
 
     public function detail($id)
@@ -31,19 +37,25 @@ class ClassController extends Controller
         return view('pages.admin.class.detail', compact('class', 'students', 'maleCount', 'femaleCount'));
     }
 
-    public function create()
-    {
-        $teachers = User::where('role', 'guru')->get();
-        $departments = Department::all();
+    // public function create()
+    // {
+    //     $teachers = User::where('role', 'guru')->get();
+    //     $departments = Department::all();
 
-        return view('pages.admin.class.create', compact('teachers', 'departments'));
-    }
+    //     return view('pages.admin.class.create', compact('teachers', 'departments'));
+    // }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'unique:classes,name'],
         ]);
+
+        $cekWalas = Classes::where('user_id', $request->teacher)->first();
+        if ($cekWalas) {
+            Alert::error('Gagal!', 'Tidak bisa memilih guru tersebut!');
+            return back();
+        }
 
         $validatedData['department_id'] = $request->department;
         $validatedData['user_id'] = $request->teacher;

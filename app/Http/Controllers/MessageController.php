@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use App\Models\Message;
 use App\Models\SubMessage;
 use App\Models\User;
@@ -47,8 +48,8 @@ class MessageController extends Controller
         $message = Message::where('slug', $slug)->first();
 
         if ($message->status == 'unread' && Auth::user()->id == $message->receiver_id) {
-            $message->update(['status' => 'read']);
-        }
+            $message->update(['status' => 'read']);{{  }}
+        }{{  }}
 
         $replies = SubMessage::where('message_id', $message->id)->get();
 

@@ -135,15 +135,9 @@
                     </li>
                 @elseif(Auth::user()->role === 'siswa')
                     <li class="sidebar-item">
-                        <a href="" class='sidebar-link'>
+                        <a href="{{ route('student.myclass.index') }}" class='sidebar-link'>
                             <ion-icon name="easel"></ion-icon>
                             <span>Kelas Saya</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="" class='sidebar-link'>
-                            <ion-icon name="finger-print"></ion-icon>
-                            <span>Absensi</span>
                         </a>
                     </li>
                 @elseif (Auth::user()->role !== 'ortu')

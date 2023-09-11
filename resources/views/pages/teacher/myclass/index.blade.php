@@ -13,27 +13,27 @@
                         <tbody>
                             <tr>
                                 <td>Kelas</td>
-                                <td>{{ $class->name }}</td>
+                                <td class="col-8">{{ $class->name }}</td>
                             </tr>
                             <tr>
                                 <td>Tingkat</td>
-                                <td>{{ $class->level }}</td>
+                                <td class="col-8">{{ $class->level }}</td>
                             </tr>
                             <tr>
                                 <td>Wali Kelas</td>
-                                <td>{{ $class->teacher->name }}</td>
+                                <td class="col-8">{{ $class->teacher->name }}</td>
                             </tr>
                             <tr>
                                 <td>Laki - Laki</td>
-                                <td>{{ $maleCount }} orang</td>
+                                <td class="col-8">{{ $maleCount }} orang</td>
                             </tr>
                             <tr>
                                 <td>Perempuan</td>
-                                <td>{{ $femaleCount }} orang</td>
+                                <td class="col-8">{{ $femaleCount }} orang</td>
                             </tr>
-                            <tr>
-                                <td class="fw-bold">Total Murid</td>
-                                <td class="fw-bold">{{ $students->count() }} orang</td>
+                            <tr class="fw-bold">
+                                <td>Total Murid</td>
+                                <td class="col-8">{{ $students->count() }} orang</td>
                             </tr>
                         </tbody>
                     </table>
@@ -56,8 +56,11 @@
                 <div class="card-body">
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
                         <h1 class="card-title">Anggota Kelas</h1>
-                        <a href="{{ route('teacher.myclass.presenceHistory') }}" class="btn btn-outline-primary">Riwayat
-                            Kehadiran</a>
+                        <div>
+                            <a href="{{ route('teacher.myclass.presence') }}" class="btn btn-success">Absensi</a>
+                            <a href="{{ route('teacher.myclass.presenceHistory') }}" class="btn btn-outline-primary">Riwayat
+                                Kehadiran</a>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="dataTable">

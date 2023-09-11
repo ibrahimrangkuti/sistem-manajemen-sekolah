@@ -17,7 +17,9 @@ class DashboardController extends Controller
         if (Auth::user()->role === 'admin') {
             return $this->DashboardAdmin();
         } elseif (Auth::user()->role === 'siswa') {
-            return $this->DashboardSiswa();
+            return $this->DashboardSiswa(); { {
+                }
+            }
         } elseif (Auth::user()->role === 'guru') {
             return $this->DashboardGuru();
         } elseif (Auth::user()->role === 'ortu') {
@@ -40,7 +42,10 @@ class DashboardController extends Controller
         $wednesdaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Rabu')->get();
         $thursdaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Kamis')->get();
         $fridaySchedules = Schedule::where('class_id', Auth::user()->class_id)->where('day', 'Jumat')->get();
-        return view('pages.student.dashboard', compact('currentDate', 'mondaySchedules', 'tuesdaySchedules', 'wednesdaySchedules', 'thursdaySchedules', 'fridaySchedules'));
+
+        $todayPresence = StudentPresence::where('user_id', Auth::user()->id)->whereDate('presence_date', date('Y-m-d'))->first();
+
+        return view('pages.student.dashboard', compact('currentDate', 'mondaySchedules', 'tuesdaySchedules', 'wednesdaySchedules', 'thursdaySchedules', 'fridaySchedules', 'todayPresence'));
     }
 
     public function DashboardGuru()
@@ -50,14 +55,14 @@ class DashboardController extends Controller
 
     public function DashboardOrtu()
     {
-        $todayPresence = SchedulePresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', date('Y-m-d'))->first();
+        $todayPresence = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', date('Y-m-d'))->first();
 
         // retrieve student attendance data with a vulnerability of 7 days
         if (request()->has('sort')) {
             $sortTime = '-' . request('sort') . ' days';
-            $studentPresences = SchedulePresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime($sortTime)))->get();
+            $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime($sortTime)))->get();
         } else {
-            $studentPresences = SchedulePresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime('-7 days')))->get();
+            $studentPresences = StudentPresence::where('user_id', Auth::user()->student->id)->whereDate('presence_date', '>=', date('Y-m-d', strtotime('-7 days')))->get();
         }
 
         return view('pages.parent.dashboard', compact('todayPresence', 'studentPresences'));

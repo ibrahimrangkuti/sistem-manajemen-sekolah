@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
 
         // \App\Models\User::factory(100)->create();
 
-        \App\Models\User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('123'),
-            'gender' => 'L',
-            'role' => 'admin'
-        ]);
+        // \App\Models\User::create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => bcrypt('123'),
+        //     'gender' => 'L',
+        //     'role' => 'admin'
+        // ]);
         // \App\Models\User::create([
         //     'name' => 'Admin Rifki',
         //     'email' => 'rifki@gmail.com',
@@ -48,6 +48,13 @@ class DatabaseSeeder extends Seeder
         //     'gender' => 'P',
         //     'role' => 'admin'
         // ]);
+        \App\Models\User::create([
+            'name' => 'Admin Luqman',
+            'email' => 'luqman@gmail.com',
+            'password' => bcrypt('123'),
+            'gender' => 'L',
+            'role' => 'admin'
+        ]);
 
         // \App\Models\Setting::create([
         //     'school_name' => 'SMKN 5 Kab. Tangerang',

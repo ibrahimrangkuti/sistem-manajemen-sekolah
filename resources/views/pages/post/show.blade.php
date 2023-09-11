@@ -33,57 +33,74 @@
                             <div class="col-md-12">
                                 <h5>Komentar</h5>
                                 <div class="row">
-                                    <form action="{{ route('forum.add-comentar', $post->slug) }}" method="POST">
+                                    <form action="{{ route('posts.add-comment', $post->id) }}" method="POST">
                                         @csrf
                                         <textarea name="body" id="body" cols="30" rows="0" class="form-control mt-2"
                                             placeholder="Tulis komentar kamu di sini..."></textarea>
                                         <button type="submit" class="btn btn-success btn-sm float-end mt-3">Kirim</button>
                                     </form>
                                 </div>
-                                <div class="d-flex gap-3 mt-4">
-                                    <div>
-                                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-                                            class="rounded-circle object-fit-cover" width="50" height="50">
-                                    </div>
-                                    <div>
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="fw-semibold">Nama</h6>
-                                            <span class="text-muted">2023-08-24</span>
+                                @foreach ($comments as $comment)
+                                    <div class="d-flex gap-3 mt-4">
+                                        <div>
+                                            <img src="{{ $comment->user->photo ? $comment->user->photo : 'https://ui-avatars.com/api/?name=' . $comment->user->name }}"
+                                                class="rounded-circle object-fit-cover" width="50" height="50">
                                         </div>
-                                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque eum
-                                            repudiandae
-                                            saepe. Magni, incidunt. Rerum laborum eum accusantium assumenda pariatur.
-                                        </p>
-                                        <div class="d-flex gap-3 mt-4">
-                                            <div>
-                                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-                                                    class="rounded-circle object-fit-cover" width="50" height="50">
+                                        <div class="w-100">
+                                            <div class="d-flex gap-2">
+                                                <h6 class="fw-semibold">{{ $comment->user->name }}</h6>
+                                                <span class="text-muted">{{ $comment->created_at->format('d-m-Y') }}</span>
                                             </div>
-                                            <div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h6 class="fw-semibold">Nama</h6>
-                                                    <span class="text-muted">2023-08-24</span>
+                                            <p>{{ $comment->body }}</p>
+                                            <a href="javascript:void(0)" class="reply-comment">Balas</a>
+                                            <form action="{{ route('posts.add-subcomment', $comment->id) }}" method="POST"
+                                                style="display: none" class="replyForm">
+                                                @csrf
+                                                <div class="form-group mt-2">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" name="body" class="form-control"
+                                                            placeholder="Tulis komentar kamu di sini..." />
+                                                        <button class="btn btn-success btn-sm" type="submit"
+                                                            id="button-addon2">Kirim</button>
+                                                    </div>
                                                 </div>
-                                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque eum
-                                                    repudiandae
-                                                    saepe. Magni, incidunt. Rerum laborum eum accusantium assumenda
-                                                    pariatur.
-                                                </p>
-                                            </div>
+                                            </form>
+                                            @foreach ($comment->sub_comments as $sub_comment)
+                                                <div class="d-flex gap-3 mt-4">
+                                                    <div>
+                                                        <img src="{{ $sub_comment->user->photo ? $sub_comment->user->photo : 'https://ui-avatars.com/api/?name=' . $sub_comment->user->name }}"
+                                                            class="rounded-circle object-fit-cover" width="50"
+                                                            height="50">
+                                                    </div>
+                                                    <div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <h6 class="fw-semibold">{{ $sub_comment->user->name }}</h6>
+                                                            <span
+                                                                class="text-muted">{{ $sub_comment->created_at->format('d-m-Y') }}</span>
+                                                        </div>
+                                                        <p>{{ $sub_comment->body }}</p>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('.reply-comment').click(function(e) {
+                e.preventDefault();
+                $(this).next('.replyForm').slideToggle();
+            });
+        });
+    </script>
+@endpush

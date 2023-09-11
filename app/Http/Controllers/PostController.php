@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -130,5 +131,28 @@ class PostController extends Controller
         Alert::success('Berhasil!', 'Data Postingan berhasil dihapus!');
 
         return back();
+    }
+
+    public function addComment(Post $post)
+    {
+        $validatedData = request()->validate([
+            'body' => ['required', 'min:3']
+        ]);
+
+        $post->comments()->create([
+            'user_id' => Auth::user()->id,
+            'body' => $validatedData['body']
+        ]);
+
+        Alert::success('Berhasil!', 'Komentar berhasil ditambahkan!');
+
+        return back();
+    }
+
+    public function addSubComment($comment_id)
+    {
+        $validatedData = request()->validate([
+            'body' => ['required', 'min:3']
+        ]);
     }
 }

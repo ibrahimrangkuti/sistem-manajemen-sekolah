@@ -35,7 +35,16 @@
                                         <td>{{ $schedule->start_time }}</td>
                                         <td>{{ $schedule->end_time }}</td>
                                         <td>
-                                            <a href="">Hapus</a>
+                                            <div class="d-flex gap-2">
+                                                <a href="{{ route('admin.schedule.edit', $schedule->id) }}"
+                                                    class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('admin.schedule.delete', $schedule->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

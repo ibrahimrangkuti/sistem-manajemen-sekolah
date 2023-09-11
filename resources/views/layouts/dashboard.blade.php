@@ -37,25 +37,6 @@
         li.active ion-icon {
             color: #fff;
         }
-
-        /* .select2-container .select2-selection--single {
-            display: block;
-            width: 100%;
-            height: 38px;
-            padding: 0.250rem 0.75rem;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #607080;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #dce7f1;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border-radius: 0.25rem;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        } */
     </style>
 
 </head>
@@ -114,13 +95,6 @@
                                         Ganti Password
                                     </button>
                                     @include('components.modals.change-password')
-
-                                    {{-- Absensi --}}
-                                    {{-- <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#presenceModal">
-                                        Absensi Harian
-                                    </button>
-                                    @include('components.modals.presence') --}}
                                 </div>
                             </div>
                         </div>
@@ -164,9 +138,10 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <script src="{{ asset('assets/js/select2.min.js') }}"></script> --}}
     <script>
         $(document).ready(() => {
-            $('select').select2({
+            $('.form-select').select2({
                 theme: 'bootstrap-5',
                 placeholder: $(this).data('placeholder'),
             })

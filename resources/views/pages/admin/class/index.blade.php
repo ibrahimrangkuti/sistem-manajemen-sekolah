@@ -5,7 +5,74 @@
 @endsection
 
 @section('content')
-    <a href="{{ route('admin.class.create') }}" class="btn btn-success mb-3">Tambah Kelas</a>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ request('id') ? route('admin.class.update', $class->id) : route('admin.class.store') }}"
+                        method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label for="teacher" class="form-label">Wali Kelas</label>
+                                    <select name="teacher" id="teacher" class="form-select"
+                                        data-placeholder="Pilih Wali Kelas">
+                                        <option></option>
+                                        @foreach ($teachers as $teacher)
+                                            @if (!\App\Models\Department::where('user_id', $teacher->id)->first())
+                                                <option value="{{ $teacher->id }}"
+                                                    {{ $class ? ($teacher->id == $class->user_id ? 'selected' : '') : null }}>
+                                                    {{ $teacher->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label for="department" class="form-label">Jurusan</label>
+                                    <select name="department" id="department" class="form-select"
+                                        data-placeholder="Pilih Jurusan">
+                                        <option></option>
+                                        @foreach ($departments as $department)
+                                            <option value="{{ $department->id }}"
+                                                {{ $class ? ($department->id === $class->department_id ? 'selected' : '') : null }}>
+                                                {{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="name" class="form-label">Nama</label>
+                                    <input type="text" name="name" id="name" class="form-control"
+                                        value="{{ $class ? $class->name : null }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="level" class="form-label">Tingkat</label>
+                                    <select name="level" id="level" class="form-select"
+                                        data-placeholder="Pilih Tingkat">
+                                        <option></option>
+                                        <option value="X"
+                                            {{ $class ? ($class->level === 'X' ? 'selected' : '') : null }}>X</option>
+                                        <option value="XI"
+                                            {{ $class ? ($class->level === 'XI' ? 'selected' : '') : null }}>XI</option>
+                                        <option value="XII"
+                                            {{ $class ? ($class->level === 'XII' ? 'selected' : '') : null }}>XII</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success float-end">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -32,9 +99,9 @@
                                             <div class="d-flex align-items-center gap-2">
                                                 <a href="{{ route('admin.class.detail', $class->id) }}"
                                                     class="btn btn-info btn-sm">Detail</a>
-                                                <a href="{{ route('admin.class.edit', $class->id) }}"
-                                                    class="btn btn-warning btn-sm">Edit</a>
-                                                <form action="{{ route('admin.class.delete', $class->id) }}" method="POST">
+                                                <a href="?id={{ $class->id }}" class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('admin.class.delete', $class->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit"

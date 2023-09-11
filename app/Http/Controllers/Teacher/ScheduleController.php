@@ -52,7 +52,7 @@ class ScheduleController extends Controller
         return view('pages.teacher.schedule.index', compact('schedules', 'nowSchedule', 'currentTime'));
     }
 
-    public function absen($id)
+    public function presence($id)
     {
         $schedule = Schedule::with('lesson')->find($id);
 
@@ -69,10 +69,10 @@ class ScheduleController extends Controller
         $studentPresence = SchedulePresence::whereDate('presence_date', date('Y-m-d'))->pluck('status')->first();
         // dd($statusPresences);
 
-        return view('pages.teacher.schedule.absen', compact('students', 'schedule', 'status'));
+        return view('pages.teacher.schedule.schedule_presence', compact('students', 'schedule', 'status'));
     }
 
-    public function storeAbsen(Request $request, $id)
+    public function storePresence(Request $request, $id)
     {
         foreach ($request->absen as $userId => $status) {
 

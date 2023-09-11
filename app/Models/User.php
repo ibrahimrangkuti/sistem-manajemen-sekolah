@@ -103,4 +103,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(SubMessage::class, 'sender_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function sub_comments()
+    {
+        return $this->hasMany(SubComment::class);
+    }
 }

@@ -47,7 +47,7 @@ class DepartmentController extends Controller
             'name' => 'required',
         ]);
 
-        $department->teacher_id = $request->teacher;
+        $department->user_id = $request->teacher;
         $department->name = $request->name;
         $department->update();
 

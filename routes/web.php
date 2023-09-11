@@ -19,6 +19,9 @@ use App\Http\Controllers\Teacher\MyClassController as TeacherMyClassController;
 use App\Http\Controllers\Teacher\MyDepartmentController as TeacherMyDepartmentController;
 use App\Http\Controllers\Teacher\ScheduleController as TeacherScheduleController;
 
+// Siswa
+use App\Http\Controllers\Student\MyClassController as StudentMyClassController;
+
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PagesController;
@@ -147,6 +150,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [AdminScheduleController::class, 'index'])->name('index');
             Route::get('/create', [AdminScheduleController::class, 'create'])->name('create');
             Route::post('/create', [AdminScheduleController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [AdminScheduleController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [AdminScheduleController::class, 'update'])->name('update');
+            Route::delete('/delete/{id}', [AdminScheduleController::class, 'delete'])->name('delete');
         });
 
         // Tugas Harian
@@ -182,6 +188,8 @@ Route::middleware('auth')->group(function () {
         // Kelas Saya
         Route::prefix('my-class')->name('myclass.')->group(function () {
             Route::get('/', [TeacherMyClassController::class, 'index'])->name('index');
+            Route::get('/presence', [TeacherMyClassController::class, 'presence'])->name('presence');
+            Route::post('/presence', [TeacherMyClassController::class, 'storePresence'])->name('storePresence');
             Route::get('/presence-history', [TeacherMyClassController::class, 'presenceHistory'])->name('presenceHistory');
         });
 
@@ -193,12 +201,18 @@ Route::middleware('auth')->group(function () {
         // Jadwal Mengajar
         Route::prefix('schedule')->name('schedule.')->group(function () {
             Route::get('/', [TeacherScheduleController::class, 'index'])->name('index');
-            Route::get('/{id}/absen', [TeacherScheduleController::class, 'absen'])->name('absen');
-            Route::post('/{id}/absen', [TeacherScheduleController::class, 'storeAbsen'])->name('storeAbsen');
+            Route::get('/{id}/presence', [TeacherScheduleController::class, 'presence'])->name('presence');
+            Route::post('/{id}/presence', [TeacherScheduleController::class, 'storePresence'])->name('storePresence');
         });
     });
 
     // Siswa
+    Route::name('student.')->middleware('role:siswa')->group(function () {
+        Route::prefix('myclass')->name('myclass.')->group(function () {
+            Route::get('/', [StudentMyClassController::class, 'index'])->name('index');
+            Route::get('/presence-history', [StudentMyClassController::class, 'presenceHistory'])->name('presenceHistory');
+        });
+    });
 
     // Ortu
 
@@ -210,5 +224,7 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}/disapproved', [PostController::class, 'disapproved'])->name('disapproved');
         Route::put('{id}', [PostController::class, 'update'])->name('update');
         Route::delete('{id}', [PostController::class, 'delete'])->name('delete');
+        Route::post('/{post}/add-comment', [PostController::class, 'addComment'])->name('add-comment');
+        Route::post('/{comment_id}/add-subcomment', [PostController::class, 'addSubComment'])->name('add-subcomment');
     });
 });

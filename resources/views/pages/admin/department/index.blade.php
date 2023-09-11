@@ -76,7 +76,7 @@
                                     <tr>
                                         <td class="col-1">{{ $loop->iteration }}</td>
                                         <td>{{ $department->name }}</td>
-                                        <td>{{ $department->teacher->name }}</td>
+                                        <td>{{ $department->teacher->name ?? 'None' }}</td>
                                         <td class="col-1">
                                             <div class="d-flex gap-2">
                                                 <a href="?id={{ $department->id }}" class="btn btn-warning btn-sm">Edit</a>

@@ -28,8 +28,9 @@ class PagesController extends Controller
     public function showForum($slug)
     {
         $post = Post::where('type', 'post')->where('slug', $slug)->first();
+        $comments = $post->comments()->latest()->get();
 
-        return view('pages.post.show', compact('post'));
+        return view('pages.post.show', compact('post', 'comments'));
     }
 
     // Berita

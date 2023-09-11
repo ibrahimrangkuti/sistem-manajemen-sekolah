@@ -75,6 +75,37 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (!$todayPresence)
+                <div class="alert alert-danger">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="alert-heading">{{ Auth::user()->student->name }}</h4>
+                            <p>Hari ini <b>{{ Auth::user()->student->name }}</b> belum absen kehadiran. Mohon diperhatikan
+                            </p>
+                        </div>
+                        <ion-icon name="finger-print" size="large" class="d-none d-md-block"></ion-icon>
+                    </div>
+                    <hr />
+                    <p class="mb-0">{{ dayName(date('Y-m-d')) }}, {{ date('d/m/Y') }}</p>
+                </div>
+            @else
+                <div class="alert alert-success">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="alert-heading">{{ Auth::user()->student->name }}</h4>
+                            <p>Hari ini {{ $todayPresence->status }}, absen pada jam
+                                {{ $todayPresence->created_at->format('H:i') }}</p>
+                        </div>
+                        <ion-icon name="finger-print" size="large" class="d-none d-md-block"></ion-icon>
+                    </div>
+                    <hr />
+                    <p class="mb-0">{{ dayName(date('Y-m-d')) }}, {{ date('d/m/Y') }}</p>
+                </div>
+            @endif
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
